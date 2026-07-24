@@ -1,0 +1,1 @@
+var e=e=>2*Math.sqrt(e/Math.PI),t=e=>Math.PI*e*e/4,n=[.2,.35,.5,.75,1,1.5,2.5,4,6,10],r=e=>n.find(t=>t>=e-1e-9)??null,i=e=>10*Math.log10(e),a=e=>10**(e/10),o=e=>20*Math.log10(e),s=e=>10**(e/20),c=(e,t)=>e/t,l=(e,t)=>e*t;export{r as a,t as c,s as i,e as l,o as n,l as o,i as r,a as s,c as t};
