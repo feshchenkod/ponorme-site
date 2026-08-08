@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Переименование слоёв AutoCAD по правилам: замена текста, префиксы и суффиксы по маскам, предпросмотр по DXF до запуска. Генератор AutoLISP-команды онлайн, чертёж никуда не загружается." />
+    <title>Массовое переименование слоёв AutoCAD — генератор LSP-скрипта онлайн</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Массовое переименование слоёв AutoCAD — генератор LSP-скрипта онлайн" />
+    <meta property="og:description" content="Переименование слоёв AutoCAD по правилам: замена текста, префиксы и суффиксы по маскам, предпросмотр по DXF до запуска. Генератор AutoLISP-команды онлайн, чертёж никуда не загружается." />
+    <meta property="og:url" content="https://ponorme.ru/calc/layer-rename" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Массовое переименование слоёв AutoCAD — генератор LSP-скрипта онлайн" />
+    <meta name="twitter:description" content="Переименование слоёв AutoCAD по правилам: замена текста, префиксы и суффиксы по маскам, предпросмотр по DXF до запуска. Генератор AutoLISP-команды онлайн, чертёж никуда не загружается." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-Bb73WUhU.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-HQnNT_aT.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-BhOvVt9H.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/layer-rename" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Зачем переименовывать слои скриптом?","acceptedAnswer":{"@type":"Answer","text":"Чертежи приводят к шаблону организации: префикс раздела, единые обозначения, чистка «мусорных» имён. Вручную это десятки переименований в каждом файле — команда с правилами делает их одним запуском и переиспользуется на похожих чертежах."}},{"@type":"Question","name":"Что будет, если новое имя уже занято?","acceptedAnswer":{"@type":"Answer","text":"AutoCAD не позволяет переименовать слой в существующее имя — скрипт пропустит такой слой и напишет об этом в командной строке; предпросмотр покажет конфликт заранее. Слить два слоя в один переименованием нельзя — для этого штатная команда СЛОЙОБЪЕД (_LAYMRG)."}},{"@type":"Question","name":"Какие слои скрипт не тронет?","acceptedAnswer":{"@type":"Answer","text":"Слой «0» и Defpoints переименовать нельзя — они пропускаются. Слои внешних ссылок (имена вида «xref|слой») принадлежат подшитому файлу и тоже не переименовываются."}},{"@type":"Question","name":"Повторный запуск команды не испортит имена?","acceptedAnswer":{"@type":"Answer","text":"Нет: замена текста после первого прогона уже не находит искомое, а префиксы и суффиксы не добавляются повторно — команда проверяет, что имя ещё не начинается или не заканчивается ими."}},{"@type":"Question","name":"Обязательно ли загружать DXF?","acceptedAnswer":{"@type":"Answer","text":"Нет, правила работают и без него — скрипт универсален для любых чертежей. DXF нужен для предпросмотра: видно, во что превратится каждое имя, и заранее подсвечиваются конфликты. Файл читается локально в браузере и никуда не отправляется; DWG предварительно сохраните как DXF."}}]}</script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

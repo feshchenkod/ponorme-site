@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Генератор AutoLISP-команды для нумерации датчиков на плане: щелчок — подпись с очередным адресом. Формат подписи, начальный номер, шаг, слой и высота текста; контроль ёмкости ДПЛС (127 адресов С2000-КДЛ). Продолжение серии при повторном запуске." />
+    <title>Нумерация датчиков AutoCAD — адреса извещателей по щелчку (генератор LSP онлайн)</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Нумерация датчиков AutoCAD — адреса извещателей по щелчку (генератор LSP онлайн)" />
+    <meta property="og:description" content="Генератор AutoLISP-команды для нумерации датчиков на плане: щелчок — подпись с очередным адресом. Формат подписи, начальный номер, шаг, слой и высота текста; контроль ёмкости ДПЛС (127 адресов С2000-КДЛ). Продолжение серии при повторном запуске." />
+    <meta property="og:url" content="https://ponorme.ru/calc/numbering" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Нумерация датчиков AutoCAD — адреса извещателей по щелчку (генератор LSP онлайн)" />
+    <meta name="twitter:description" content="Генератор AutoLISP-команды для нумерации датчиков на плане: щелчок — подпись с очередным адресом. Формат подписи, начальный номер, шаг, слой и высота текста; контроль ёмкости ДПЛС (127 адресов С2000-КДЛ). Продолжение серии при повторном запуске." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-Bb73WUhU.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-HQnNT_aT.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-BhOvVt9H.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/numbering" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Как работает нумерация?","acceptedAnswer":{"@type":"Answer","text":"Команда спрашивает начальный номер (по умолчанию — продолжение прошлой серии), дальше каждый щелчок ставит подпись и увеличивает номер на шаг. Enter или Esc завершает серию; итог и следующий номер печатаются в командной строке."}},{"@type":"Question","name":"Ошибся в середине линии — как исправить?","acceptedAnswer":{"@type":"Answer","text":"Завершите серию, удалите неверные подписи и запустите команду снова с нужного начального номера — он спрашивается при каждом запуске. Одно U откатывает всю серию целиком."}},{"@type":"Question","name":"Почему предупреждение после 127?","acceptedAnswer":{"@type":"Answer","text":"127 — ёмкость ДПЛС одного С2000-КДЛ. Команда предупреждает, но нумерацию не останавливает; лимит в форме можно изменить или отключить (0). Для второй линии обычно начинают новую серию с префиксом, например «2.»."}},{"@type":"Question","name":"Подписи — это текст или атрибуты блоков?","acceptedAnswer":{"@type":"Answer","text":"Однострочный текст (TEXT) на отдельном слое: работает с любыми блоками и без блоков, слой легко скрыть или отключить на печать. Запись адреса в атрибут требует одинаковой структуры всех блоков — такие атрибуты заполняются штатными средствами."}},{"@type":"Question","name":"Чем режим «к блоку» отличается от «в точку»?","acceptedAnswer":{"@type":"Answer","text":"«В точку» — подпись там, где щёлкнули. «К блоку» — щелчок по вставке блока, подпись встаёт у его точки вставки с заданным смещением: у всех датчиков одинаково, ровнее, чем на глаз."}},{"@type":"Question","name":"Работает ли в AutoCAD LT и nanoCAD?","acceptedAnswer":{"@type":"Answer","text":"AutoCAD LT поддерживает AutoLISP начиная с версии 2024; полный AutoCAD и nanoCAD — давно. SCR-варианта нет: команда интерактивная, командный сценарий так не умеет."}}]}</script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

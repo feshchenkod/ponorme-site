@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Онлайн-проверка аккумуляторной батареи СПЗ по контрольному разряду: фактическая ёмкость Cф = Iр·tр, приведение к 25 °C, остаточная ёмкость в % и вывод «годна / под замену» по ГОСТ Р 59638." />
+    <title>Проверка ёмкости АКБ онлайн — годна или под замену (ГОСТ Р 59638)</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Проверка ёмкости АКБ онлайн — годна или под замену (ГОСТ Р 59638)" />
+    <meta property="og:description" content="Онлайн-проверка аккумуляторной батареи СПЗ по контрольному разряду: фактическая ёмкость Cф = Iр·tр, приведение к 25 °C, остаточная ёмкость в % и вывод «годна / под замену» по ГОСТ Р 59638." />
+    <meta property="og:url" content="https://ponorme.ru/calc/battery-test" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Проверка ёмкости АКБ онлайн — годна или под замену (ГОСТ Р 59638)" />
+    <meta name="twitter:description" content="Онлайн-проверка аккумуляторной батареи СПЗ по контрольному разряду: фактическая ёмкость Cф = Iр·tр, приведение к 25 °C, остаточная ёмкость в % и вывод «годна / под замену» по ГОСТ Р 59638." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-Bb73WUhU.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-HQnNT_aT.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-BhOvVt9H.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/battery-test" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Как проверить, годна ли АКБ пожарной сигнализации?","acceptedAnswer":{"@type":"Answer","text":"Разрядить батарею током Cном/10 до 10,5 В на 12-вольтовую АКБ (1,75 В на элемент), замерить время разряда tр, посчитать фактическую ёмкость Cф = Iр·tр и привести её к 25 °C. Если при первой проверке остаточная ёмкость не ниже 80 % номинала — АКБ годна (ГОСТ Р 59638)."}},{"@type":"Question","name":"Каким током разряжать АКБ при проверке?","acceptedAnswer":{"@type":"Answer","text":"Контрольный разряд ведётся током 10-часового режима: Iр = Cном/10. Например, для батареи 17 А·ч — 1,7 А. Конечное напряжение — 10,5 В на 12-вольтовую АКБ, то есть 1,75 В на элемент."}},{"@type":"Question","name":"До какого напряжения разряжать батарею при проверке?","acceptedAnswer":{"@type":"Answer","text":"Для 12-вольтовой АКБ — до 10,5 В на батарею, то есть 1,75 В на элемент (в 12-В блоке 6 элементов). Встречающаяся в статьях формулировка «10,5 В на элемент» ошибочна — это напряжение всей батареи. Разряд ниже конечного напряжения повреждает АКБ, поэтому напряжение контролируют в течение всего теста."}},{"@type":"Question","name":"Зачем приводить ёмкость к 25 °C?","acceptedAnswer":{"@type":"Answer","text":"Ёмкость свинцово-кислотной батареи зависит от температуры: на холоде она ниже. Чтобы сравнить результат с номиналом (заданным при 25 °C), измеренную ёмкость делят на K = 1 + 0,006·(t − 25)."}}]}</script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

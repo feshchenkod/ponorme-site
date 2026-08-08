@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Перевод плана из PDF или фотографии (JPG, PNG) в подложку для AutoCAD: выравнивание фона, устранение перекоса, обрезка полей и калибровка масштаба по известному размеру. На выходе DXF (AutoCAD 2000) с растрами. Работает в браузере, файлы никуда не отправляются." />
+    <title>PDF и JPG в DXF онлайн — растровая подложка плана для AutoCAD с привязкой к масштабу</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="PDF и JPG в DXF онлайн — растровая подложка плана для AutoCAD с привязкой к масштабу" />
+    <meta property="og:description" content="Перевод плана из PDF или фотографии (JPG, PNG) в подложку для AutoCAD: выравнивание фона, устранение перекоса, обрезка полей и калибровка масштаба по известному размеру. На выходе DXF (AutoCAD 2000) с растрами. Работает в браузере, файлы никуда не отправляются." />
+    <meta property="og:url" content="https://ponorme.ru/calc/pdf-underlay" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PDF и JPG в DXF онлайн — растровая подложка плана для AutoCAD с привязкой к масштабу" />
+    <meta name="twitter:description" content="Перевод плана из PDF или фотографии (JPG, PNG) в подложку для AutoCAD: выравнивание фона, устранение перекоса, обрезка полей и калибровка масштаба по известному размеру. На выходе DXF (AutoCAD 2000) с растрами. Работает в браузере, файлы никуда не отправляются." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-Bb73WUhU.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-HQnNT_aT.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-BhOvVt9H.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/pdf-underlay" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Получится ли из PDF настоящий вектор — линии и полилинии?","acceptedAnswer":{"@type":"Answer","text":"Внутри скана или фотографии нет ни линий, ни координат — полностью восстановить чертёж можно только обводкой, и этот инструмент готовит для неё подложку. Обводку сокращает «черновой вектор»: длинные горизонтальные и вертикальные прямые находятся автоматически и укладываются красным слоем в тот же DXF, лишнее из них удаляется в AutoCAD рамкой. Векторные PDF (выгруженные из AutoCAD или Revit) — отдельная задача, её мы делаем следующей."}},{"@type":"Question","name":"Что такое «черновой вектор» и чего от него ждать?","acceptedAnswer":{"@type":"Answer","text":"Поиск длинных прямых на листе: стены и оси обычно находятся, но вместе с ними в черновик попадают и размерные линии. Текст, штриховка и косые линии не ищутся намеренно — черновик должен сокращать обводку, а не заваливать чертёж мусором. Порог минимальной длины настраивается ползунком, результат виден поверх листа до выгрузки. На сканах печатных чертежей качество заметно выше, чем на снимках от руки."}},{"@type":"Question","name":"Зачем калибровать масштаб?","acceptedAnswer":{"@type":"Answer","text":"Чтобы подложка встала в натуральную величину и с неё можно было обводить сразу в миллиметрах. Укажите на листе два конца известного размера — например крайние выносные линии размерной цепочки — и введите это расстояние. Если размерных чисел не видно, масштаб принимается условно по формату листа, и такой лист помечается в чертеже требующим калибровки."}},{"@type":"Question","name":"Насколько точна подложка?","acceptedAnswer":{"@type":"Answer","text":"Скан даёт равномерный масштаб, снимок с рук — нет: перспектива растягивает лист по полю, расхождение между размерами в разных частях может доходить до нескольких процентов. Программа выправляет поворот и перекос, но не перспективу. Поэтому подложка годится для обводки, расстановки оборудования и прикидки трасс, а размеры для спецификации берут с проставленных на чертеже чисел."}},{"@type":"Question","name":"Почему результат отдаётся архивом?","acceptedAnswer":{"@type":"Answer","text":"Растр в DXF подключается ссылкой на файл, а не встраивается внутрь. В архиве лежат DXF и каталог img с подложками — распаковывать нужно целиком и держать рядом. При передаче проекта пользуйтесь ФОРМКОМПЛЕКТ (ETRANSMIT), он соберёт связанные файлы."}},{"@type":"Question","name":"Почему DXF формата AutoCAD 2000, а не R12?","acceptedAnswer":{"@type":"Answer","text":"В R12 сущности IMAGE не существует как класса, растровую подложку туда положить нельзя. AC1015 читают AutoCAD (включая LT), nanoCAD и другие редакторы."}},{"@type":"Question","name":"Что делать с многостраничным PDF?","acceptedAnswer":{"@type":"Answer","text":"Каждая страница становится отдельным листом: со своим названием, поворотом, масштабом и слоем. В чертеже листы стоят в ряд слева направо с зазором, ненужные можно отключить перед выгрузкой."}},{"@type":"Question","name":"Можно ли загрузить фотографии без PDF?","acceptedAnswer":{"@type":"Answer","text":"Да: JPG, PNG и WebP открываются напрямую, в том числе несколько сразу — каждая фотография становится листом, ориентация из EXIF учитывается. HEIC с iPhone браузеры не читают: снимайте в «наиболее совместимом» формате или сохраните снимок как JPEG."}}]}</script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

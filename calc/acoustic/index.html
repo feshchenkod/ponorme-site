@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Онлайн-расчёт СОУЭ по СП 3.13130.2026: уровень звукового давления речевого оповещателя в расчётной точке и проверка превышения над шумом помещения (15 дБ, в квартирах 10 дБ). Ход расчёта и график затухания." />
+    <title>Расчёт СОУЭ онлайн — уровень звукового давления речевых оповещателей (СП 3.13130)</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Расчёт СОУЭ онлайн — уровень звукового давления речевых оповещателей (СП 3.13130)" />
+    <meta property="og:description" content="Онлайн-расчёт СОУЭ по СП 3.13130.2026: уровень звукового давления речевого оповещателя в расчётной точке и проверка превышения над шумом помещения (15 дБ, в квартирах 10 дБ). Ход расчёта и график затухания." />
+    <meta property="og:url" content="https://ponorme.ru/calc/acoustic" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Расчёт СОУЭ онлайн — уровень звукового давления речевых оповещателей (СП 3.13130)" />
+    <meta name="twitter:description" content="Онлайн-расчёт СОУЭ по СП 3.13130.2026: уровень звукового давления речевого оповещателя в расчётной точке и проверка превышения над шумом помещения (15 дБ, в квартирах 10 дБ). Ход расчёта и график затухания." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-Bb73WUhU.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-HQnNT_aT.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-BhOvVt9H.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/acoustic" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Как рассчитать СОУЭ по СП 3.13130?","acceptedAnswer":{"@type":"Answer","text":"Уровень звукового давления оповещателя в точке считается по формулам (В.1) и (В.2) приложения В: от чувствительности и мощности оповещателя с поправкой на расстояние. Затем расчётный уровень сравнивается с нормируемым: превышение над постоянным шумом помещения и абсолютные границы для этого типа помещений (п. 6.8.2–6.8.5, 6.9.1)."}},{"@type":"Question","name":"На сколько дБ звук оповещения должен превышать шум?","acceptedAnswer":{"@type":"Answer","text":"Не менее чем на 15 дБ, а в помещениях квартир и апартаментов — не менее чем на 10 дБ (п. 6.8.2 СП 3.13130). Превышение обеспечивается на высоте 1,5 м в любой точке помещения. Типовые уровни шума по видам помещений приведены в таблице В.1."}},{"@type":"Question","name":"Какие абсолютные уровни требует СП 3.13130?","acceptedAnswer":{"@type":"Answer","text":"Сигнал оповещения — не менее 65 дБА (в квартирах 55 дБА) и не более 110 дБА на высоте 1,5 м (п. 6.8.2, 6.8.4). В зданиях класса Ф1.1 — не более 95 дБА (п. 6.8.5). В спальных помещениях на уровне головы спящего — 75…95 дБА (п. 6.9.1). При шуме свыше 85 дБА — не менее 105 дБА, а по п. 6.2.13 дополнительно применяют световой и (или) тактильный способ, если шум нельзя автоматически снизить при пожаре."}},{"@type":"Question","name":"Почему нужно выбирать режим нормирования?","acceptedAnswer":{"@type":"Answer","text":"Требуемые уровни зависят от типа защищаемых помещений: жильё, спальные помещения и здания Ф1.1 нормируются отдельно от обычных помещений — различаются и запас над шумом, и абсолютные границы. Режим задаёт, с чем сравнивается расчётный уровень; выбранные пункты СП показываются в ходе расчёта и в отчёте."}},{"@type":"Question","name":"Что делать, если уровень звука недостаточен?","acceptedAnswer":{"@type":"Answer","text":"Увеличить мощность подключения оповещателя, сократить расстояние до оповещаемых или добавить оповещатели (п. В.6.2 СП 3.13130)."}},{"@type":"Question","name":"Почему нормы в дБА, а чувствительность оповещателя — в дБ?","acceptedAnswer":{"@type":"Answer","text":"СП 3.13130 нормирует уровни звука в дБА (частотное взвешивание А), причём требуемый уровень определяется как максимальный УЗД с временной коррекцией F по ГОСТ Р 53188.1. Чувствительность оповещателей в ТД по ГОСТ Р 53325 указывается в дБ. Методика приложения В оперирует этими величинами напрямую — расчётные уровни сравниваются с нормируемыми в дБА."}}]}</script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

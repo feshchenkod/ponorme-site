@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Маленькие инженерные расчёты онлайн: процент запаса, сумма токов из списка, падение напряжения в медной линии (ΔU = ρ·2L·I/S)." />
+    <title>Мини-расчёты онлайн — процент запаса, сумма токов, падение напряжения</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Мини-расчёты онлайн — процент запаса, сумма токов, падение напряжения" />
+    <meta property="og:description" content="Маленькие инженерные расчёты онлайн: процент запаса, сумма токов из списка, падение напряжения в медной линии (ΔU = ρ·2L·I/S)." />
+    <meta property="og:url" content="https://ponorme.ru/calc/mini" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Мини-расчёты онлайн — процент запаса, сумма токов, падение напряжения" />
+    <meta name="twitter:description" content="Маленькие инженерные расчёты онлайн: процент запаса, сумма токов из списка, падение напряжения в медной линии (ΔU = ρ·2L·I/S)." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-Bb73WUhU.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-HQnNT_aT.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-BhOvVt9H.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/mini" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Как посчитать падение напряжения в линии питания приборов?","acceptedAnswer":{"@type":"Answer","text":"ΔU = ρ·2·L·I/S, где ρ = 0,0175 Ом·мм²/м для меди, L — длина линии в одну сторону (множитель 2 учитывает оба провода), I — ток, S — сечение жилы. Например, 100 м линии 1,5 мм² при 1 А теряют 2,3 В — критично для приборов на 12 В."}},{"@type":"Question","name":"Какое падение напряжения допустимо?","acceptedAnswer":{"@type":"Answer","text":"Единой нормы для слаботочных линий нет — предел задаёт диапазон питания прибора из его ТД. Типовой приём: прибор с диапазоном 10,2…28,4 В при резерве от АКБ 12 В получает около 10,5–11 В с учётом разряда, поэтому на линию закладывают не более 5–10 % номинала. Точнее — сверьте минимальное входное напряжение прибора с напряжением АКБ в конце разряда (10,5 В)."}},{"@type":"Question","name":"Как быстро сложить токи из спецификации?","acceptedAnswer":{"@type":"Answer","text":"Вставьте текст со значениями в поле «Сумма токов» — все числа найдутся и сложатся автоматически. Коды моделей вроде «С2000-4» или «ДИП-34А» не считаются: числа, приклеенные к буквам, пропускаются. Значение с единицей пишите через пробел: «0,5 мА»."}}]}</script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

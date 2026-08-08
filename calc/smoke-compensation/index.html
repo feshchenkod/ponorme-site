@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Онлайн-проверка компенсирующего притока при дымоудалении по СП 7.13130: массовый расход с учётом температуры продуктов горения, отрицательный дисбаланс не более 30 %, скорость в дверных проёмах не более 6 м/с, требуемый диапазон притока." />
+    <title>Компенсация дымоудаления — проверка дисбаланса приточной противодымной вентиляции (СП 7.13130)</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Компенсация дымоудаления — проверка дисбаланса приточной противодымной вентиляции (СП 7.13130)" />
+    <meta property="og:description" content="Онлайн-проверка компенсирующего притока при дымоудалении по СП 7.13130: массовый расход с учётом температуры продуктов горения, отрицательный дисбаланс не более 30 %, скорость в дверных проёмах не более 6 м/с, требуемый диапазон притока." />
+    <meta property="og:url" content="https://ponorme.ru/calc/smoke-compensation" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Компенсация дымоудаления — проверка дисбаланса приточной противодымной вентиляции (СП 7.13130)" />
+    <meta name="twitter:description" content="Онлайн-проверка компенсирующего притока при дымоудалении по СП 7.13130: массовый расход с учётом температуры продуктов горения, отрицательный дисбаланс не более 30 %, скорость в дверных проёмах не более 6 м/с, требуемый диапазон притока." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-Bb73WUhU.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-HQnNT_aT.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-BhOvVt9H.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/smoke-compensation" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Какой дисбаланс допускается между притоком и дымоудалением?","acceptedAnswer":{"@type":"Answer","text":"По п. 7.4 СП 7.13130 при совместном действии приточной и вытяжной противодымной вентиляции отрицательный дисбаланс в защищаемом помещении допускается не более 30 %, а положительный дисбаланс не допускается вообще. То есть компенсирующий приток должен быть не менее 70 % и не более 100 % от удаляемого расхода. Дополнительно перепад давления на закрытых дверях эвакуационных выходов не должен превышать 150 Па."}},{"@type":"Question","name":"Почему баланс считается по массовому расходу, а не по объёмному?","acceptedAnswer":{"@type":"Answer","text":"Удаляемые продукты горения горячие (200–600 °C) и потому лёгкие: ρ = 353/(273+t). При 400 °C плотность около 0,52 кг/м³, а у наружного воздуха при 20 °C — 1,20 кг/м³, то есть более чем вдвое выше. Сравнение объёмных расходов при разных температурах даёт ошибку в разы, поэтому дисбаланс сопоставляется по массе. СП прямо этого не уточняет — такая трактовка принята в калькуляторе и указана в ходе расчёта."}},{"@type":"Question","name":"Какая скорость допускается в проёмах компенсирующего притока?","acceptedAnswer":{"@type":"Answer","text":"При естественном притоке через двери наружных эвакуационных выходов суммарная площадь проходного сечения определяется по условию непревышения скорости воздушного потока в дверных проёмах более 6 м/с (п. 8.8 СП 7.13130). Проёмы для естественного притока должны располагаться в нижней части защищаемого помещения."}},{"@type":"Question","name":"Считает ли калькулятор сам расход дымоудаления?","acceptedAnswer":{"@type":"Answer","text":"Нет. Расход удаляемых продуктов горения определяется отдельным расчётом по пп. 7.2–7.5 СП 7.13130 — от мощности тепловыделения очага, теплопотерь через ограждения, температуры продуктов горения и геометрии дымовой зоны; фиксированные значения температуры принимать без расчёта не допускается. Этот калькулятор проверяет баланс притока и удаления по уже полученному расходу."}}]}</script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

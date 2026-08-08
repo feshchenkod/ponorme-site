@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Спецификация с плана: подсчёт вставок блоков по маскам имён — мгновенно из DXF в браузере или готовой AutoLISP-командой (таблица в чертёж + CSV). Динамические блоки — по исходному имени. Чертёж никуда не загружается." />
+    <title>Подсчёт блоков AutoCAD онлайн — спецификация оборудования с плана (DXF, LSP)</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Подсчёт блоков AutoCAD онлайн — спецификация оборудования с плана (DXF, LSP)" />
+    <meta property="og:description" content="Спецификация с плана: подсчёт вставок блоков по маскам имён — мгновенно из DXF в браузере или готовой AutoLISP-командой (таблица в чертёж + CSV). Динамические блоки — по исходному имени. Чертёж никуда не загружается." />
+    <meta property="og:url" content="https://ponorme.ru/calc/block-count" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Подсчёт блоков AutoCAD онлайн — спецификация оборудования с плана (DXF, LSP)" />
+    <meta name="twitter:description" content="Спецификация с плана: подсчёт вставок блоков по маскам имён — мгновенно из DXF в браузере или готовой AutoLISP-командой (таблица в чертёж + CSV). Динамические блоки — по исходному имени. Чертёж никуда не загружается." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-Bb73WUhU.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-HQnNT_aT.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-BhOvVt9H.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/block-count" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Как посчитать количество блоков в AutoCAD?","acceptedAnswer":{"@type":"Answer","text":"Штатно — команда БЛОКСЧЁТ (_BCOUNT) из Express Tools или мастер извлечения данных (ДАННЫЕИЗВЛ), но первый считает всё подряд без группировки, а второй требует настройки на каждый чертёж. Здесь правила «маска имени → наименование» задаются один раз: LSP-команда считает по ним любой чертёж и сразу даёт строки спецификации, а не сырой список имён."}},{"@type":"Question","name":"Как считаются динамические блоки?","acceptedAnswer":{"@type":"Answer","text":"LSP-команда берёт эффективное (исходное) имя, поэтому все состояния динамического блока попадают в одну строку. В браузерном подсчёте по DXF динамические блоки видны под служебными именами (*U…) — если они есть, сервис предупредит; точный итог по таким блокам даст команда в AutoCAD."}},{"@type":"Question","name":"Что попадает в подсчёт, а что нет?","acceptedAnswer":{"@type":"Answer","text":"Вставки блоков в пространстве модели (по желанию — и на листах). Вложенные в другие блоки вставки не считаются — как и в штатных инструментах: одна вставка сборного блока это одна единица. MINSERT-массивы считаются по числу элементов. Блоки, не попавшие ни под одну маску, показываются отдельным итогом «мимо масок»."}},{"@type":"Question","name":"Куда выводится результат?","acceptedAnswer":{"@type":"Answer","text":"Всегда — отчёт в командную строку. По настройкам скрипт дополнительно вставит таблицу «Спецификация оборудования» в чертёж (точку укажете при запуске) и сохранит CSV с разделителем «;» — такой файл Excel открывает двойным кликом. Подсчёт по DXF в браузере можно скачать в Excel сразу со страницы."}},{"@type":"Question","name":"Работает ли с блоками УГО из вашей библиотеки?","acceptedAnswer":{"@type":"Answer","text":"Да, кнопка «Блоки УГО ПоНорме» подставляет правила для всех блоков комплекта /calc/ugo с полными наименованиями по РД 25.953-90 — спецификация получается готовыми формулировками. Свои блоки добавляются масками: например, «ДИП*,ИП212*» → «Извещатель дымовой»."}}]}</script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

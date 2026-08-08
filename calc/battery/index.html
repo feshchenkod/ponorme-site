@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Онлайн-расчёт ёмкости аккумулятора для СПС и СОУЭ по СП 6.13130 (Б.1.1): суммарные токи приборов и извещателей, коэффициент Kн по разрядной таблице, подбор АКБ Delta и «Болид», экспорт в PDF и Excel." />
+    <title>Расчёт ёмкости АКБ для пожарной сигнализации онлайн (СП 6.13130, приложение Б)</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Расчёт ёмкости АКБ для пожарной сигнализации онлайн (СП 6.13130, приложение Б)" />
+    <meta property="og:description" content="Онлайн-расчёт ёмкости аккумулятора для СПС и СОУЭ по СП 6.13130 (Б.1.1): суммарные токи приборов и извещателей, коэффициент Kн по разрядной таблице, подбор АКБ Delta и «Болид», экспорт в PDF и Excel." />
+    <meta property="og:url" content="https://ponorme.ru/calc/battery" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Расчёт ёмкости АКБ для пожарной сигнализации онлайн (СП 6.13130, приложение Б)" />
+    <meta name="twitter:description" content="Онлайн-расчёт ёмкости аккумулятора для СПС и СОУЭ по СП 6.13130 (Б.1.1): суммарные токи приборов и извещателей, коэффициент Kн по разрядной таблице, подбор АКБ Delta и «Болид», экспорт в PDF и Excel." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-Bb73WUhU.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-HQnNT_aT.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-BhOvVt9H.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/battery" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"По какому СП рассчитывается ёмкость АКБ для пожарной сигнализации?","acceptedAnswer":{"@type":"Answer","text":"По приложению Б СП 6.13130.2025 (формула Б.1.1): ёмкость учитывает суммарные токи в дежурном режиме и режиме «Пожар», собственный ток источника питания, коэффициент старения Kстр и коэффициент Kн, учитывающий нагрузочные (токоразрядные) характеристики АКБ, — по разрядной таблице."}},{"@type":"Question","name":"Какое время резерва брать для АКБ?","acceptedAnswer":{"@type":"Answer","text":"По СП 6.13130 (приложение Б, п. Б.2) — 24 часа в дежурном режиме плюс 1 час в режиме «Пожар». В экспертном режиме можно задать другое время работы."}},{"@type":"Question","name":"Что такое коэффициент Kн и откуда он берётся?","acceptedAnswer":{"@type":"Answer","text":"Kн = Cном/Cфакт(t) — отношение номинальной ёмкости к фактически отдаваемой за время t по разрядной таблице АКБ. При Kн < 1 принимается равным 1 (в запас). В сервисе Kн считается автоматически по кривым разряда Delta и «Болид»."}},{"@type":"Question","name":"В печатном СП во втором слагаемом (Б.1.1) стоит ΣIд.р. — почему калькулятор подставляет ток режима «Пожар»?","acceptedAnswer":{"@type":"Answer","text":"Это опечатка печатного текста: второе слагаемое описывает работу в режиме «Пожар» (в нём Kнр.п. и tр.п.), поэтому физически в него входит ток этого режима ΣIр.п. Подстановка ΣIд.р. занизила бы ёмкость при токе «Пожара» выше дежурного. Калькулятор считает с ΣIр.п.; отклонение явно указано в описании методики."}}]}</script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
