@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Перевод векторного PDF (из AutoCAD, nanoCAD, Revit) в DXF: линии, полилинии и текст с группировкой по цветам и привязкой к масштабу. Работает в браузере, чертёж никуда не отправляется." />
+    <title>Конвертер PDF в DXF онлайн — векторные линии чертежа без обводки и трассировки</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Конвертер PDF в DXF онлайн — векторные линии чертежа без обводки и трассировки" />
+    <meta property="og:description" content="Перевод векторного PDF (из AutoCAD, nanoCAD, Revit) в DXF: линии, полилинии и текст с группировкой по цветам и привязкой к масштабу. Работает в браузере, чертёж никуда не отправляется." />
+    <meta property="og:url" content="https://ponorme.ru/calc/pdf-vector" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Конвертер PDF в DXF онлайн — векторные линии чертежа без обводки и трассировки" />
+    <meta name="twitter:description" content="Перевод векторного PDF (из AutoCAD, nanoCAD, Revit) в DXF: линии, полилинии и текст с группировкой по цветам и привязкой к масштабу. Работает в браузере, чертёж никуда не отправляется." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-CSSNEEI2.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-cy7HkTES.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CDenYK7y.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/pdf-vector" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Чем это отличается от «Подложки из PDF»?","acceptedAnswer":{"@type":"Answer","text":"Подложка — для сканов и фотографий: там внутри картинка, и она ставится в чертёж растром под обводку. Здесь наоборот: если PDF выгружен из САПР, в нём лежат настоящие линии — они переносятся в DXF как геометрия, обводить ничего не нужно. Если в файле не найдётся векторной геометрии, инструмент прямо об этом скажет и отправит к подложке."}},{"@type":"Question","name":"Сохранятся ли слои исходного чертежа?","acceptedAnswer":{"@type":"Answer","text":"Нет — при печати в PDF слои DWG теряются безвозвратно, остаётся только внешний вид. Единственный устойчивый признак — цвет, поэтому линии группируются по цветам: каждая группа становится слоем DXF (LINII-FF0000 и т. п.), ненужные группы отключаются перед выгрузкой."}},{"@type":"Question","name":"Почему окружности и дуги стали ломаными?","acceptedAnswer":{"@type":"Answer","text":"В самом PDF нет дуг — только отрезки и кривые Безье: всё круглое превратилось в кривые ещё при печати из САПР. Кривые спрямляются адаптивно с малым допуском, поэтому визуально дуги остаются гладкими; при необходимости их можно перечертить по месту."}},{"@type":"Question","name":"Что будет с текстом и размерами?","acceptedAnswer":{"@type":"Answer","text":"Надписи переносятся однострочным текстом (слой TEKST, шрифт Standard) со своей позицией, высотой и углом — начертание исходного шрифта не сохраняется. Размеры приезжают «разобранными»: линии отдельно, числа отдельно, размерными объектами AutoCAD они не станут. Текст, преобразованный при печати в кривые, приедет контурами, а не текстом."}},{"@type":"Question","name":"Как чертёж попадает в натуральную величину?","acceptedAnswer":{"@type":"Answer","text":"PDF знает только размер бумаги. Укажите масштаб печати (1:100 и т. д.) — или, если он нестандартный («вписать в лист»), откалибруйте по известному размеру: два щелчка по концам размерной цепочки и её значение в миллиметрах. Инструмент покажет, какому масштабу это соответствует."}},{"@type":"Question","name":"Что не переносится?","acceptedAnswer":{"@type":"Answer","text":"Растровые вставки (логотипы, подложки) — для них есть «Подложка из PDF». Штриховки приезжают множеством линий или контуров — такие группы легко отключить. Обрезка областей не применяется: линии, спрятанные при печати за границей видимости, могут появиться. Заливки переносятся контурами, без заполнения."}}]}</script>
+  </head>
+  <body>
+    <div id="app"><div class="flex min-h-screen flex-col"><main class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-8 sm:px-6"><div class="py-8"><a href="/calculators/cad" class="mb-4 inline-flex items-center gap-1 text-sm text-muted">Автоматизация AutoCAD</a><h1 class="text-2xl font-semibold tracking-tight">Векторный PDF → DXF</h1><p class="mt-2 max-w-3xl text-sm text-muted">Достать настоящие линии из PDF, выгруженного из САПР: геометрия и текст в DXF с привязкой к масштабу — без обводки.</p><div class="mt-6 max-w-3xl text-[15px]"><p class="mb-3 leading-relaxed">Переводит векторный PDF в DXF без обводки и трассировки: если файл выгружен из САПР — AutoCAD, nanoCAD, Revit, — внутри него лежат настоящие линии, и они переносятся в чертёж как геометрия. Кривые Безье спрямляются адаптивно, надписи приезжают текстом со своей позицией, высотой и углом.</p>
+<p class="mb-3 leading-relaxed">Слои исходного DWG в PDF не сохраняются, поэтому линии группируются по цвету: каждая группа — отдельный слой DXF со счётчиком линий, лишние группы (рамки, штриховки) отключаются до выгрузки. Кнопка «что уедет в DXF» показывает будущий чертёж рядом с исходной страницей — расхождения видны до скачивания.</p>
+<p class="mb-3 leading-relaxed">Масштаб задаётся выбором из стандартного ряда или калибровкой по известному размеру — тогда инструмент сам покажет, какому масштабу соответствует печать. Единицы результата — миллиметры натуры, несколько листов раскладываются в ряд.</p>
+<h3 class="mt-5 mb-2 text-base font-semibold">Пределы честно</h3>
+<ul class="list-disc space-y-1 pl-5"><li>Растровые вставки не переносятся — для сканов и фотографий есть «Подложка из PDF».</li><li>Дуг в PDF не существует: всё круглое становится плавными ломаными ещё при печати из САПР.</li><li>Размеры приезжают «разобранными» — линии и числа отдельно, не размерными объектами.</li><li>Обрезка областей не применяется: скрытые при печати линии могут появиться в чертеже.</li></ul></div><section class="mt-8 max-w-3xl"><h2 class="text-lg font-semibold">Вопросы и ответы</h2><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Чем это отличается от «Подложки из PDF»?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Подложка — для сканов и фотографий: там внутри картинка, и она ставится в чертёж растром под обводку. Здесь наоборот: если PDF выгружен из САПР, в нём лежат настоящие линии — они переносятся в DXF как геометрия, обводить ничего не нужно. Если в файле не найдётся векторной геометрии, инструмент прямо об этом скажет и отправит к подложке.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Сохранятся ли слои исходного чертежа?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Нет — при печати в PDF слои DWG теряются безвозвратно, остаётся только внешний вид. Единственный устойчивый признак — цвет, поэтому линии группируются по цветам: каждая группа становится слоем DXF (LINII-FF0000 и т. п.), ненужные группы отключаются перед выгрузкой.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Почему окружности и дуги стали ломаными?</summary><p class="mt-2 text-sm leading-relaxed text-muted">В самом PDF нет дуг — только отрезки и кривые Безье: всё круглое превратилось в кривые ещё при печати из САПР. Кривые спрямляются адаптивно с малым допуском, поэтому визуально дуги остаются гладкими; при необходимости их можно перечертить по месту.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Что будет с текстом и размерами?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Надписи переносятся однострочным текстом (слой TEKST, шрифт Standard) со своей позицией, высотой и углом — начертание исходного шрифта не сохраняется. Размеры приезжают «разобранными»: линии отдельно, числа отдельно, размерными объектами AutoCAD они не станут. Текст, преобразованный при печати в кривые, приедет контурами, а не текстом.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Как чертёж попадает в натуральную величину?</summary><p class="mt-2 text-sm leading-relaxed text-muted">PDF знает только размер бумаги. Укажите масштаб печати (1:100 и т. д.) — или, если он нестандартный («вписать в лист»), откалибруйте по известному размеру: два щелчка по концам размерной цепочки и её значение в миллиметрах. Инструмент покажет, какому масштабу это соответствует.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Что не переносится?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Растровые вставки (логотипы, подложки) — для них есть «Подложка из PDF». Штриховки приезжают множеством линий или контуров — такие группы легко отключить. Обрезка областей не применяется: линии, спрятанные при печати за границей видимости, могут появиться. Заливки переносятся контурами, без заполнения.</p></details></section></div></main></div></div>
+  </body>
+</html>

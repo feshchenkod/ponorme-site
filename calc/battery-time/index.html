@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Расчёт времени автономной работы СПЗ от существующей АКБ по формуле (Б.3) СП 6.13130.2025: дежурный режим, режим «Пожар» и дежурный с резервом на тревогу, поправки на старение (остаточная ёмкость) и температуру по ГОСТ Р 59638. Проверка нормативных 24 ч + 1 ч." />
+    <title>Время работы от АКБ онлайн — сколько проработает система при отключении питания</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Время работы от АКБ онлайн — сколько проработает система при отключении питания" />
+    <meta property="og:description" content="Расчёт времени автономной работы СПЗ от существующей АКБ по формуле (Б.3) СП 6.13130.2025: дежурный режим, режим «Пожар» и дежурный с резервом на тревогу, поправки на старение (остаточная ёмкость) и температуру по ГОСТ Р 59638. Проверка нормативных 24 ч + 1 ч." />
+    <meta property="og:url" content="https://ponorme.ru/calc/battery-time" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Время работы от АКБ онлайн — сколько проработает система при отключении питания" />
+    <meta name="twitter:description" content="Расчёт времени автономной работы СПЗ от существующей АКБ по формуле (Б.3) СП 6.13130.2025: дежурный режим, режим «Пожар» и дежурный с резервом на тревогу, поправки на старение (остаточная ёмкость) и температуру по ГОСТ Р 59638. Проверка нормативных 24 ч + 1 ч." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-CSSNEEI2.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-cy7HkTES.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CDenYK7y.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/battery-time" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Чем этот расчёт отличается от расчёта ёмкости АКБ?","acceptedAnswer":{"@type":"Answer","text":"Это обратная задача. Расчёт ёмкости отвечает проектировщику: какая АКБ нужна под заданную нагрузку. Здесь исходная точка — существующая батарея: сколько реально проработает система при отключении питания. Типовой сценарий — обследование действующего объекта, где АКБ уже стоит, а нагрузка со временем выросла."}},{"@type":"Question","name":"Почему остаточная ёмкость по умолчанию 80 %?","acceptedAnswer":{"@type":"Answer","text":"Формула (Б.2) СП 6.13130.2025 задаёт коэффициент старения Kстр = 100 %/S, где S — ёмкость в конце срока службы по ТД; для типовых 80 % это Kстр = 1,25. Время по формуле (Б.3) t = C/(I·Kстр) — математически то же самое, что считать от 80 % остаточной ёмкости. Если ёмкость проверялась контрольным разрядом, подставьте фактический процент — расчёт станет точнее консервативного умолчания."}},{"@type":"Question","name":"Как узнать фактическую остаточную ёмкость?","acceptedAnswer":{"@type":"Answer","text":"Контрольным разрядом по ГОСТ Р 59638 — у нас есть отдельный инструмент «Проверка АКБ разрядом»: разрядите батарею постоянным током, замерьте время до конечного напряжения, и он посчитает фактическую ёмкость с приведением к 25 °C. Полученный процент — прямой вход для этого расчёта."}},{"@type":"Question","name":"Что за «дежурный с тревогой в конце» и почему это главная цифра?","acceptedAnswer":{"@type":"Answer","text":"Худший сценарий по п. Б.2 СП 6.13130.2025: система живёт на АКБ в дежурном режиме, а в самом конце должна ещё отработать тревогу (норматив — 24 ч дежурного + 1 ч «Пожар»). Расчёт резервирует ёмкость на тревогу и делит остаток на дежурный ток: если получилось меньше 24 ч — батарея нормативное время не выдерживает."}},{"@type":"Question","name":"Почему коэффициенты нагрузки Кн приняты равными 1?","acceptedAnswer":{"@type":"Answer","text":"Кн учитывает токоразрядные характеристики конкретной АКБ (при больших токах отдаваемая ёмкость меньше) и берётся из ТД производителя. Для быстрой оценки при обследовании он принят 1 — это немного оптимистично при токах выше 0,1C. Для проектного расчёта с кривыми конкретных батарей используйте расчёт ёмкости АКБ, где Кн подставляется автоматически."}}]}</script>
+  </head>
+  <body>
+    <div id="app"><div class="flex min-h-screen flex-col"><main class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-8 sm:px-6"><div class="py-8"><a href="/calculators/fire" class="mb-4 inline-flex items-center gap-1 text-sm text-muted">Пожарная безопасность</a><h1 class="text-2xl font-semibold tracking-tight">Время работы от АКБ</h1><p class="mt-2 max-w-3xl text-sm text-muted">Обратная задача ёмкости: сколько проработает существующая АКБ в дежурном режиме и при пожаре — со старением и температурой.</p><div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium border-line text-muted">СП 6.13130.2025 · приложение Б — формулы (Б.2) старения и (Б.3) времени работы; п. Б.2 — 24 ч + 1 ч</span><span class="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium border-line text-muted">ГОСТ Р 59638 · температурная зависимость ёмкости; проверка фактической ёмкости разрядом</span></div><div class="mt-6 max-w-3xl text-[15px]"><p class="mb-3 leading-relaxed">Обратная задача расчёта АКБ: <strong>сколько реально проработает система от существующей батареи</strong> при отключении основного питания. Вводятся ёмкость, токи дежурного режима и «Пожара» — сервис считает время по <strong>формуле (Б.3) СП 6.13130.2025</strong> в трёх видах: только дежурный, только тревога и главный сценарий — <strong>дежурный с резервом на тревогу в конце</strong>, который сравнивается с нормативными 24 ч + 1 ч (п. Б.2).</p>
+<p class="mb-3 leading-relaxed">Старение задаётся <strong>остаточной ёмкостью</strong>: по умолчанию 80 % — расчётный конец срока службы (эквивалент Kстр = 1,25 по формуле (Б.2)); если батарея проверялась контрольным разрядом — подставьте фактический процент из <a href="/calc/battery-test" class="text-accent underline underline-offset-2">проверки АКБ разрядом</a>. Температура ниже 25 °C снижает доступную ёмкость по ГОСТ Р 59638 (0,6 % на градус).</p>
+<p class="mb-3 leading-relaxed">Типовое применение — <strong>обследование действующих объектов</strong>: АКБ стоит давно, нагрузка выросла, и вопрос «доживёт ли система до конца рабочего дня» требует числа, а не ощущения. Для проектного подбора новой батареи под нагрузку используйте <a href="/calc/battery" class="text-accent underline underline-offset-2">расчёт ёмкости АКБ</a> — там же учитываются токоразрядные кривые конкретных батарей (Кн) и каталог приборов.</p></div><section class="mt-8 max-w-3xl"><h2 class="text-lg font-semibold">Вопросы и ответы</h2><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Чем этот расчёт отличается от расчёта ёмкости АКБ?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Это обратная задача. Расчёт ёмкости отвечает проектировщику: какая АКБ нужна под заданную нагрузку. Здесь исходная точка — существующая батарея: сколько реально проработает система при отключении питания. Типовой сценарий — обследование действующего объекта, где АКБ уже стоит, а нагрузка со временем выросла.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Почему остаточная ёмкость по умолчанию 80 %?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Формула (Б.2) СП 6.13130.2025 задаёт коэффициент старения Kстр = 100 %/S, где S — ёмкость в конце срока службы по ТД; для типовых 80 % это Kстр = 1,25. Время по формуле (Б.3) t = C/(I·Kстр) — математически то же самое, что считать от 80 % остаточной ёмкости. Если ёмкость проверялась контрольным разрядом, подставьте фактический процент — расчёт станет точнее консервативного умолчания.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Как узнать фактическую остаточную ёмкость?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Контрольным разрядом по ГОСТ Р 59638 — у нас есть отдельный инструмент «Проверка АКБ разрядом»: разрядите батарею постоянным током, замерьте время до конечного напряжения, и он посчитает фактическую ёмкость с приведением к 25 °C. Полученный процент — прямой вход для этого расчёта.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Что за «дежурный с тревогой в конце» и почему это главная цифра?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Худший сценарий по п. Б.2 СП 6.13130.2025: система живёт на АКБ в дежурном режиме, а в самом конце должна ещё отработать тревогу (норматив — 24 ч дежурного + 1 ч «Пожар»). Расчёт резервирует ёмкость на тревогу и делит остаток на дежурный ток: если получилось меньше 24 ч — батарея нормативное время не выдерживает.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Почему коэффициенты нагрузки Кн приняты равными 1?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Кн учитывает токоразрядные характеристики конкретной АКБ (при больших токах отдаваемая ёмкость меньше) и берётся из ТД производителя. Для быстрой оценки при обследовании он принят 1 — это немного оптимистично при токах выше 0,1C. Для проектного расчёта с кривыми конкретных батарей используйте расчёт ёмкости АКБ, где Кн подставляется автоматически.</p></details></section></div></main></div></div>
+  </body>
+</html>

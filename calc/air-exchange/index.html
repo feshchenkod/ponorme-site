@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Онлайн-расчёт вентиляции помещения по кратности воздухообмена: требуемый расход L = n·V, справочник типовых кратностей, подбор диаметра круглого воздуховода по скорости. С ходом расчёта." />
+    <title>Расчёт воздухообмена по кратности онлайн — расход воздуха и подбор воздуховода</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Расчёт воздухообмена по кратности онлайн — расход воздуха и подбор воздуховода" />
+    <meta property="og:description" content="Онлайн-расчёт вентиляции помещения по кратности воздухообмена: требуемый расход L = n·V, справочник типовых кратностей, подбор диаметра круглого воздуховода по скорости. С ходом расчёта." />
+    <meta property="og:url" content="https://ponorme.ru/calc/air-exchange" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Расчёт воздухообмена по кратности онлайн — расход воздуха и подбор воздуховода" />
+    <meta name="twitter:description" content="Онлайн-расчёт вентиляции помещения по кратности воздухообмена: требуемый расход L = n·V, справочник типовых кратностей, подбор диаметра круглого воздуховода по скорости. С ходом расчёта." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-CSSNEEI2.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-cy7HkTES.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CDenYK7y.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/air-exchange" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Как рассчитать вентиляцию помещения по кратности?","acceptedAnswer":{"@type":"Answer","text":"Требуемый расход воздуха L = n·V, где V — объём помещения (м³), n — кратность воздухообмена (ч⁻¹) — сколько раз в час воздух должен полностью замениться. Кратность берётся из профильного СП для вашего типа помещения или из справочника типовых значений."}},{"@type":"Question","name":"Почему расчёт по кратности — оценочный?","acceptedAnswer":{"@type":"Answer","text":"СП 60.13330 требует определять воздухообмен расчётом: по людям (санитарная норма наружного воздуха), по вредностям, влаге или теплоизбыткам. Кратность — упрощённый справочный метод: он даёт стартовую оценку и применяется, когда профильный СП нормирует именно кратность. Для санузлов и кухонь нормируются фиксированные расходы (м³/ч), а не кратность."}},{"@type":"Question","name":"Какую скорость воздуха принимать в воздуховоде?","acceptedAnswer":{"@type":"Answer","text":"Для магистральных воздуховодов жилых и общественных зданий типово 4–6 м/с, для ответвлений и решёток 2–4 м/с (ограничение — шум), для производственных систем до 8–12 м/с. Фактическая скорость в подобранном стандартном диаметре получается ниже целевой — сечение принимается с запасом."}}]}</script>
+  </head>
+  <body>
+    <div id="app"><div class="flex min-h-screen flex-col"><main class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-8 sm:px-6"><div class="py-8"><a href="/calculators/hvac" class="mb-4 inline-flex items-center gap-1 text-sm text-muted">Вентиляция</a><h1 class="text-2xl font-semibold tracking-tight">Воздухообмен по кратности</h1><p class="mt-2 max-w-3xl text-sm text-muted">Требуемый расход воздуха L = n·V по объёму помещения и кратности, с подбором диаметра круглого воздуховода.</p><div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium border-line text-muted">СП 60.13330 · отопление, вентиляция и кондиционирование — общие требования к воздухообмену</span></div><div class="mt-6 max-w-3xl text-[15px]"><p class="mb-3 leading-relaxed">Считает требуемый расход приточного или вытяжного воздуха по кратности воздухообмена: <strong>L = n·V</strong>, где V — объём помещения, n — сколько раз в час воздух должен полностью замениться. По расходу и целевой скорости подбирается диаметр круглого воздуховода из стандартного ряда с пересчётом фактической скорости.</p>
+<h3 class="mt-5 mb-2 text-base font-semibold">Формулы</h3>
+<ul class="list-disc space-y-1 pl-5"><li>Расход воздуха: <strong>L = n·V</strong>, м³/ч.</li><li>Сечение воздуховода: <strong>S = L/(3600·v)</strong>; диаметр <strong>d = √(4S/π)</strong> — далее ближайший стандартный Ø не меньше расчётного.</li><li>Фактическая скорость в стандартном диаметре: <strong>v = L/(3600·S)</strong> — получается ниже целевой (сечение с запасом).</li></ul>
+<h3 class="mt-5 mb-2 text-base font-semibold">Ограничения</h3>
+<ul class="list-disc space-y-1 pl-5"><li>Кратностный метод — <strong>оценочный</strong>: СП 60.13330 требует определять воздухообмен расчётом по людям (норма наружного воздуха на человека), вредностям, влаге или теплоизбыткам. Справочные кратности дают стартовую оценку и применимы, когда профильный СП нормирует именно кратность.</li><li>Для санузлов и кухонь жилых зданий нормируются <strong>фиксированные расходы</strong> (например, 25–50 и 60–90 м³/ч), а не кратность — задайте расход напрямую через кратность n = L/V либо посчитайте по профильному СП.</li><li>Противодымная вентиляция (СП 7.13130) этим калькулятором <strong>не считается</strong> — там другая методика.</li><li>Типовые кратности в справочнике собраны по практике проектирования (АВОК, профильные СП) — перед выпуском проекта сверьте значение с документом для вашего типа здания.</li></ul></div><section class="mt-8 max-w-3xl"><h2 class="text-lg font-semibold">Вопросы и ответы</h2><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Как рассчитать вентиляцию помещения по кратности?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Требуемый расход воздуха L = n·V, где V — объём помещения (м³), n — кратность воздухообмена (ч⁻¹) — сколько раз в час воздух должен полностью замениться. Кратность берётся из профильного СП для вашего типа помещения или из справочника типовых значений.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Почему расчёт по кратности — оценочный?</summary><p class="mt-2 text-sm leading-relaxed text-muted">СП 60.13330 требует определять воздухообмен расчётом: по людям (санитарная норма наружного воздуха), по вредностям, влаге или теплоизбыткам. Кратность — упрощённый справочный метод: он даёт стартовую оценку и применяется, когда профильный СП нормирует именно кратность. Для санузлов и кухонь нормируются фиксированные расходы (м³/ч), а не кратность.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Какую скорость воздуха принимать в воздуховоде?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Для магистральных воздуховодов жилых и общественных зданий типово 4–6 м/с, для ответвлений и решёток 2–4 м/с (ограничение — шум), для производственных систем до 8–12 м/с. Фактическая скорость в подобранном стандартном диаметре получается ниже целевой — сечение принимается с запасом.</p></details></section></div></main></div></div>
+  </body>
+</html>

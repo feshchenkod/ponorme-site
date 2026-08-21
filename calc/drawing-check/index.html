@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Генератор AutoLISP-команды проверки чертежа СПЗ: двойные вставки блоков (копипаст на месте), блоки без адреса, незаполненные атрибуты, объекты на слое 0, слои вне белого списка. Находки обводятся кружками и листаются с зумом; повторный запуск обновляет маркеры." />
+    <title>Проверка чертежа СПЗ в AutoCAD — LSP-линтер: дубли блоков, датчики без адреса, слои</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Проверка чертежа СПЗ в AutoCAD — LSP-линтер: дубли блоков, датчики без адреса, слои" />
+    <meta property="og:description" content="Генератор AutoLISP-команды проверки чертежа СПЗ: двойные вставки блоков (копипаст на месте), блоки без адреса, незаполненные атрибуты, объекты на слое 0, слои вне белого списка. Находки обводятся кружками и листаются с зумом; повторный запуск обновляет маркеры." />
+    <meta property="og:url" content="https://ponorme.ru/calc/drawing-check" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Проверка чертежа СПЗ в AutoCAD — LSP-линтер: дубли блоков, датчики без адреса, слои" />
+    <meta name="twitter:description" content="Генератор AutoLISP-команды проверки чертежа СПЗ: двойные вставки блоков (копипаст на месте), блоки без адреса, незаполненные атрибуты, объекты на слое 0, слои вне белого списка. Находки обводятся кружками и листаются с зумом; повторный запуск обновляет маркеры." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-CSSNEEI2.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-cy7HkTES.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CDenYK7y.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/drawing-check" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Что именно проверяется?","acceptedAnswer":{"@type":"Answer","text":"Пять правил, каждое отключаемо: двойные вставки одного блока в одной точке; блоки по маске без адреса (ни заполненного атрибута, ни подписи рядом); обязательные атрибуты существуют и непусты; объекты на слое 0; слои вне белого списка масок. Проверяется пространство модели."}},{"@type":"Question","name":"Почему двойные вставки — первая проверка?","acceptedAnswer":{"@type":"Answer","text":"Блок, случайно вставленный дважды в одну точку, на печати не виден вообще: чертёж выглядит правильно, а спецификация, ёмкость АКБ и адреса считаются с лишним устройством. Ошибка всплывает только при монтаже. Команда ловит такие пары по совпадению эффективного имени и точки вставки с допуском."}},{"@type":"Question","name":"Как команда понимает, что у блока есть адрес?","acceptedAnswer":{"@type":"Answer","text":"Адрес есть, если у блока заполнен атрибут с заданным тегом или в радиусе поиска найден однострочный текст формата «префикс + число + суффикс» — тот же формат, что в инструменте нумерации. Дубли и пропуски самих адресов ищет команда АДРЕС-ДУБЛИ из инструмента нумерации."}},{"@type":"Question","name":"Как разбирать находки?","acceptedAnswer":{"@type":"Answer","text":"Каждая находка печатается в командной строке и обводится кружком на слое проверки (до 200 кружков, дальше — только счёт). После отчёта Enter листает находки с зумом. Исправили — запустите команду снова: старые кружки смоются, отчёт пересчитается."}},{"@type":"Question","name":"Чего линтер не умеет?","acceptedAnswer":{"@type":"Answer","text":"Правил, требующих семантики проекта, в DWG не выводимой: «устройство не подключено к линии», «извещатель вне помещения», «кабельная линия не замкнута» — в чертеже линия связи и стена неотличимы от любых других отрезков. Такие проверки возможны только при жёстком стандарте слоёв и блоков."}},{"@type":"Question","name":"Работает ли в AutoCAD LT и nanoCAD?","acceptedAnswer":{"@type":"Answer","text":"AutoCAD LT поддерживает AutoLISP начиная с версии 2024; полный AutoCAD и nanoCAD — давно. Используются только штатные функции чертежа (ssget, entmake, vla-объекты документа) — внешних зависимостей нет."}}]}</script>
+  </head>
+  <body>
+    <div id="app"><div class="flex min-h-screen flex-col"><main class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-8 sm:px-6"><div class="py-8"><a href="/calculators/cad" class="mb-4 inline-flex items-center gap-1 text-sm text-muted">Автоматизация AutoCAD</a><h1 class="text-2xl font-semibold tracking-tight">Проверка чертежа СПЗ</h1><p class="mt-2 max-w-3xl text-sm text-muted">Линтер чертежа одной командой: двойные вставки блоков, датчики без адреса, пустые атрибуты, объекты на слое 0 и слои вне стандарта — LSP-команда с маркерами находок и листанием с зумом.</p><div class="mt-6 max-w-3xl text-[15px]"><p class="mb-3 leading-relaxed">Линтер чертежа СПЗ: одна LSP-команда прогоняет включённые проверки по модели и печатает отчёт, а находки обводит кружками на отдельном слое — как проверка кода у программистов, только для плана сигнализации. Повторный запуск смывает старые маркеры и пересчитывает отчёт, после отчёта находки листаются с зумом по Enter.</p>
+<p class="mb-3 leading-relaxed">Правила настраиваются в форме и попадают в скрипт только включённые. Самое ценное — <strong>двойные вставки блоков</strong>: случайный копипаст датчика в ту же точку на печати не виден, но завышает спецификацию, ёмкость АКБ и число адресов; команда ловит такие пары по эффективному имени (динамические блоки не обманут) и совпадению точек с допуском. <strong>Блоки без адреса</strong> ищутся по маске имён: адресом считается заполненный атрибут с заданным тегом или подпись формата «префикс + число + суффикс» рядом — формат тот же, что в <a href="/calc/numbering" class="text-accent underline underline-offset-2">инструменте нумерации</a>. Для организаций с атрибутным стандартом есть проверка <strong>обязательных атрибутов</strong> (различает «атрибута нет» и «атрибут пуст»), для стандарта слоёв — <strong>белый список масок</strong>; объекты на <strong>слое 0</strong> отмечаются всегда, если правило включено.</p>
+<p class="mb-3 leading-relaxed">Проверяется только то, что честно выводится из геометрии DWG: правил вида «устройство не подключено» или «извещатель вне помещения» линтер не обещает — в чужом чертеже линия связи неотличима от прочих отрезков. Дубли и пропуски самих адресов проверяет парная команда АДРЕС-ДУБЛИ из инструмента нумерации.</p></div><section class="mt-8 max-w-3xl"><h2 class="text-lg font-semibold">Вопросы и ответы</h2><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Что именно проверяется?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Пять правил, каждое отключаемо: двойные вставки одного блока в одной точке; блоки по маске без адреса (ни заполненного атрибута, ни подписи рядом); обязательные атрибуты существуют и непусты; объекты на слое 0; слои вне белого списка масок. Проверяется пространство модели.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Почему двойные вставки — первая проверка?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Блок, случайно вставленный дважды в одну точку, на печати не виден вообще: чертёж выглядит правильно, а спецификация, ёмкость АКБ и адреса считаются с лишним устройством. Ошибка всплывает только при монтаже. Команда ловит такие пары по совпадению эффективного имени и точки вставки с допуском.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Как команда понимает, что у блока есть адрес?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Адрес есть, если у блока заполнен атрибут с заданным тегом или в радиусе поиска найден однострочный текст формата «префикс + число + суффикс» — тот же формат, что в инструменте нумерации. Дубли и пропуски самих адресов ищет команда АДРЕС-ДУБЛИ из инструмента нумерации.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Как разбирать находки?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Каждая находка печатается в командной строке и обводится кружком на слое проверки (до 200 кружков, дальше — только счёт). После отчёта Enter листает находки с зумом. Исправили — запустите команду снова: старые кружки смоются, отчёт пересчитается.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Чего линтер не умеет?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Правил, требующих семантики проекта, в DWG не выводимой: «устройство не подключено к линии», «извещатель вне помещения», «кабельная линия не замкнута» — в чертеже линия связи и стена неотличимы от любых других отрезков. Такие проверки возможны только при жёстком стандарте слоёв и блоков.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Работает ли в AutoCAD LT и nanoCAD?</summary><p class="mt-2 text-sm leading-relaxed text-muted">AutoCAD LT поддерживает AutoLISP начиная с версии 2024; полный AutoCAD и nanoCAD — давно. Используются только штатные функции чертежа (ssget, entmake, vla-объекты документа) — внешних зависимостей нет.</p></details></section></div></main></div></div>
+  </body>
+</html>

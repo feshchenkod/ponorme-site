@@ -1,0 +1,1 @@
+var e=(e,t)=>(e/t-1)*100,t=e=>(e.match(/(?<![\p{L}\d-])\d+(?:[.,]\d+)?(?![\p{L}\d-]|[.,]\d)/gu)??[]).map(e=>parseFloat(e.replace(`,`,`.`))),n=e=>e.reduce((e,t)=>e+t,0),r=(e,t,n)=>.0175*2*e*n/t,i={12:10.5,24:21},a=(e,t)=>e-t;export{n as a,t as i,a as n,r as o,e as r,i as t};

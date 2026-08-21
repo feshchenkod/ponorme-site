@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Онлайн-подбор РИП и шкафов ШПС «Болид» по токам нагрузки и времени резерва: проверка тока, минимально достаточная АКБ по СП 6.13130, запас. Импорт токов из расчёта ёмкости АКБ." />
+    <title>Подбор РИП по нагрузке онлайн — источник резервного питания «Болид» (12/24 В)</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Подбор РИП по нагрузке онлайн — источник резервного питания «Болид» (12/24 В)" />
+    <meta property="og:description" content="Онлайн-подбор РИП и шкафов ШПС «Болид» по токам нагрузки и времени резерва: проверка тока, минимально достаточная АКБ по СП 6.13130, запас. Импорт токов из расчёта ёмкости АКБ." />
+    <meta property="og:url" content="https://ponorme.ru/calc/rip" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Подбор РИП по нагрузке онлайн — источник резервного питания «Болид» (12/24 В)" />
+    <meta name="twitter:description" content="Онлайн-подбор РИП и шкафов ШПС «Болид» по токам нагрузки и времени резерва: проверка тока, минимально достаточная АКБ по СП 6.13130, запас. Импорт токов из расчёта ёмкости АКБ." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-CSSNEEI2.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-cy7HkTES.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CDenYK7y.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/rip" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Как подобрать РИП для пожарной сигнализации?","acceptedAnswer":{"@type":"Answer","text":"Сложите токи всех потребителей в дежурном режиме и режиме «Пожар», задайте время резерва (по СП 6.13130 — 24 ч и 1 ч) — подборщик проверит каждый РИП «Болид» по длительному току и по ёмкости штатных АКБ по формуле (Б.1.1) и покажет минимально достаточную конфигурацию с запасом."}},{"@type":"Question","name":"Почему РИП с подходящим током нагрузки может не подойти?","acceptedAnswer":{"@type":"Answer","text":"Ёмкости его АКБ может не хватить на время резерва: требуемая ёмкость считается по (Б.1.1) с коэффициентами Kн по разрядной таблице и Kстр = 1,25. Дополнительно проверяется ток разряда: на цепочку АКБ нельзя давать больше паспортного тока разряда за время режима (правило РЭ «Болид»)."}},{"@type":"Question","name":"Токи уже посчитаны в расчёте ёмкости АКБ — вводить заново?","acceptedAnswer":{"@type":"Answer","text":"Нет: подборщик встроен в расчёт ёмкости АКБ («Источник питания») и берёт токи оттуда автоматически. Отдельная страница удобна, когда токи известны сразу — например, из проекта."}}]}</script>
+  </head>
+  <body>
+    <div id="app"><div class="flex min-h-screen flex-col"><main class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-8 sm:px-6"><div class="py-8"><a href="/calculators/fire" class="mb-4 inline-flex items-center gap-1 text-sm text-muted">Пожарная безопасность</a><h1 class="text-2xl font-semibold tracking-tight">Подбор РИП по нагрузке</h1><p class="mt-2 max-w-3xl text-sm text-muted">Токи нагрузки и время резерва → подходящие РИП и шкафы ШПС «Болид» с минимально достаточной АКБ и запасом по (Б.1.1).</p><div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium border-line text-muted">СП 6.13130 · Приложение Б, формула (Б.1.1) — методика ёмкости</span></div><div class="mt-6 max-w-3xl text-[15px]"><p class="mb-3 leading-relaxed">Подбор источника резервированного питания «Болид» по токам нагрузки и времени резерва. Введите токи в дежурном режиме и режиме «Пожар» (или подставьте их из вашего расчёта ёмкости АКБ) — сервис проверит каждый РИП и шкаф ШПС линейки по длительному току, подберёт минимально достаточную конфигурацию АКБ в штатные отсеки и покажет запас.</p>
+<p class="mb-3 leading-relaxed">Методика ёмкости — формула (Б.1.1) СП 6.13130: Kстр = 1,25 (по формуле (Б.2) при ёмкости в конце срока S = 80 % из ТД «Болид»), Kн — по разрядным таблицам серии АБ «Болид», собственный ток каждого источника — его паспортный (у моделей, где он не нормирован в РЭ, принята оценка 40 мА — помечены «*»). Дополнительно проверяется правило РЭ: ток разряда цепочки АКБ не выше паспортного для выбранного времени.</p>
+<p class="mb-3 leading-relaxed">Кроме РИП в подборе участвуют шкафы ШПС-12 и ШПС-24 — резервированный источник и место для монтажа приборов ИСО «Орион» в общем корпусе (исполнения внутри группы различаются только конструктивно: окно на двери, IP54). Характеристики сверены с карточками bolid.ru и актуальными РЭ (2025–2026). Максимальный ток — кратковременный (до 2 мин с интервалом не менее 1 ч; у РИП-24 исп.56 и ШПС-24 — до 10 мин) и в подборе по длительной нагрузке не используется.</p></div><section class="mt-8 max-w-3xl"><h2 class="text-lg font-semibold">Вопросы и ответы</h2><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Как подобрать РИП для пожарной сигнализации?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Сложите токи всех потребителей в дежурном режиме и режиме «Пожар», задайте время резерва (по СП 6.13130 — 24 ч и 1 ч) — подборщик проверит каждый РИП «Болид» по длительному току и по ёмкости штатных АКБ по формуле (Б.1.1) и покажет минимально достаточную конфигурацию с запасом.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Почему РИП с подходящим током нагрузки может не подойти?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Ёмкости его АКБ может не хватить на время резерва: требуемая ёмкость считается по (Б.1.1) с коэффициентами Kн по разрядной таблице и Kстр = 1,25. Дополнительно проверяется ток разряда: на цепочку АКБ нельзя давать больше паспортного тока разряда за время режима (правило РЭ «Болид»).</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Токи уже посчитаны в расчёте ёмкости АКБ — вводить заново?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Нет: подборщик встроен в расчёт ёмкости АКБ («Источник питания») и берёт токи оттуда автоматически. Отдельная страница удобна, когда токи известны сразу — например, из проекта.</p></details></section></div></main></div></div>
+  </body>
+</html>

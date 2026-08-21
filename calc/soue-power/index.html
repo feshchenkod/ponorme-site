@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Мощностной расчёт речевого оповещения: громкоговорители по трансляционным линиям 100/70/30 В с отводами 1/3/6/10 Вт, суммарная мощность, подбор усилителя с запасом, ток и падение напряжения в линиях с проверкой 10 % по п. В.3.4 СП 3.13130.2026 и потерей УЗД дальнего громкоговорителя." />
+    <title>Расчёт мощности СОУЭ онлайн — линии 100 В, подбор усилителя, загрузка линий</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Расчёт мощности СОУЭ онлайн — линии 100 В, подбор усилителя, загрузка линий" />
+    <meta property="og:description" content="Мощностной расчёт речевого оповещения: громкоговорители по трансляционным линиям 100/70/30 В с отводами 1/3/6/10 Вт, суммарная мощность, подбор усилителя с запасом, ток и падение напряжения в линиях с проверкой 10 % по п. В.3.4 СП 3.13130.2026 и потерей УЗД дальнего громкоговорителя." />
+    <meta property="og:url" content="https://ponorme.ru/calc/soue-power" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Расчёт мощности СОУЭ онлайн — линии 100 В, подбор усилителя, загрузка линий" />
+    <meta name="twitter:description" content="Мощностной расчёт речевого оповещения: громкоговорители по трансляционным линиям 100/70/30 В с отводами 1/3/6/10 Вт, суммарная мощность, подбор усилителя с запасом, ток и падение напряжения в линиях с проверкой 10 % по п. В.3.4 СП 3.13130.2026 и потерей УЗД дальнего громкоговорителя." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-CSSNEEI2.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-cy7HkTES.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CDenYK7y.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/soue-power" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Почему мощность линии — просто сумма отводов?","acceptedAnswer":{"@type":"Answer","text":"В трансляционных линиях 100 В каждый громкоговоритель подключается через согласующий трансформатор с фиксированными отводами (типовые 1/3/6/10 Вт). Пока усилитель держит номинальное напряжение линии, каждый громкоговоритель потребляет мощность своего отвода независимо от остальных — поэтому нагрузка линии равна сумме отводов, а ток I = P/U. Это и есть причина, по которой 100-вольтовые линии позволяют вешать десятки громкоговорителей на один кабель."}},{"@type":"Question","name":"Какой запас мощности усилителя закладывать?","acceptedAnswer":{"@type":"Answer","text":"Нормативного требования нет — это практика производителей: обычно 20 % на старение, допуски и последующие дополнения. Руководство на конкретный прибор главнее: если РЭ разрешает грузить до номинала — можно поставить запас 0 и проверить только сумму отводов. Запас в расчёте настраивается."}},{"@type":"Question","name":"Как падение напряжения в линии влияет на громкость?","acceptedAnswer":{"@type":"Answer","text":"Мощность на трансформаторном отводе пропорциональна квадрату напряжения, а УЗД зависит от мощности как 10·lg(P) — формула (В.1) СП 3.13130.2026. Падение 10 % напряжения означает −0,9 дБ у дальнего громкоговорителя. П. В.3.4 ограничивает падение напряжения в линиях связи и электропитания оповещателей 10 % от номинального (если ТД не описывает влияние падения на УЗД) — расчёт проверяет линию по этому лимиту и показывает потерю в децибелах."}},{"@type":"Question","name":"Чем этот расчёт отличается от акустического расчёта СОУЭ?","acceptedAnswer":{"@type":"Answer","text":"Акустический расчёт отвечает на вопрос «слышно ли»: уровень звука в расчётной точке против шума (уровни, расстояния, таблица В.1). Здесь — электрическая сторона тех же линий: хватает ли усилителя, как разложена нагрузка и не теряет ли дальний громкоговоритель громкость из-за кабеля. Работают в паре: выбрали отводы по УЗД — проверьте здесь мощность и линии."}},{"@type":"Question","name":"Для низковольтных линий 12/24 В этот расчёт подходит?","acceptedAnswer":{"@type":"Answer","text":"Нет — звуковые и световые оповещатели на 12/24 В считаются по постоянному току: для них есть расчёт падения напряжения в линии СПЗ с участками и режимом разряженной АКБ. Этот инструмент — для трансформаторных трансляционных линий 100/70/30 В речевого оповещения."}}]}</script>
+  </head>
+  <body>
+    <div id="app"><div class="flex min-h-screen flex-col"><main class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-8 sm:px-6"><div class="py-8"><a href="/calculators/fire" class="mb-4 inline-flex items-center gap-1 text-sm text-muted">Пожарная безопасность</a><h1 class="text-2xl font-semibold tracking-tight">Мощность и линии речевого СОУЭ</h1><p class="mt-2 max-w-3xl text-sm text-muted">Трансляционные линии 100 В: сумма отводов громкоговорителей по линиям, подбор усилителя с запасом, контроль падения напряжения.</p><div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium border-line text-muted">СП 3.13130.2026 · формула (В.1) — УЗД от мощности; п. В.3.4 — падение напряжения не более 10 %</span></div><div class="mt-6 max-w-3xl text-[15px]"><p class="mb-3 leading-relaxed">Мощностной расчёт <strong>речевого оповещения</strong>: громкоговорители раскладываются по <strong>трансляционным линиям 100/70/30 В</strong> группами «количество × отвод» (типовые отводы 1/3/6/10 Вт — из ТД громкоговорителя). Сервис считает мощность и ток каждой линии, суммарную нагрузку, <strong>требуемую мощность усилителя с запасом</strong> и подбирает ближайший типовой номинал; если усилитель уже выбран — показывает его загрузку с вердиктом.</p>
+<p class="mb-3 leading-relaxed">Для каждой линии можно задать длину и сечение кабеля — тогда проверяется <strong>падение напряжения</strong> против лимита 10 % (п. В.3.4 СП 3.13130.2026) и показывается, сколько децибел теряет дальний громкоговоритель: мощность на трансформаторном отводе пропорциональна квадрату напряжения, а УЗД связан с мощностью формулой (В.1) L = S + 10·lg(P).</p>
+<p class="mb-3 leading-relaxed">Электрическая и акустическая стороны работают в паре: отводы выбираются по требуемому УЗД в <a href="/calc/acoustic" class="text-accent underline underline-offset-2">расчёте звукового давления СОУЭ</a>, а здесь проверяются мощность, линии и усилитель. Низковольтные линии 12/24 В (звуковые и световые оповещатели) считаются отдельным инструментом — <a href="/calc/line-drop" class="text-accent underline underline-offset-2">падение напряжения в линии СПЗ</a>.</p></div><section class="mt-8 max-w-3xl"><h2 class="text-lg font-semibold">Вопросы и ответы</h2><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Почему мощность линии — просто сумма отводов?</summary><p class="mt-2 text-sm leading-relaxed text-muted">В трансляционных линиях 100 В каждый громкоговоритель подключается через согласующий трансформатор с фиксированными отводами (типовые 1/3/6/10 Вт). Пока усилитель держит номинальное напряжение линии, каждый громкоговоритель потребляет мощность своего отвода независимо от остальных — поэтому нагрузка линии равна сумме отводов, а ток I = P/U. Это и есть причина, по которой 100-вольтовые линии позволяют вешать десятки громкоговорителей на один кабель.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Какой запас мощности усилителя закладывать?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Нормативного требования нет — это практика производителей: обычно 20 % на старение, допуски и последующие дополнения. Руководство на конкретный прибор главнее: если РЭ разрешает грузить до номинала — можно поставить запас 0 и проверить только сумму отводов. Запас в расчёте настраивается.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Как падение напряжения в линии влияет на громкость?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Мощность на трансформаторном отводе пропорциональна квадрату напряжения, а УЗД зависит от мощности как 10·lg(P) — формула (В.1) СП 3.13130.2026. Падение 10 % напряжения означает −0,9 дБ у дальнего громкоговорителя. П. В.3.4 ограничивает падение напряжения в линиях связи и электропитания оповещателей 10 % от номинального (если ТД не описывает влияние падения на УЗД) — расчёт проверяет линию по этому лимиту и показывает потерю в децибелах.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Чем этот расчёт отличается от акустического расчёта СОУЭ?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Акустический расчёт отвечает на вопрос «слышно ли»: уровень звука в расчётной точке против шума (уровни, расстояния, таблица В.1). Здесь — электрическая сторона тех же линий: хватает ли усилителя, как разложена нагрузка и не теряет ли дальний громкоговоритель громкость из-за кабеля. Работают в паре: выбрали отводы по УЗД — проверьте здесь мощность и линии.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Для низковольтных линий 12/24 В этот расчёт подходит?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Нет — звуковые и световые оповещатели на 12/24 В считаются по постоянному току: для них есть расчёт падения напряжения в линии СПЗ с участками и режимом разряженной АКБ. Этот инструмент — для трансформаторных трансляционных линий 100/70/30 В речевого оповещения.</p></details></section></div></main></div></div>
+  </body>
+</html>

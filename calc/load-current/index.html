@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Онлайн-расчёт тока электрической нагрузки по активной мощности и коэффициенту мощности для 1-фазной (220 В) и 3-фазной (380 В) сети: расчётный ток, полная (кВА) и реактивная (квар) мощность, подбор номинала автомата по ГОСТ IEC 60898-1." />
+    <title>Расчёт тока нагрузки онлайн — ток по мощности и cosφ, подбор автомата (1ф/3ф)</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Расчёт тока нагрузки онлайн — ток по мощности и cosφ, подбор автомата (1ф/3ф)" />
+    <meta property="og:description" content="Онлайн-расчёт тока электрической нагрузки по активной мощности и коэффициенту мощности для 1-фазной (220 В) и 3-фазной (380 В) сети: расчётный ток, полная (кВА) и реактивная (квар) мощность, подбор номинала автомата по ГОСТ IEC 60898-1." />
+    <meta property="og:url" content="https://ponorme.ru/calc/load-current" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Расчёт тока нагрузки онлайн — ток по мощности и cosφ, подбор автомата (1ф/3ф)" />
+    <meta name="twitter:description" content="Онлайн-расчёт тока электрической нагрузки по активной мощности и коэффициенту мощности для 1-фазной (220 В) и 3-фазной (380 В) сети: расчётный ток, полная (кВА) и реактивная (квар) мощность, подбор номинала автомата по ГОСТ IEC 60898-1." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-CSSNEEI2.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-cy7HkTES.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CDenYK7y.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/load-current" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Как рассчитать ток по мощности для трёхфазной сети?","acceptedAnswer":{"@type":"Answer","text":"Ток трёхфазной нагрузки I = P/(√3·U·cosφ), где P — активная мощность (Вт), U — линейное напряжение (380 В), cosφ — коэффициент мощности. Для однофазной сети I = P/(U·cosφ) при фазном напряжении 220 В."}},{"@type":"Question","name":"Какой автомат выбрать по расчётному току?","acceptedAnswer":{"@type":"Answer","text":"Номинал автомата принимается ближайшим стандартным из ряда ГОСТ IEC 60898-1 (6, 10, 13, 16, 20, 25, 32, 40, 50, 63 А …) не ниже расчётного тока. Это выбор по нагреву; селективность, стойкость к токам КЗ и согласование с сечением кабеля проверяются отдельно по ПУЭ (гл. 3.1, 1.3)."}},{"@type":"Question","name":"Зачем учитывать КПД (η)?","acceptedAnswer":{"@type":"Answer","text":"Для двигателей паспортная мощность указывается на валу; из сети потребляется больше на величину потерь: Pпотр = P/η. Ток считается по потребляемой мощности."}},{"@type":"Question","name":"Почему для номиналов больше 125 А нет ссылки на ГОСТ IEC 60898-1?","acceptedAnswer":{"@type":"Answer","text":"ГОСТ IEC 60898-1 распространяется на модульные автоматические выключатели с номиналами до 125 А. Бо́льшие номиналы (160–630 А) — аппараты по ГОСТ Р 50030.2 (IEC 60947-2): выключатели в литом корпусе и воздушные. Калькулятор помечает такие номиналы отдельной подсказкой."}}]}</script>
+  </head>
+  <body>
+    <div id="app"><div class="flex min-h-screen flex-col"><main class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-8 sm:px-6"><div class="py-8"><a href="/calculators/electrics" class="mb-4 inline-flex items-center gap-1 text-sm text-muted">Электрика</a><h1 class="text-2xl font-semibold tracking-tight">Ток нагрузки и подбор автомата</h1><p class="mt-2 max-w-3xl text-sm text-muted">Расчётный ток, полная и реактивная мощность по мощности и cosφ (1-ф / 3-ф) с подбором номинала автомата.</p><div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium border-line text-muted">ГОСТ IEC 60898-1 · стандартный ряд номинальных токов автоматических выключателей</span></div><div class="mt-6 max-w-3xl text-[15px]"><p class="mb-3 leading-relaxed">Считает расчётный ток электрической нагрузки по активной мощности и коэффициенту мощности для однофазной (220 В) и трёхфазной (380 В) сети, а также полную (кВА) и реактивную (квар) мощность из треугольника мощностей. По расчётному току подбирается ближайший стандартный номинал автоматического выключателя.</p>
+<h3 class="mt-5 mb-2 text-base font-semibold">Формулы</h3>
+<ul class="list-disc space-y-1 pl-5"><li>Ток: <strong>3-ф</strong> — I = P/(√3·U·cosφ); <strong>1-ф</strong> — I = P/(U·cosφ), где U — линейное (3-ф) или фазное (1-ф) напряжение.</li><li>Полная мощность S = P/cosφ; реактивная Q = √(S² − P²); угол φ = arccos(cosφ).</li><li>Для двигателей потребляемая из сети мощность учитывает КПД: Pпотр = P/η.</li></ul>
+<h3 class="mt-5 mb-2 text-base font-semibold">Ограничения</h3>
+<ul class="list-disc space-y-1 pl-5"><li>Подбор автомата — только по расчётному току (нагреву), из стандартного ряда ГОСТ IEC 60898-1 (модульные автоматы до 125 А; номиналы выше — аппараты по ГОСТ Р 50030.2). Согласование с длительно допустимым током кабеля и выбор сечений — ПУЭ гл. 3.1 и 1.3, селективность и стойкость к токам КЗ проверяются отдельно.</li><li>Напряжение и cosφ задаёт проектировщик по паспорту нагрузки; для смешанной нагрузки используйте средневзвешенный cosφ. Подставляемые 220/380 В — распространённые в действующих сетях значения; ГОСТ 29322 задаёт номинальные 230/400 В — при необходимости укажите их в поле напряжения.</li></ul></div><section class="mt-8 max-w-3xl"><h2 class="text-lg font-semibold">Вопросы и ответы</h2><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Как рассчитать ток по мощности для трёхфазной сети?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Ток трёхфазной нагрузки I = P/(√3·U·cosφ), где P — активная мощность (Вт), U — линейное напряжение (380 В), cosφ — коэффициент мощности. Для однофазной сети I = P/(U·cosφ) при фазном напряжении 220 В.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Какой автомат выбрать по расчётному току?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Номинал автомата принимается ближайшим стандартным из ряда ГОСТ IEC 60898-1 (6, 10, 13, 16, 20, 25, 32, 40, 50, 63 А …) не ниже расчётного тока. Это выбор по нагреву; селективность, стойкость к токам КЗ и согласование с сечением кабеля проверяются отдельно по ПУЭ (гл. 3.1, 1.3).</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Зачем учитывать КПД (η)?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Для двигателей паспортная мощность указывается на валу; из сети потребляется больше на величину потерь: Pпотр = P/η. Ток считается по потребляемой мощности.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Почему для номиналов больше 125 А нет ссылки на ГОСТ IEC 60898-1?</summary><p class="mt-2 text-sm leading-relaxed text-muted">ГОСТ IEC 60898-1 распространяется на модульные автоматические выключатели с номиналами до 125 А. Бо́льшие номиналы (160–630 А) — аппараты по ГОСТ Р 50030.2 (IEC 60947-2): выключатели в литом корпусе и воздушные. Калькулятор помечает такие номиналы отдельной подсказкой.</p></details></section></div></main></div></div>
+  </body>
+</html>
