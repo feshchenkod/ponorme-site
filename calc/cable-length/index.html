@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Генератор AutoLISP-команды: суммирование длин кабельных линий пространства модели по правилам «маска слоёв — марка кабеля», запас в процентах, добавки на стояки, округление вверх; ведомость в командную строку, таблица в чертёж и CSV для Excel. Отдельная команда рисует трассу с показом набранных метров." />
+    <title>Длины кабеля с плана AutoCAD — ведомость по слоям с запасом (генератор LSP онлайн)</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Длины кабеля с плана AutoCAD — ведомость по слоям с запасом (генератор LSP онлайн)" />
+    <meta property="og:description" content="Генератор AutoLISP-команды: суммирование длин кабельных линий пространства модели по правилам «маска слоёв — марка кабеля», запас в процентах, добавки на стояки, округление вверх; ведомость в командную строку, таблица в чертёж и CSV для Excel. Отдельная команда рисует трассу с показом набранных метров." />
+    <meta property="og:url" content="https://ponorme.ru/calc/cable-length" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Длины кабеля с плана AutoCAD — ведомость по слоям с запасом (генератор LSP онлайн)" />
+    <meta name="twitter:description" content="Генератор AutoLISP-команды: суммирование длин кабельных линий пространства модели по правилам «маска слоёв — марка кабеля», запас в процентах, добавки на стояки, округление вверх; ведомость в командную строку, таблица в чертёж и CSV для Excel. Отдельная команда рисует трассу с показом набранных метров." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "alternateName": ["По норме", "Понорме", "ponorme", "ponorme.ru"],
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-rvfkNJFT.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-BjZ7n3X7.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DMKLb401.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/cable-length" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Что считается длиной линии?","acceptedAnswer":{"@type":"Answer","text":"Длина по кривой: отрезки, полилинии (включая дуговые сегменты), дуги и сплайны пространства модели. Окружности, тексты и блоки не считаются. Каждая линия относится к первому правилу, чья маска слоёв совпала."}},{"@type":"Question","name":"Как задаётся марка кабеля?","acceptedAnswer":{"@type":"Answer","text":"В правиле: маска слоёв → марка. Правило с маркой сливает все совпавшие слои в одну строку ведомости; правило без марки даёт строку на каждый слой с его именем. Знак «×» в марке автоматически заменяется русской «х»: в кодировке cp1251, в которой сохраняются LSP и CSV, символа «×» нет — да и в марках кабеля по каталогам пишется именно буква «х»."}},{"@type":"Question","name":"Откуда берётся запас и что за добавка?","acceptedAnswer":{"@type":"Answer","text":"Запас в процентах покрывает провис, разделку и неточность плана — обычно 10–15 %. Добавка в метрах — вертикальные участки, которых на плане нет: стояки между этажами, спуски к приборам; она прибавляется к строке ведомости после запаса. Итог округляется вверх до заданного шага."}},{"@type":"Question","name":"Это кабельный журнал?","acceptedAnswer":{"@type":"Answer","text":"Это ведомость длин по маркам — верхняя строка кабельного журнала. Пообъектный журнал «участок — откуда — куда — длина» требует адресов устройств на концах каждого участка; такие данные появляются после автоадресации, и это следующий шаг развития инструмента."}},{"@type":"Question","name":"Зачем команда-трасса, если есть полилиния?","acceptedAnswer":{"@type":"Answer","text":"Это и есть полилиния, но набранные метры видны прямо в подсказке следующей точки, а в конце длина подписывается текстом. Прямоугольная разводка — штатной клавишей F8. Автопрокладки вдоль стен нет сознательно: в чертеже стены неотличимы от прочих линий."}},{"@type":"Question","name":"Работает ли в AutoCAD LT и nanoCAD?","acceptedAnswer":{"@type":"Answer","text":"Полный AutoCAD и nanoCAD — да. AutoCAD LT 2023 и старше — нет (там нет AutoLISP); в LT 2024+ AutoLISP появился и, по справке Autodesk, используемые vla-/vlax-функции поддерживаются (внешние COM-объекты — нет), однако на LT работа не проверялась. CSV пишется с запятой-десятичной, русский Excel открывает его сразу."}}]}</script>
+  </head>
+  <body>
+    <div id="app"><div class="flex min-h-screen flex-col"><main class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-8 sm:px-6"><div class="py-8"><a href="/calculators/cad" class="mb-4 inline-flex items-center gap-1 text-sm text-muted">Автоматизация AutoCAD</a><h1 class="text-2xl font-semibold tracking-tight">Длины кабеля с плана</h1><p class="mt-2 max-w-3xl text-sm text-muted">Ведомость кабелей одной командой: длины линий по слоям с марками, запасом и добавками на вертикали — таблица в чертёж и CSV. Плюс команда-трасса с живым счётчиком метров.</p><div class="mt-6 max-w-3xl text-[15px]"><p class="mb-3 leading-relaxed">Сколько кабеля заказывать — вопрос, на который план уже ответил: линии начерчены по слоям, осталось честно их измерить. Команда суммирует длины отрезков, полилиний, дуг и сплайнов пространства модели по правилам «маска слоёв → марка кабеля», добавляет запас на провис и разделку, метры на вертикали (стояки, спуски к приборам) и округляет вверх до целого метра. Итог — ведомость в командной строке, таблица прямо в чертёж и CSV для Excel с запятой-десятичной.</p>
+<p class="mb-3 leading-relaxed">Правила работают как в <a href="/calc/block-count" class="text-accent underline underline-offset-2">спецификации с плана</a>: первое совпадение маски выигрывает. Правило с маркой сливает слои ШС и ДПЛС в одну строку «КПСнг(А)-FRLS 1х2х0,5 — 240 м»; правило без марки даёт строку на каждый слой — удобно для быстрой прикидки по чужому чертежу маской «*».</p>
+<p class="mb-3 leading-relaxed">Вторая команда — трасса: та же полилиния по щелчкам, но набранные метры показываются прямо в подсказке следующей точки, а длина подписывается у конца. Прямоугольная разводка — штатным орто (F8). Автопрокладки вдоль стен здесь нет сознательно: в DWG стена неотличима от любой другой линии, и «умная» трасса мимо реальных коробов хуже честной ручной со счётчиком.</p></div><section class="mt-8 max-w-3xl"><h2 class="text-lg font-semibold">Вопросы и ответы</h2><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Что считается длиной линии?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Длина по кривой: отрезки, полилинии (включая дуговые сегменты), дуги и сплайны пространства модели. Окружности, тексты и блоки не считаются. Каждая линия относится к первому правилу, чья маска слоёв совпала.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Как задаётся марка кабеля?</summary><p class="mt-2 text-sm leading-relaxed text-muted">В правиле: маска слоёв → марка. Правило с маркой сливает все совпавшие слои в одну строку ведомости; правило без марки даёт строку на каждый слой с его именем. Знак «×» в марке автоматически заменяется русской «х»: в кодировке cp1251, в которой сохраняются LSP и CSV, символа «×» нет — да и в марках кабеля по каталогам пишется именно буква «х».</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Откуда берётся запас и что за добавка?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Запас в процентах покрывает провис, разделку и неточность плана — обычно 10–15 %. Добавка в метрах — вертикальные участки, которых на плане нет: стояки между этажами, спуски к приборам; она прибавляется к строке ведомости после запаса. Итог округляется вверх до заданного шага.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Это кабельный журнал?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Это ведомость длин по маркам — верхняя строка кабельного журнала. Пообъектный журнал «участок — откуда — куда — длина» требует адресов устройств на концах каждого участка; такие данные появляются после автоадресации, и это следующий шаг развития инструмента.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Зачем команда-трасса, если есть полилиния?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Это и есть полилиния, но набранные метры видны прямо в подсказке следующей точки, а в конце длина подписывается текстом. Прямоугольная разводка — штатной клавишей F8. Автопрокладки вдоль стен нет сознательно: в чертеже стены неотличимы от прочих линий.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Работает ли в AutoCAD LT и nanoCAD?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Полный AutoCAD и nanoCAD — да. AutoCAD LT 2023 и старше — нет (там нет AutoLISP); в LT 2024+ AutoLISP появился и, по справке Autodesk, используемые vla-/vlax-функции поддерживаются (внешние COM-объекты — нет), однако на LT работа не проверялась. CSV пишется с запятой-десятичной, русский Excel открывает его сразу.</p></details></section></div></main></div></div>
+  </body>
+</html>

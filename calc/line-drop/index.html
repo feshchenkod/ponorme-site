@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Расчёт падения напряжения в линиях СПЗ (оповещатели, питание 12/24 В) по участкам с убывающим током: напряжение на последнем устройстве, проверка 10 % от номинального по п. В.3.4 СП 3.13130.2026, режим разряженной АКБ, подбор минимального сечения из стандартного ряда." />
+    <title>Падение напряжения в линии СПЗ онлайн — участки, разряженная АКБ, подбор сечения</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Падение напряжения в линии СПЗ онлайн — участки, разряженная АКБ, подбор сечения" />
+    <meta property="og:description" content="Расчёт падения напряжения в линиях СПЗ (оповещатели, питание 12/24 В) по участкам с убывающим током: напряжение на последнем устройстве, проверка 10 % от номинального по п. В.3.4 СП 3.13130.2026, режим разряженной АКБ, подбор минимального сечения из стандартного ряда." />
+    <meta property="og:url" content="https://ponorme.ru/calc/line-drop" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Падение напряжения в линии СПЗ онлайн — участки, разряженная АКБ, подбор сечения" />
+    <meta name="twitter:description" content="Расчёт падения напряжения в линиях СПЗ (оповещатели, питание 12/24 В) по участкам с убывающим током: напряжение на последнем устройстве, проверка 10 % от номинального по п. В.3.4 СП 3.13130.2026, режим разряженной АКБ, подбор минимального сечения из стандартного ряда." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "alternateName": ["По норме", "Понорме", "ponorme", "ponorme.ru"],
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-rvfkNJFT.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-BjZ7n3X7.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DMKLb401.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/line-drop" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Чем расчёт по участкам лучше формулы для всей линии?","acceptedAnswer":{"@type":"Answer","text":"Формула ΔU = ρ·2L·I/S с полным током и полной длиной считает, будто вся нагрузка висит в конце линии. На деле через каждый участок течёт только ток устройств за ним, поэтому падение заметно меньше: для равномерной линии из n устройств — в (n+1)/2n раза, то есть почти вдвое. Участковый расчёт позволяет пройти проверку без завышения сечения."}},{"@type":"Question","name":"Действует ли ограничение 10 % для линий извещателей и модулей?","acceptedAnswer":{"@type":"Answer","text":"Напрямую — нет: п. В.3.4 СП 3.13130.2026 нормирует линии оповещателей (10 % — при отсутствии в ТД данных о влиянии падения напряжения на выходной УЗД). Для извещателей, модулей и прочих устройств 10 % — разумный проектный ориентир, а обязательным остаётся минимум напряжения питания по ТД устройства — вторая проверка расчёта."}},{"@type":"Question","name":"Откуда взято ограничение падения в 10 %?","acceptedAnswer":{"@type":"Answer","text":"П. В.3.4 СП 3.13130.2026: на УЗД оповещателя влияет падение напряжения в линиях связи и электропитания; если в ТД данных о таком влиянии нет, падение напряжения ограничивается 10 % от номинального. Если производитель приводит зависимость УЗД от питания — руководствуйтесь ТД, а проверка по минимальному напряжению устройства остаётся в силе."}},{"@type":"Question","name":"Зачем режим «разряженная АКБ»?","acceptedAnswer":{"@type":"Answer","text":"В резервном режиме линия питается от АКБ, и к концу нормативного времени работы на клеммах остаётся около 10,5 В для батареи 12 В и 21 В для 24 В (по РЭ приборов). Ток нагрузки при этом прежний, а запас по напряжению минимальный — именно этот случай решает, сработает ли последний оповещатель. Проверка «10 %» при этом по-прежнему считается от номинального напряжения, как её формулирует п. В.3.4."}},{"@type":"Question","name":"Подходит ли расчёт для 100-вольтовых трансляционных линий?","acceptedAnswer":{"@type":"Answer","text":"Нет. Речевые СОУЭ с трансформаторными линиями 100 В (и 30/70 В) считаются по мощности, а не по постоянному току — для них есть отдельный расчёт «Мощность и линии речевого СОУЭ». Здесь считаются низковольтные линии 12/24 В: звуковые и световые оповещатели, табло, питание извещателей и модулей."}},{"@type":"Question","name":"Какое минимальное напряжение устройства брать?","acceptedAnswer":{"@type":"Answer","text":"Из ТД на устройство. У приборов и оповещателей «Болид» диапазон питания обычно 10,2…28,4 В — поэтому по умолчанию стоит 10,2 В. Если в линии устройства с разными порогами, берите наибольший из минимумов: проверка идёт по последнему устройству, где напряжение ниже всего."}}]}</script>
+  </head>
+  <body>
+    <div id="app"><div class="flex min-h-screen flex-col"><main class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-8 sm:px-6"><div class="py-8"><a href="/calculators/fire" class="mb-4 inline-flex items-center gap-1 text-sm text-muted">Пожарная безопасность</a><h1 class="text-2xl font-semibold tracking-tight">Падение напряжения в линии СПЗ</h1><p class="mt-2 max-w-3xl text-sm text-muted">Цепочка питания по участкам: напряжение и запас у каждого устройства, проверка 10 % по СП 3.13130.2026, подбор сечения, режим разряженной АКБ.</p><div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium border-line text-muted">СП 3.13130.2026 · п. В.3.4 — падение напряжения не более 10 % от номинального при отсутствии данных ТД</span></div><div class="mt-6 max-w-3xl text-[15px]"><p class="mb-3 leading-relaxed">Расчёт <strong>падения напряжения в низковольтных линиях СПЗ</strong> (12/24 В): оповещатели, табло, питание извещателей и модулей. Линия считается <strong>по участкам</strong>: через каждый участок течёт только ток устройств, расположенных за ним, поэтому падение получается заметно меньше, чем по формуле «весь ток на всю длину», — и сечение не завышается. Результат рисуется <strong>цепочкой питания</strong> «источник → кабель → устройство → …»: у каждого узла — напряжение и запас до минимума, над каждым участком — длина, ток и падение; устройствам можно дать свои подписи (РИП → прибор → извещатели → табло).</p>
+<p class="mb-3 leading-relaxed">Проверяются два условия: падение <strong>не более 10 % от номинального</strong> — п. В.3.4 СП 3.13130.2026 (действует, когда в ТД оповещателя нет данных о влиянии падения напряжения на УЗД), и <strong>минимальное напряжение на последнем устройстве</strong> по его ТД. Режим <strong>«разряженная АКБ»</strong> считает худший случай резервного питания: 10,5 В на линии 12 В и 21 В на 24 В — линия, проходящая по номиналу, в этом режиме нередко уже не проходит. Обратная задача решается сразу: показывается минимальное достаточное сечение из стандартного ряда 0,2–4 мм².</p>
+<p class="mb-3 leading-relaxed">Типовая линия задаётся тремя числами (шаг, число устройств, ток), неравномерная — таблицей участков. Для прикидки одним участком есть <a href="/calc/mini" class="text-accent underline underline-offset-2">мини-расчёт падения напряжения</a>; 100-вольтовые трансляционные линии речевых СОУЭ считаются по мощности — для них есть <a href="/calc/soue-power" class="text-accent underline underline-offset-2">расчёт мощности и линий СОУЭ</a>.</p></div><section class="mt-8 max-w-3xl"><h2 class="text-lg font-semibold">Вопросы и ответы</h2><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Чем расчёт по участкам лучше формулы для всей линии?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Формула ΔU = ρ·2L·I/S с полным током и полной длиной считает, будто вся нагрузка висит в конце линии. На деле через каждый участок течёт только ток устройств за ним, поэтому падение заметно меньше: для равномерной линии из n устройств — в (n+1)/2n раза, то есть почти вдвое. Участковый расчёт позволяет пройти проверку без завышения сечения.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Действует ли ограничение 10 % для линий извещателей и модулей?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Напрямую — нет: п. В.3.4 СП 3.13130.2026 нормирует линии оповещателей (10 % — при отсутствии в ТД данных о влиянии падения напряжения на выходной УЗД). Для извещателей, модулей и прочих устройств 10 % — разумный проектный ориентир, а обязательным остаётся минимум напряжения питания по ТД устройства — вторая проверка расчёта.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Откуда взято ограничение падения в 10 %?</summary><p class="mt-2 text-sm leading-relaxed text-muted">П. В.3.4 СП 3.13130.2026: на УЗД оповещателя влияет падение напряжения в линиях связи и электропитания; если в ТД данных о таком влиянии нет, падение напряжения ограничивается 10 % от номинального. Если производитель приводит зависимость УЗД от питания — руководствуйтесь ТД, а проверка по минимальному напряжению устройства остаётся в силе.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Зачем режим «разряженная АКБ»?</summary><p class="mt-2 text-sm leading-relaxed text-muted">В резервном режиме линия питается от АКБ, и к концу нормативного времени работы на клеммах остаётся около 10,5 В для батареи 12 В и 21 В для 24 В (по РЭ приборов). Ток нагрузки при этом прежний, а запас по напряжению минимальный — именно этот случай решает, сработает ли последний оповещатель. Проверка «10 %» при этом по-прежнему считается от номинального напряжения, как её формулирует п. В.3.4.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Подходит ли расчёт для 100-вольтовых трансляционных линий?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Нет. Речевые СОУЭ с трансформаторными линиями 100 В (и 30/70 В) считаются по мощности, а не по постоянному току — для них есть отдельный расчёт «Мощность и линии речевого СОУЭ». Здесь считаются низковольтные линии 12/24 В: звуковые и световые оповещатели, табло, питание извещателей и модулей.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Какое минимальное напряжение устройства брать?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Из ТД на устройство. У приборов и оповещателей «Болид» диапазон питания обычно 10,2…28,4 В — поэтому по умолчанию стоит 10,2 В. Если в линии устройства с разными порогами, берите наибольший из минимумов: проверка идёт по последнему устройству, где напряжение ниже всего.</p></details></section></div></main></div></div>
+  </body>
+</html>

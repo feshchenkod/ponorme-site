@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Онлайн-расчёт ВПВ по действующей редакции СП 10.13130.2020 (с Изменением № 1, с 01.09.2026): количество пожарных кранов и минимальный расход по таблицам 7.1 и 7.2, давление и расход диктующего ПК-с по таблице 7.3, минимальная высота компактной части струи, оценка давления на вводе." />
+    <title>Расчёт внутреннего противопожарного водопровода онлайн — число струй, расход и давление (СП 10.13130 с Изм. № 1)</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Расчёт внутреннего противопожарного водопровода онлайн — число струй, расход и давление (СП 10.13130 с Изм. № 1)" />
+    <meta property="og:description" content="Онлайн-расчёт ВПВ по действующей редакции СП 10.13130.2020 (с Изменением № 1, с 01.09.2026): количество пожарных кранов и минимальный расход по таблицам 7.1 и 7.2, давление и расход диктующего ПК-с по таблице 7.3, минимальная высота компактной части струи, оценка давления на вводе." />
+    <meta property="og:url" content="https://ponorme.ru/calc/vpv" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Расчёт внутреннего противопожарного водопровода онлайн — число струй, расход и давление (СП 10.13130 с Изм. № 1)" />
+    <meta name="twitter:description" content="Онлайн-расчёт ВПВ по действующей редакции СП 10.13130.2020 (с Изменением № 1, с 01.09.2026): количество пожарных кранов и минимальный расход по таблицам 7.1 и 7.2, давление и расход диктующего ПК-с по таблице 7.3, минимальная высота компактной части струи, оценка давления на вводе." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "alternateName": ["По норме", "Понорме", "ponorme", "ponorme.ru"],
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-rvfkNJFT.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-BjZ7n3X7.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DMKLb401.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/vpv" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Сколько струй и какой расход нужен для жилого дома?","acceptedAnswer":{"@type":"Answer","text":"По таблице 7.1 СП 10.13130 в редакции Изменения № 1: для многоквартирных домов (Ф1.3) с этажностью от 12 до 16 (или высотой 30–50 м) — 1 струя 2,5 л/с при общей длине коридора до 10 м и 2 струи по 2,5 л/с при более длинном коридоре; свыше 16 этажей (выше 50 м) — 2 струи по 2,5 л/с независимо от коридора. Ниже 12 этажей ВПВ по таблице не требуется."}},{"@type":"Question","name":"Что изменило Изменение № 1 в таблицах числа струй?","acceptedAnswer":{"@type":"Answer","text":"Таблицы 7.1 и 7.2 изложены в новой редакции: критерии заданы этажностью или высотой — строка принимается при любом из событий (прим. ** к табл. 7.1; высота считается по СП 1.13130), для производственных зданий градация по объёму стала проще (до 150 и свыше 150 тыс. м³); для театров, кинотеатров, клубов и цирков (Ф2.1) — 2 и 4 ПК-с по расчётному количеству посадочных мест; пп. 7.11–7.12 исключены, для производственных и складских зданий выше 50 м действует новый п. 7.13 — две или четыре струи по 5 л/с. Подробный разбор изменения — на странице /sp/10.13130-izm1."}},{"@type":"Question","name":"Как определить давление у пожарного крана?","acceptedAnswer":{"@type":"Answer","text":"По справочной таблице 7.3 СП 10.13130: для выбранных диаметра клапана (DN 50/65), диаметра выходного отверстия ствола (13/16/19 мм) и длины рукава (10/15/20 м) таблица даёт расход ствола и давление у диктующего клапана, обеспечивающие требуемую высоту компактной части струи. Минимальная высота струи — п. 7.15: 6 м в зданиях до 50 м, 8 м в жилых выше 50 м, 16 м в общественных и производственных выше 50 м."}},{"@type":"Question","name":"Какое давление нужно на вводе или у насоса?","acceptedAnswer":{"@type":"Answer","text":"Давление у диктующего клапана плюс геометрическая высота его расположения и потери в сети от ввода до крана (потери берутся из гидравлического расчёта трубопроводов). Инструмент складывает эти составляющие; помните об ограничении гидростатического давления в самостоятельном ВПВ — не более 0,9 МПа у самого нижнего ПК (п. 6.2.20 в редакции Изменения № 1; раньше было 0,6 МПа)."}},{"@type":"Question","name":"Когда у кранов нужны диафрагмы?","acceptedAnswer":{"@type":"Answer","text":"При давлении у ПК более 0,45 МПа между пожарным клапаном и соединительной головкой предусматриваются диафрагмы или регуляторы давления (п. 7.5); диаметр отверстия диафрагмы — по номограмме приложения Б СП 10.13130. Допускаются одинаковые диафрагмы на 3–4 этажах."}}]}</script>
+  </head>
+  <body>
+    <div id="app"><div class="flex min-h-screen flex-col"><main class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-8 sm:px-6"><div class="py-8"><a href="/calculators/fire" class="mb-4 inline-flex items-center gap-1 text-sm text-muted">Пожарная безопасность</a><h1 class="text-2xl font-semibold tracking-tight">Расход и давление ВПВ (пожарные краны)</h1><p class="mt-2 max-w-3xl text-sm text-muted">Число струй и расход по таблицам 7.1/7.2 СП 10.13130 в редакции Изменения № 1, давление у диктующего ПК-с по таблице 7.3, оценка давления на вводе.</p><div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium border-line text-muted">СП 10.13130.2020 (с Изм. № 1) · таблицы 7.1, 7.2, п. 7.13 — число ПК-с и расход; п. 7.15 — высота компактной струи; п. 6.2.20 — гидростатика ≤0,9 МПа</span><span class="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium border-line text-muted">СП 10.13130.2020 · таблица 7.3 (справочная) — гидравлические параметры ПК-с; п. 7.5 — диафрагмы при давлении более 0,45 МПа</span></div><div class="mt-6 max-w-3xl text-[15px]"><p class="mb-3 leading-relaxed">Расчёт внутреннего противопожарного водопровода по действующей редакции СП 10.13130.2020 — с Изменением № 1 (в силе с 1 сентября 2026 года): число ПК-с и минимальный расход, давление и расход диктующего крана, оценка давления на вводе.</p>
+<p class="mb-3 leading-relaxed">Три шага расчёта:</p>
+<ul class="list-disc space-y-1 pl-5"><li><strong>Число струй и расход</strong> — по новым таблицам 7.1 (жилые, общественные, административно-бытовые) и 7.2 (производственные и складские), включая п. 7.13 для производственных и складских зданий выше 50 м. Критерии — этажность или высота (строка принимается при любом из событий), длина коридора, вместимость, площадь, объём.</li><li><strong>Давление и расход диктующего ПК-с</strong> — по справочной таблице 7.3: диаметр клапана DN 50/65, выходное отверстие ствола 13/16/19 мм, рукав 10/15/20 м и требуемая высота компактной части струи (минимумы — п. 7.15). Инструмент показывает и подходящие альтернативные комплектации.</li><li><strong>Оценка давления на вводе</strong> — давление у клапана плюс геометрия и потери сети (потери — из гидравлического расчёта трубопроводов), с проверкой ограничений по пп. 6.2.19–6.2.20 и напоминанием о диафрагмах (п. 7.5).</li></ul>
+<p class="mb-3 leading-relaxed">Гидравлический расчёт трубопроводной сети (потери по участкам) в инструмент не входит — потери задаются готовым значением из вашего расчёта.</p></div><section class="mt-8 max-w-3xl"><h2 class="text-lg font-semibold">Вопросы и ответы</h2><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Сколько струй и какой расход нужен для жилого дома?</summary><p class="mt-2 text-sm leading-relaxed text-muted">По таблице 7.1 СП 10.13130 в редакции Изменения № 1: для многоквартирных домов (Ф1.3) с этажностью от 12 до 16 (или высотой 30–50 м) — 1 струя 2,5 л/с при общей длине коридора до 10 м и 2 струи по 2,5 л/с при более длинном коридоре; свыше 16 этажей (выше 50 м) — 2 струи по 2,5 л/с независимо от коридора. Ниже 12 этажей ВПВ по таблице не требуется.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Что изменило Изменение № 1 в таблицах числа струй?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Таблицы 7.1 и 7.2 изложены в новой редакции: критерии заданы этажностью или высотой — строка принимается при любом из событий (прим. ** к табл. 7.1; высота считается по СП 1.13130), для производственных зданий градация по объёму стала проще (до 150 и свыше 150 тыс. м³); для театров, кинотеатров, клубов и цирков (Ф2.1) — 2 и 4 ПК-с по расчётному количеству посадочных мест; пп. 7.11–7.12 исключены, для производственных и складских зданий выше 50 м действует новый п. 7.13 — две или четыре струи по 5 л/с. Подробный разбор изменения — на странице /sp/10.13130-izm1.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Как определить давление у пожарного крана?</summary><p class="mt-2 text-sm leading-relaxed text-muted">По справочной таблице 7.3 СП 10.13130: для выбранных диаметра клапана (DN 50/65), диаметра выходного отверстия ствола (13/16/19 мм) и длины рукава (10/15/20 м) таблица даёт расход ствола и давление у диктующего клапана, обеспечивающие требуемую высоту компактной части струи. Минимальная высота струи — п. 7.15: 6 м в зданиях до 50 м, 8 м в жилых выше 50 м, 16 м в общественных и производственных выше 50 м.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Какое давление нужно на вводе или у насоса?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Давление у диктующего клапана плюс геометрическая высота его расположения и потери в сети от ввода до крана (потери берутся из гидравлического расчёта трубопроводов). Инструмент складывает эти составляющие; помните об ограничении гидростатического давления в самостоятельном ВПВ — не более 0,9 МПа у самого нижнего ПК (п. 6.2.20 в редакции Изменения № 1; раньше было 0,6 МПа).</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Когда у кранов нужны диафрагмы?</summary><p class="mt-2 text-sm leading-relaxed text-muted">При давлении у ПК более 0,45 МПа между пожарным клапаном и соединительной головкой предусматриваются диафрагмы или регуляторы давления (п. 7.5); диаметр отверстия диафрагмы — по номограмме приложения Б СП 10.13130. Допускаются одинаковые диафрагмы на 3–4 этажах.</p></details></section></div></main></div></div>
+  </body>
+</html>

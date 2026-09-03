@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Быстрые инженерные переводы онлайн: амперы ↔ миллиамперы, мощность ↔ ток при 12/24/220 В, сечение ↔ диаметр жилы, децибелы ↔ разы, дБ ↔ дБА по октавным полосам." />
+    <title>Инженерные конвертеры онлайн — А в мА, Вт в А, сечение и диаметр провода, дБ в дБА</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Инженерные конвертеры онлайн — А в мА, Вт в А, сечение и диаметр провода, дБ в дБА" />
+    <meta property="og:description" content="Быстрые инженерные переводы онлайн: амперы ↔ миллиамперы, мощность ↔ ток при 12/24/220 В, сечение ↔ диаметр жилы, децибелы ↔ разы, дБ ↔ дБА по октавным полосам." />
+    <meta property="og:url" content="https://ponorme.ru/calc/converters" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Инженерные конвертеры онлайн — А в мА, Вт в А, сечение и диаметр провода, дБ в дБА" />
+    <meta name="twitter:description" content="Быстрые инженерные переводы онлайн: амперы ↔ миллиамперы, мощность ↔ ток при 12/24/220 В, сечение ↔ диаметр жилы, децибелы ↔ разы, дБ ↔ дБА по октавным полосам." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "alternateName": ["По норме", "Понорме", "ponorme", "ponorme.ru"],
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-rvfkNJFT.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-BjZ7n3X7.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DMKLb401.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/converters" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Как перевести ватты в амперы?","acceptedAnswer":{"@type":"Answer","text":"Разделите мощность на напряжение: I = P/U. Например, оповещатель 6 Вт при 12 В потребляет 0,5 А. Для сети 220 В переменного тока формула точна при cosφ = 1 (нагревательные приборы); для двигателей и импульсных блоков питания ток будет выше — используйте расчёт тока нагрузки с cosφ."}},{"@type":"Question","name":"Как узнать сечение жилы по её диаметру?","acceptedAnswer":{"@type":"Answer","text":"S = π·d²/4: измерьте диаметр жилы без изоляции штангенциркулем и подставьте. Диаметру 1,0 мм соответствует 0,79 мм², 1,38 мм — 1,5 мм². Обратный перевод: d = 2·√(S/π)."}},{"@type":"Question","name":"Почему при удвоении мощности получается +3 дБ, а не +6?","acceptedAnswer":{"@type":"Answer","text":"Децибел по мощности — 10·lg(N): удвоение даёт 10·lg 2 ≈ 3 дБ. А по звуковому давлению и расстоянию — 20·lg(N), поэтому удвоение расстояния до оповещателя снижает уровень на 6 дБ. Те же коэффициенты стоят в формулах (В.1) и (В.2) СП 3.13130."}},{"@type":"Question","name":"Почему для мощности 10·lg, а для давления и напряжения 20·lg?","acceptedAnswer":{"@type":"Answer","text":"Децибел определён через отношение мощностей: 10·lg(P₂/P₁). Звуковое давление и напряжение — амплитудные величины, а мощность пропорциональна их квадрату, поэтому 10·lg((p₂/p₁)²) = 20·lg(p₂/p₁). Отсюда разные «удвоения»: вдвое больше мощности — +3 дБ, вдвое больше давления или напряжения — +6 дБ. Конвертер «Децибелы и разы» считает обе шкалы."}},{"@type":"Question","name":"Как перевести децибелы в дБА?","acceptedAnswer":{"@type":"Answer","text":"Единого коэффициента нет: дБА — это уровень звукового давления с частотной коррекцией A, а её поправка зависит от частоты (ГОСТ Р 53188.1, таблица 3). Для одной октавной полосы прибавьте поправку: на 63 Гц −26,2 дБ, на 250 Гц −8,6 дБ, на 1000 Гц — 0, то есть дБ и дБА совпадают. Общий уровень широкополосного шума в дБА получают энергетическим суммированием скорректированных полос — его измеряет шумомер с включённой характеристикой A. Именно в дБА нормированы уровни звука СОУЭ в СП 3.13130 (примечание к п. 6.2.9 СП 3.13130.2026 прямо отсылает к ГОСТ Р 53188.1)."}}]}</script>
+  </head>
+  <body>
+    <div id="app"><div class="flex min-h-screen flex-col"><main class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-8 sm:px-6"><div class="py-8"><a href="/calculators/tools" class="mb-4 inline-flex items-center gap-1 text-sm text-muted">Конвертеры и мини-расчёты</a><h1 class="text-2xl font-semibold tracking-tight">Инженерные конвертеры</h1><p class="mt-2 max-w-3xl text-sm text-muted">Быстрые переводы: дБ ↔ дБА, децибелы ↔ разы, А ↔ мА, Вт ↔ А при 12/24 В, сечение ↔ диаметр жилы.</p><div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium border-line text-muted">ГОСТ Р 53188.1-2019 · таблица 3 — частотная коррекция A</span><span class="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium border-line text-muted">СП 3.13130.2026 · примечание к п. 6.2.9 — единицы дБА</span></div><div class="mt-6 max-w-3xl text-[15px]"><p class="mb-3 leading-relaxed">Пять переводов, которые регулярно нужны в работе над системами противопожарной защиты: пересчитать мощность оповещателя в ток для расчёта АКБ, проверить сечение жилы по измеренному диаметру, перейти между децибелами, разами и дБА.</p>
+<p class="mb-3 leading-relaxed">Двусторонние переводы: значение вводится в любое поле пары, второе пересчитывается сразу — пересчитанное поле подсвечивается. Внутри: дБ ↔ дБА по октавным полосам (ГОСТ Р 53188.1), децибелы ↔ разы, А ↔ мА, Вт ↔ А, сечение ↔ диаметр жилы.</p></div><section class="mt-8 max-w-3xl"><h2 class="text-lg font-semibold">Вопросы и ответы</h2><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Как перевести ватты в амперы?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Разделите мощность на напряжение: I = P/U. Например, оповещатель 6 Вт при 12 В потребляет 0,5 А. Для сети 220 В переменного тока формула точна при cosφ = 1 (нагревательные приборы); для двигателей и импульсных блоков питания ток будет выше — используйте расчёт тока нагрузки с cosφ.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Как узнать сечение жилы по её диаметру?</summary><p class="mt-2 text-sm leading-relaxed text-muted">S = π·d²/4: измерьте диаметр жилы без изоляции штангенциркулем и подставьте. Диаметру 1,0 мм соответствует 0,79 мм², 1,38 мм — 1,5 мм². Обратный перевод: d = 2·√(S/π).</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Почему при удвоении мощности получается +3 дБ, а не +6?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Децибел по мощности — 10·lg(N): удвоение даёт 10·lg 2 ≈ 3 дБ. А по звуковому давлению и расстоянию — 20·lg(N), поэтому удвоение расстояния до оповещателя снижает уровень на 6 дБ. Те же коэффициенты стоят в формулах (В.1) и (В.2) СП 3.13130.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Почему для мощности 10·lg, а для давления и напряжения 20·lg?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Децибел определён через отношение мощностей: 10·lg(P₂/P₁). Звуковое давление и напряжение — амплитудные величины, а мощность пропорциональна их квадрату, поэтому 10·lg((p₂/p₁)²) = 20·lg(p₂/p₁). Отсюда разные «удвоения»: вдвое больше мощности — +3 дБ, вдвое больше давления или напряжения — +6 дБ. Конвертер «Децибелы и разы» считает обе шкалы.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Как перевести децибелы в дБА?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Единого коэффициента нет: дБА — это уровень звукового давления с частотной коррекцией A, а её поправка зависит от частоты (ГОСТ Р 53188.1, таблица 3). Для одной октавной полосы прибавьте поправку: на 63 Гц −26,2 дБ, на 250 Гц −8,6 дБ, на 1000 Гц — 0, то есть дБ и дБА совпадают. Общий уровень широкополосного шума в дБА получают энергетическим суммированием скорректированных полос — его измеряет шумомер с включённой характеристикой A. Именно в дБА нормированы уровни звука СОУЭ в СП 3.13130 (примечание к п. 6.2.9 СП 3.13130.2026 прямо отсылает к ГОСТ Р 53188.1).</p></details></section></div></main></div></div>
+  </body>
+</html>

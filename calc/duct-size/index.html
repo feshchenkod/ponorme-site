@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Онлайн-подбор воздуховода: диаметр круглого и размеры прямоугольного по расходу и скорости, обратный расчёт фактической скорости, эквивалентный по трению диаметр, справочник рекомендуемых скоростей." />
+    <title>Расчёт воздуховода онлайн — сечение, диаметр и скорость воздуха по расходу</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Расчёт воздуховода онлайн — сечение, диаметр и скорость воздуха по расходу" />
+    <meta property="og:description" content="Онлайн-подбор воздуховода: диаметр круглого и размеры прямоугольного по расходу и скорости, обратный расчёт фактической скорости, эквивалентный по трению диаметр, справочник рекомендуемых скоростей." />
+    <meta property="og:url" content="https://ponorme.ru/calc/duct-size" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Расчёт воздуховода онлайн — сечение, диаметр и скорость воздуха по расходу" />
+    <meta name="twitter:description" content="Онлайн-подбор воздуховода: диаметр круглого и размеры прямоугольного по расходу и скорости, обратный расчёт фактической скорости, эквивалентный по трению диаметр, справочник рекомендуемых скоростей." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "alternateName": ["По норме", "Понорме", "ponorme", "ponorme.ru"],
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-rvfkNJFT.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-BjZ7n3X7.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DMKLb401.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/duct-size" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Как подобрать сечение воздуховода по расходу воздуха?","acceptedAnswer":{"@type":"Answer","text":"Требуемая площадь S = L/(3600·v), где L — расход (м³/ч), v — принятая скорость (м/с). Для круглого воздуховода диаметр d = √(4S/π), далее берётся ближайший стандартный диаметр не меньше расчётного. Для прямоугольного одна сторона задаётся по строительным ограничениям, вторая подбирается из типового ряда."}},{"@type":"Question","name":"Какую скорость воздуха принимать?","acceptedAnswer":{"@type":"Answer","text":"Справочно: магистрали жилых и общественных зданий — 4–6 м/с, ответвления и подводки к решёткам — 2–4 м/с, воздухораспределители — 1,5–3 м/с (ограничение по шуму), магистрали производственных зданий — 6–12 м/с. Это практика проектирования, а не норматив: в системах противодымной вентиляции скорости определяются расчётом по СП 7.13130."}},{"@type":"Question","name":"Зачем нужен эквивалентный диаметр прямоугольного воздуховода?","acceptedAnswer":{"@type":"Answer","text":"Таблицы и номограммы аэродинамического расчёта составлены для круглых воздуховодов. Чтобы ими воспользоваться для прямоугольного сечения, считают эквивалентный по трению диаметр dэ = 1,3·(a·b)^0,625/(a+b)^0,25 — потери давления на трение у такого круглого воздуховода будут теми же. Для расчёта скорости эквивалентный диаметр не применяется: скорость считается по фактической площади a·b."}}]}</script>
+  </head>
+  <body>
+    <div id="app"><div class="flex min-h-screen flex-col"><main class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-8 sm:px-6"><div class="py-8"><a href="/calculators/hvac" class="mb-4 inline-flex items-center gap-1 text-sm text-muted">Вентиляция</a><h1 class="text-2xl font-semibold tracking-tight">Сечение и скорость воздуховода</h1><p class="mt-2 max-w-3xl text-sm text-muted">Подбор круглого и прямоугольного воздуховода по расходу и скорости, обратная проверка готового размера, эквивалентный диаметр.</p><div class="mt-6 max-w-3xl text-[15px]"><p class="mb-3 leading-relaxed">Подбирает воздуховод по расходу воздуха и принятой скорости — круглый из стандартного ряда диаметров или прямоугольный (одна сторона задаётся, вторая подбирается), а также решает обратную задачу: какая скорость получится в уже выбранном размере. Дополнительно считает эквивалентный по трению диаметр для аэродинамического расчёта.</p>
+<h3 class="mt-5 mb-2 text-base font-semibold">Формулы</h3>
+<ul class="list-disc space-y-1 pl-5"><li>Требуемая площадь сечения: <strong>S = L/(3600·v)</strong>, м².</li><li>Круглый воздуховод: <strong>d = √(4S/π)</strong>; далее ближайший стандартный диаметр не меньше расчётного.</li><li>Прямоугольный: вторая сторона <strong>b = S/a</strong>, округляется вверх до типового ряда.</li><li>Фактическая скорость: <strong>v = L/(3600·S)</strong> — по фактической площади принятого сечения.</li><li>Эквивалентный по трению диаметр: <strong>dэ = 1,3·(a·b)^0,625/(a+b)^0,25</strong>, мм.</li><li>Гидравлический диаметр: <strong>dг = 2ab/(a+b)</strong>, мм.</li></ul>
+<h3 class="mt-5 mb-2 text-base font-semibold">Ограничения</h3>
+<ul class="list-disc space-y-1 pl-5"><li>Рекомендуемые скорости — <strong>справочные</strong> (практика проектирования, АВОК), а не нормативные требования: верхняя граница ограничена шумом и потерями давления. Для систем противодымной вентиляции скорости и расходы определяются расчётом по СП 7.13130.</li><li>Соотношение сторон прямоугольного воздуховода по практике принимают <strong>не более 1:3</strong>: при большем растёт трение, расход материала и сложность монтажа.</li><li>Эквивалентный диаметр применяется только для определения потерь на трение — скорость и расход по нему считать нельзя.</li><li>Аэродинамический расчёт системы (потери давления в сети, местные сопротивления, подбор вентилятора) этим инструментом не выполняется.</li></ul></div><section class="mt-8 max-w-3xl"><h2 class="text-lg font-semibold">Вопросы и ответы</h2><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Как подобрать сечение воздуховода по расходу воздуха?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Требуемая площадь S = L/(3600·v), где L — расход (м³/ч), v — принятая скорость (м/с). Для круглого воздуховода диаметр d = √(4S/π), далее берётся ближайший стандартный диаметр не меньше расчётного. Для прямоугольного одна сторона задаётся по строительным ограничениям, вторая подбирается из типового ряда.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Какую скорость воздуха принимать?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Справочно: магистрали жилых и общественных зданий — 4–6 м/с, ответвления и подводки к решёткам — 2–4 м/с, воздухораспределители — 1,5–3 м/с (ограничение по шуму), магистрали производственных зданий — 6–12 м/с. Это практика проектирования, а не норматив: в системах противодымной вентиляции скорости определяются расчётом по СП 7.13130.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Зачем нужен эквивалентный диаметр прямоугольного воздуховода?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Таблицы и номограммы аэродинамического расчёта составлены для круглых воздуховодов. Чтобы ими воспользоваться для прямоугольного сечения, считают эквивалентный по трению диаметр dэ = 1,3·(a·b)^0,625/(a+b)^0,25 — потери давления на трение у такого круглого воздуховода будут теми же. Для расчёта скорости эквивалентный диаметр не применяется: скорость считается по фактической площади a·b.</p></details></section></div></main></div></div>
+  </body>
+</html>

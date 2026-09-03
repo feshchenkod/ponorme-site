@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Онлайн-определение категории помещения В1, В2, В3, В4 по СП 12.13130 (приложение Б): пожарная нагрузка по справочнику теплоты сгорания, удельная нагрузка, проверка по формуле (Б.5). С ходом расчёта." />
+    <title>Категория помещения В1–В4 по пожарной опасности — расчёт онлайн (СП 12.13130)</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Категория помещения В1–В4 по пожарной опасности — расчёт онлайн (СП 12.13130)" />
+    <meta property="og:description" content="Онлайн-определение категории помещения В1, В2, В3, В4 по СП 12.13130 (приложение Б): пожарная нагрузка по справочнику теплоты сгорания, удельная нагрузка, проверка по формуле (Б.5). С ходом расчёта." />
+    <meta property="og:url" content="https://ponorme.ru/calc/category" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Категория помещения В1–В4 по пожарной опасности — расчёт онлайн (СП 12.13130)" />
+    <meta name="twitter:description" content="Онлайн-определение категории помещения В1, В2, В3, В4 по СП 12.13130 (приложение Б): пожарная нагрузка по справочнику теплоты сгорания, удельная нагрузка, проверка по формуле (Б.5). С ходом расчёта." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "alternateName": ["По норме", "Понорме", "ponorme", "ponorme.ru"],
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-rvfkNJFT.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-BjZ7n3X7.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DMKLb401.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/category" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Как определить категорию помещения В1, В2, В3 или В4?","acceptedAnswer":{"@type":"Answer","text":"По приложению Б СП 12.13130.2009: считается пожарная нагрузка Q (сумма произведений массы материалов на низшую теплоту сгорания), затем удельная нагрузка g = Q/S, и категория выбирается по таблице Б.1. Для В2 и В3 выполняется проверка повышения по формуле (Б.5)."}},{"@type":"Question","name":"Чем категории В отличаются от А и Б?","acceptedAnswer":{"@type":"Answer","text":"Категории А и Б — взрывопожароопасные (горючие газы, ЛВЖ и горючие жидкости, горючие пыли и волокна, вещества, реагирующие с водой или кислородом воздуха, — признаки в таблице 1) и определяются расчётом избыточного давления взрыва по приложению А. Категории В1–В4 — пожароопасные: помещение с горючими материалами, не отнесённое к А/Б (признаки — таблица 1), классифицируется по удельной пожарной нагрузке. Проверка ведётся от А к Д (п. 5.2)."}},{"@type":"Question","name":"Какое Q подставлять в проверку (Б.5): в СП написано «определённое по формуле (Б.2)»?","acceptedAnswer":{"@type":"Answer","text":"Это неточность печатного текста: по формуле (Б.2) считается удельная нагрузка g, а не Q. В неравенство (Б.5) подставляется полная пожарная нагрузка Q из формулы (Б.1) — так решены примеры Пособия ВНИИПО; так выполняется расчёт и здесь."}},{"@type":"Question","name":"Где взять низшую теплоту сгорания материалов?","acceptedAnswer":{"@type":"Answer","text":"В сервисе есть справочник, значения выверены по Пособию ВНИИПО и базе Кошмарова. Для материала не из списка теплоту сгорания можно ввести вручную."}}]}</script>
+  </head>
+  <body>
+    <div id="app"><div class="flex min-h-screen flex-col"><main class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-8 sm:px-6"><div class="py-8"><a href="/calculators/fire" class="mb-4 inline-flex items-center gap-1 text-sm text-muted">Пожарная безопасность</a><h1 class="text-2xl font-semibold tracking-tight">Категория помещения В1–В4 по пожарной нагрузке</h1><p class="mt-2 max-w-3xl text-sm text-muted">Пожарная нагрузка по справочнику материалов, удельная нагрузка, категория по таблице Б.1 и проверка (Б.5).</p><div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium border-line text-muted">СП 12.13130.2009 · Приложение Б (с Изм. № 1) — формулы (Б.1), (Б.2), (Б.5), таблица Б.1</span></div><div class="mt-6 max-w-3xl text-[15px]"><p class="mb-3 leading-relaxed">Определение категории помещения <strong>В1–В4</strong> по удельной пожарной нагрузке — приложение Б СП 12.13130.2009 (с Изм. № 1). Соберите пожарную нагрузку из справочника материалов (низшая теплота сгорания выверена по Пособию ВНИИПО и базе Кошмарова), укажите площадь её размещения — категория определится по таблице Б.1 с обязательной проверкой повышения по формуле (Б.5) для В2 и В3.</p>
+<p class="mb-3 leading-relaxed"><strong>Границы применения.</strong> Определяются только категории В1–В4. Предварительно убедитесь, что помещение не относится к категориям А или Б (горючие газы, ЛВЖ и нагретые горючие жидкости, горючие пыли или волокна — в количествах, при которых возможно образование взрывоопасных смесей, а также вещества, способные взрываться и гореть при взаимодействии с водой, кислородом воздуха или друг с другом; признаки — таблица 1, расчёт избыточного давления — приложение А): проверка категорий ведётся от А к Д (п. 5.2).</p>
+<p class="mb-3 leading-relaxed">Примечания к методике:</p>
+<ul class="list-disc space-y-1 pl-5"><li>Площадь размещения S в формуле (Б.2) принимается <strong>не менее 10 м²</strong> — при меньшей площади подставляется 10 м².</li><li>В печатном СП в описании (Б.5) сказано «Q, определённое по формуле (Б.2)» — это неточность: подставляется пожарная нагрузка Q из (Б.1), как в примерах Пособия ВНИИПО.</li><li>Изменение № 1 (приказ МЧС № 643 от 09.12.2010) исключило повышение В4 → В3 по (Б.5) — проверка выполняется только для В2 и В3.</li><li>Таблица Б.1 задаёт целочисленные диапазоны (В3: 181–1400 и т. д.); для промежуточных значений принята общепринятая непрерывная трактовка границ.</li><li>В4 принимается только при площади участка размещения до 10 м² (введённая S считается площадью участка): при большей S расчёт принимает В3 — как пример со стеллажами Пособия ВНИИПО. Также для В4 нужны расстояния между ними более предельных (таблица Б.2, для ЛВЖ/ГЖ — формулы (Б.3), (Б.4)) — проверьте по плану.</li></ul></div><section class="mt-8 max-w-3xl"><h2 class="text-lg font-semibold">Вопросы и ответы</h2><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Как определить категорию помещения В1, В2, В3 или В4?</summary><p class="mt-2 text-sm leading-relaxed text-muted">По приложению Б СП 12.13130.2009: считается пожарная нагрузка Q (сумма произведений массы материалов на низшую теплоту сгорания), затем удельная нагрузка g = Q/S, и категория выбирается по таблице Б.1. Для В2 и В3 выполняется проверка повышения по формуле (Б.5).</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Чем категории В отличаются от А и Б?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Категории А и Б — взрывопожароопасные (горючие газы, ЛВЖ и горючие жидкости, горючие пыли и волокна, вещества, реагирующие с водой или кислородом воздуха, — признаки в таблице 1) и определяются расчётом избыточного давления взрыва по приложению А. Категории В1–В4 — пожароопасные: помещение с горючими материалами, не отнесённое к А/Б (признаки — таблица 1), классифицируется по удельной пожарной нагрузке. Проверка ведётся от А к Д (п. 5.2).</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Какое Q подставлять в проверку (Б.5): в СП написано «определённое по формуле (Б.2)»?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Это неточность печатного текста: по формуле (Б.2) считается удельная нагрузка g, а не Q. В неравенство (Б.5) подставляется полная пожарная нагрузка Q из формулы (Б.1) — так решены примеры Пособия ВНИИПО; так выполняется расчёт и здесь.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Где взять низшую теплоту сгорания материалов?</summary><p class="mt-2 text-sm leading-relaxed text-muted">В сервисе есть справочник, значения выверены по Пособию ВНИИПО и базе Кошмарова. Для материала не из списка теплоту сгорания можно ввести вручную.</p></details></section></div></main></div></div>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Онлайн-проверка аккумуляторной батареи СПЗ по контрольному разряду: фактическая ёмкость Cф = Iр·tр, приведение к 25 °C, остаточная ёмкость в % и вывод «годна / под замену» по ГОСТ Р 59638." />
+    <title>Проверка ёмкости АКБ онлайн — годна или под замену (ГОСТ Р 59638)</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Проверка ёмкости АКБ онлайн — годна или под замену (ГОСТ Р 59638)" />
+    <meta property="og:description" content="Онлайн-проверка аккумуляторной батареи СПЗ по контрольному разряду: фактическая ёмкость Cф = Iр·tр, приведение к 25 °C, остаточная ёмкость в % и вывод «годна / под замену» по ГОСТ Р 59638." />
+    <meta property="og:url" content="https://ponorme.ru/calc/battery-test" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Проверка ёмкости АКБ онлайн — годна или под замену (ГОСТ Р 59638)" />
+    <meta name="twitter:description" content="Онлайн-проверка аккумуляторной батареи СПЗ по контрольному разряду: фактическая ёмкость Cф = Iр·tр, приведение к 25 °C, остаточная ёмкость в % и вывод «годна / под замену» по ГОСТ Р 59638." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "alternateName": ["По норме", "Понорме", "ponorme", "ponorme.ru"],
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-rvfkNJFT.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-BjZ7n3X7.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DMKLb401.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/battery-test" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Как проверить, годна ли АКБ пожарной сигнализации?","acceptedAnswer":{"@type":"Answer","text":"Разрядить батарею постоянным током до конечного напряжения (типовой режим по ТД производителей — Cном/10 до 10,5 В на 12-вольтовую АКБ, то есть 1,75 В на элемент; ГОСТ Р 59638, п. Б.2.28, рекомендует режим продолжительностью 3 ч и более), замерить время разряда tр, посчитать фактическую ёмкость Cф = Iр·tр и привести её к 25 °C. Если при первой проверке остаточная ёмкость выше 80 % номинала — АКБ годна; при 80 % и менее ГОСТ отводит на замену 12 месяцев (п. Б.2.28)."}},{"@type":"Question","name":"Каким током разряжать АКБ при проверке?","acceptedAnswer":{"@type":"Answer","text":"Типовой ток по ТД производителей АКБ — Iр = Cном/10 (сам ГОСТ Р 59638 ток не задаёт, лишь рекомендует режим продолжительностью 3 ч и более). Например, для батареи 17 А·ч — 1,7 А. Конечное напряжение — 10,5 В на 12-вольтовую АКБ, то есть 1,75 В на элемент."}},{"@type":"Question","name":"До какого напряжения разряжать батарею при проверке?","acceptedAnswer":{"@type":"Answer","text":"Для 12-вольтовой АКБ — до 10,5 В на батарею, то есть 1,75 В на элемент (в 12-В блоке 6 элементов) — так задают ТД производителей для этого режима; в таблице ГОСТ Р МЭК 60896-21 (п. 6.11.3) 1,75 В/эл соответствует 8-часовому режиму, а 10-часовому — 1,80 В/эл. Встречающаяся в статьях формулировка «10,5 В на элемент» ошибочна — это напряжение всей батареи. Разряд ниже конечного напряжения повреждает АКБ, поэтому напряжение контролируют в течение всего теста."}},{"@type":"Question","name":"Как часто проверять фактическую ёмкость?","acceptedAnswer":{"@type":"Answer","text":"ГОСТ Р 59638 (п. Б.2.28) рекомендует проверку фактической ёмкости не реже одного раза в 36 мес, начиная с даты производства батареи. Между проверками: осмотры — не реже раза в 3 мес (п. Б.2.25), контроль напряжения на клеммах — не реже раза в 6 мес (п. Б.2.27), а если применяется метод импульсной нагрузки — не реже раза в 6 мес (п. Б.2.29). АКБ, не прошедшую проверку, заменяют в течение 12 мес."}},{"@type":"Question","name":"Зачем приводить ёмкость к 25 °C?","acceptedAnswer":{"@type":"Answer","text":"Ёмкость свинцово-кислотной батареи зависит от температуры: на холоде она ниже. Чтобы сравнить результат с номиналом (заданным при 25 °C), измеренную ёмкость делят на K = 1 + 0,006·(t − 25). Формула и коэффициент λ = 0,006 (для режимов разряда от 3 ч) — из ГОСТ Р МЭК 60896-21 (пп. 6.11.12, 6.11.3), на который отсылает п. Б.2.28 ГОСТ Р 59638."}}]}</script>
+  </head>
+  <body>
+    <div id="app"><div class="flex min-h-screen flex-col"><main class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-8 sm:px-6"><div class="py-8"><a href="/calculators/fire" class="mb-4 inline-flex items-center gap-1 text-sm text-muted">Пожарная безопасность</a><h1 class="text-2xl font-semibold tracking-tight">Проверка ёмкости АКБ (годна / под замену)</h1><p class="mt-2 max-w-3xl text-sm text-muted">Оценка остаточной ёмкости аккумулятора по контрольному разряду с приведением к 25 °C — годна или под замену по критериям ГОСТ Р 59638.</p><div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium border-line text-muted">ГОСТ Р 59638-2021 · п. Б.2.28 — пороги замены 80/85 %, режим разряда ≥3 ч, периодичность проверки</span><span class="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium border-line text-muted">ГОСТ Р МЭК 60896-21-2013 · пп. 6.11.11–6.11.12 — ёмкость C = I·t и приведение к 25 °C (λ = 0,006)</span><span class="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium border-line text-muted">СП 6.13130 · электропитание систем противопожарной защиты</span></div><div class="mt-6 max-w-3xl text-[15px]"><p class="mb-3 leading-relaxed">Проверяет, годна ли аккумуляторная батарея системы противопожарной защиты по остаточной ёмкости — по результату контрольного разряда (ГОСТ Р 59638). Применяется при вводе в эксплуатацию и периодическом обслуживании: оставить АКБ или заменить.</p>
+<h3 class="mt-5 mb-2 text-base font-semibold">Методика</h3>
+<ul class="list-disc space-y-1 pl-5"><li>Батарею разряжают постоянным током <strong>Iр = Cном/10</strong> до конечного напряжения <strong>10,5 В на 12-В АКБ</strong> (1,75 В на элемент) — типовой режим контрольного разряда по ТД производителей АКБ — и фиксируют время разряда tр.</li><li>Фактически отданная ёмкость: <strong>Cф = Iр·tр</strong>.</li><li>Приведение к 25 °C: <strong>Cф,25 = Cф/K</strong>, где K = 1 + 0,006·(t − 25) — формула и коэффициент из ГОСТ Р МЭК 60896-21 (пп. 6.11.12, 6.11.3; действует для режимов разряда от 3 ч), на который отсылает п. Б.2.28 ГОСТ Р 59638.</li><li>Остаточная ёмкость: <strong>Cф,25/Cном·100 %</strong>. АКБ годна, если остаточная ёмкость <strong>выше порога</strong> (первая проверка — 80 %); при снижении до порога и менее ГОСТ предписывает заменить батарею в течение следующих 12 месяцев (п. Б.2.28).</li></ul>
+<h3 class="mt-5 mb-2 text-base font-semibold">Ограничения</h3>
+<ul class="list-disc space-y-1 pl-5"><li>Порог 80 % — для первой проверки; при второй и последующих ГОСТ ужесточает его до 85 % (п. Б.2.28) — выберите значение в поле «Порог годности».</li><li>Конечное напряжение и ток разряда зависят от типа АКБ — уточняйте по ТД производителя. Сам ГОСТ Р 59638 (п. Б.2.28) ток и конечное напряжение не задаёт, отсылая к инструкциям производителя; в таблице режимов ГОСТ Р МЭК 60896-21 (п. 6.11.3) 10-часовому режиму соответствует 1,80 В/эл (10,8 В на батарею), 1,75 В/эл — 8-часовому.</li><li>Разряд ниже конечного напряжения повреждает батарею — контроль обязателен.</li><li>Номинал зависит от режима разряда: C₁₀ меньше C₂₀. Для теста током Cном/10 корректнее сравнивать с 10-часовой ёмкостью из ТД — сравнение с 20-часовым номиналом систематически занижает остаточный процент у исправной батареи.</li></ul>
+<p class="mb-3 leading-relaxed">Полученный процент фактической ёмкости — прямой вход для расчёта <a href="/calc/battery-time" class="text-accent underline underline-offset-2">времени работы от АКБ</a>: сколько система с этой батареей проживёт в дежурном режиме и при пожаре.</p></div><section class="mt-8 max-w-3xl"><h2 class="text-lg font-semibold">Вопросы и ответы</h2><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Как проверить, годна ли АКБ пожарной сигнализации?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Разрядить батарею постоянным током до конечного напряжения (типовой режим по ТД производителей — Cном/10 до 10,5 В на 12-вольтовую АКБ, то есть 1,75 В на элемент; ГОСТ Р 59638, п. Б.2.28, рекомендует режим продолжительностью 3 ч и более), замерить время разряда tр, посчитать фактическую ёмкость Cф = Iр·tр и привести её к 25 °C. Если при первой проверке остаточная ёмкость выше 80 % номинала — АКБ годна; при 80 % и менее ГОСТ отводит на замену 12 месяцев (п. Б.2.28).</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Каким током разряжать АКБ при проверке?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Типовой ток по ТД производителей АКБ — Iр = Cном/10 (сам ГОСТ Р 59638 ток не задаёт, лишь рекомендует режим продолжительностью 3 ч и более). Например, для батареи 17 А·ч — 1,7 А. Конечное напряжение — 10,5 В на 12-вольтовую АКБ, то есть 1,75 В на элемент.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">До какого напряжения разряжать батарею при проверке?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Для 12-вольтовой АКБ — до 10,5 В на батарею, то есть 1,75 В на элемент (в 12-В блоке 6 элементов) — так задают ТД производителей для этого режима; в таблице ГОСТ Р МЭК 60896-21 (п. 6.11.3) 1,75 В/эл соответствует 8-часовому режиму, а 10-часовому — 1,80 В/эл. Встречающаяся в статьях формулировка «10,5 В на элемент» ошибочна — это напряжение всей батареи. Разряд ниже конечного напряжения повреждает АКБ, поэтому напряжение контролируют в течение всего теста.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Как часто проверять фактическую ёмкость?</summary><p class="mt-2 text-sm leading-relaxed text-muted">ГОСТ Р 59638 (п. Б.2.28) рекомендует проверку фактической ёмкости не реже одного раза в 36 мес, начиная с даты производства батареи. Между проверками: осмотры — не реже раза в 3 мес (п. Б.2.25), контроль напряжения на клеммах — не реже раза в 6 мес (п. Б.2.27), а если применяется метод импульсной нагрузки — не реже раза в 6 мес (п. Б.2.29). АКБ, не прошедшую проверку, заменяют в течение 12 мес.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Зачем приводить ёмкость к 25 °C?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Ёмкость свинцово-кислотной батареи зависит от температуры: на холоде она ниже. Чтобы сравнить результат с номиналом (заданным при 25 °C), измеренную ёмкость делят на K = 1 + 0,006·(t − 25). Формула и коэффициент λ = 0,006 (для режимов разряда от 3 ч) — из ГОСТ Р МЭК 60896-21 (пп. 6.11.12, 6.11.3), на который отсылает п. Б.2.28 ГОСТ Р 59638.</p></details></section></div></main></div></div>
+  </body>
+</html>

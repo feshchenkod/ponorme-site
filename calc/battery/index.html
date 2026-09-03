@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Онлайн-расчёт ёмкости аккумулятора для СПС и СОУЭ по СП 6.13130 (Б.1.1): суммарные токи приборов и извещателей («Болид», «Рубеж» и другие), коэффициент Kн по разрядной таблице, подбор АКБ Delta и «Болид», экспорт в PDF и Excel." />
+    <title>Расчёт ёмкости АКБ для пожарной сигнализации онлайн (СП 6.13130, приложение Б)</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#04a4fc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Расчёт ёмкости АКБ для пожарной сигнализации онлайн (СП 6.13130, приложение Б)" />
+    <meta property="og:description" content="Онлайн-расчёт ёмкости аккумулятора для СПС и СОУЭ по СП 6.13130 (Б.1.1): суммарные токи приборов и извещателей («Болид», «Рубеж» и другие), коэффициент Kн по разрядной таблице, подбор АКБ Delta и «Болид», экспорт в PDF и Excel." />
+    <meta property="og:url" content="https://ponorme.ru/calc/battery" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Расчёт ёмкости АКБ для пожарной сигнализации онлайн (СП 6.13130, приложение Б)" />
+    <meta name="twitter:description" content="Онлайн-расчёт ёмкости аккумулятора для СПС и СОУЭ по СП 6.13130 (Б.1.1): суммарные токи приборов и извещателей («Болид», «Рубеж» и другие), коэффициент Kн по разрядной таблице, подбор АКБ Delta и «Болид», экспорт в PDF и Excel." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "alternateName": ["По норме", "Понорме", "ponorme", "ponorme.ru"],
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-rvfkNJFT.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-BjZ7n3X7.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DMKLb401.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/battery" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"По какому СП рассчитывается ёмкость АКБ для пожарной сигнализации?","acceptedAnswer":{"@type":"Answer","text":"По приложению Б СП 6.13130.2025 (формула Б.1.1): ёмкость учитывает суммарные токи в дежурном режиме и режиме «Пожар», собственный ток источника питания, коэффициент старения Kстр и коэффициент Kн, учитывающий нагрузочные (токоразрядные) характеристики АКБ, — по разрядной таблице."}},{"@type":"Question","name":"Какое время резерва брать для АКБ?","acceptedAnswer":{"@type":"Answer","text":"По СП 6.13130 (приложение Б, п. Б.2) — 24 часа в дежурном режиме плюс 1 час в режиме «Пожар». В экспертном режиме можно задать другое время работы."}},{"@type":"Question","name":"Что такое коэффициент Kн и откуда он берётся?","acceptedAnswer":{"@type":"Answer","text":"Kн = Cном/Cфакт(t) — отношение номинальной ёмкости к фактически отдаваемой за время t по разрядной таблице АКБ. По умолчанию при Kн < 1 он принимается равным 1 (в запас). Kн считается автоматически по разрядным кривым каталога (Delta, «Болид», GSL, SKAT)."}},{"@type":"Question","name":"Kн режима «Пожар» получился 1,5, хотя ток нагрузки небольшой — почему?","acceptedAnswer":{"@type":"Answer","text":"По умолчанию Kн выбирается по времени резерва: для «Пожара» берётся коэффициент часового режима разрядной таблицы — как если бы АКБ за этот час разряжалась полностью. Когда фактический ток заметно меньше табличного тока часового разряда, такой Kн даёт страховочный запас. В экспертном режиме есть точный метод: Kн выбирается по фактическому току из той же таблицы — без запаса и без округления Kн до 1."}},{"@type":"Question","name":"В печатном СП во втором слагаемом (Б.1.1) стоит ΣIд.р. — почему в расчёт подставляется ток режима «Пожар»?","acceptedAnswer":{"@type":"Answer","text":"Это опечатка печатного текста: второе слагаемое описывает работу в режиме «Пожар» (в нём Kнр.п. и tр.п.), поэтому физически в него входит ток этого режима ΣIр.п. Подстановка ΣIд.р. занизила бы ёмкость при токе «Пожара» выше дежурного. Расчёт ведётся с ΣIр.п.; отклонение явно указано в описании методики."}}]}</script>
+  </head>
+  <body>
+    <div id="app"><div class="flex min-h-screen flex-col"><main class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-8 sm:px-6"><div class="py-8"><a href="/calculators/fire" class="mb-4 inline-flex items-center gap-1 text-sm text-muted">Пожарная безопасность</a><h1 class="text-2xl font-semibold tracking-tight">Расчёт ёмкости АКБ для СПЗ</h1><p class="mt-2 max-w-3xl text-sm text-muted">Подбор аккумуляторной батареи и РИП по набору приборов и извещателей «Болид» и «Рубеж»: суммарные токи, Kн по разрядной таблице, проверка линий.</p><div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium border-line text-muted">СП 6.13130 · Приложение Б, формулы (Б.1)–(Б.3)</span></div><div class="mt-6 max-w-3xl text-[15px]"><p class="mb-3 leading-relaxed">Определяет требуемую ёмкость аккумуляторной батареи (автономного источника питания) для работы системы противопожарной защиты при прекращении электроснабжения: 24 часа в дежурном режиме и 1 час в режиме «Пожар».</p>
+<p class="mb-3 leading-relaxed">Суммарные токи считаются по выбранному набору приборов и извещателей, коэффициент Kн, учитывающий нагрузочные (токоразрядные) характеристики, — по разрядной таблице выбранной АКБ.</p>
+<h3 class="mt-5 mb-2 text-base font-semibold">Особенности методики</h3>
+<ul class="list-disc space-y-1 pl-5"><li>Расчёт ведётся по уточнённой формуле (Б.1.1) с раздельными коэффициентами Kн для каждого режима. В печатном тексте СП во втором слагаемом формулы стоит ΣIд.р. — это очевидная опечатка, используется физически корректный ток режима «Пожар».</li><li>Kстр = 100 %/S (формула Б.2); для АКБ «Болид» ёмкость в конце срока службы не ниже 80 %, откуда Kстр = 1,25.</li><li>Нагрузка извещателей пересчитывается в ток прибора-хозяина: для ДПЛС — по точкам РЭ С2000-КДЛ, для шлейфов — оценочно через напряжение ШС. Для АЛС «Рубеж» (прот. R3) вклад адресных устройств взят по паспорту «Рубеж-2ОП» — около 3 мА на адрес со стороны источника питания (0,4 А без АУ → 1,9 А при 500 АУ): это консервативнее собственных токов АУ от АЛС (0,18–0,7 мА).</li><li>Дополнительно проверяются лимиты линий (адреса и суммарный ток ДПЛС — по РЭ конкретного контроллера: С2000-КДЛ 100 мА, КДЛ-2И 64 мА, исп.01 84 мА; 10×10 извещателей «Сигнал-10», 3 мА на неадресный ШС; у АЛС «Рубеж-2ОП» — 500 адресов, 2 АЛС × 250) и паспортные токи разряда АКБ.</li><li>По посчитанным токам сразу подбирается источник питания: список источников (РИП и ШПС «Болид», ИВЭПР «Рубеж», СКАТ «Бастион») с отметкой «подходит / не подходит» (длительный ток, ёмкость штатных АКБ в отсеках, правило РЭ по току разряда). Выбор РИП подставляет его паспортный собственный ток в расчёт.</li><li>В экспертном режиме можно включить учёт температуры среды (по умолчанию расчёт при 25 °C, как в формуле СП): ниже 25 °C доступная ёмкость АКБ снижается по коэффициенту K = 1 + 0,006·(t − 25) (ГОСТ Р МЭК 60896-21, на него отсылает ГОСТ Р 59638) — важно для неотапливаемых помещений и уличных шкафов. Выше 25 °C ёмкость не завышается (в запас).</li><li>Токи приборов и разрядные кривые АКБ сверены с технической документацией производителей; перед выпуском проекта проверьте актуальные редакции ТД.</li></ul>
+<p class="mb-3 leading-relaxed">Обратная задача — сколько проработает уже установленная АКБ при выросшей нагрузке (обследование действующих объектов) — считается инструментом <a href="/calc/battery-time" class="text-accent underline underline-offset-2">«Время работы от АКБ»</a>.</p></div><section class="mt-8 max-w-3xl"><h2 class="text-lg font-semibold">Вопросы и ответы</h2><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">По какому СП рассчитывается ёмкость АКБ для пожарной сигнализации?</summary><p class="mt-2 text-sm leading-relaxed text-muted">По приложению Б СП 6.13130.2025 (формула Б.1.1): ёмкость учитывает суммарные токи в дежурном режиме и режиме «Пожар», собственный ток источника питания, коэффициент старения Kстр и коэффициент Kн, учитывающий нагрузочные (токоразрядные) характеристики АКБ, — по разрядной таблице.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Какое время резерва брать для АКБ?</summary><p class="mt-2 text-sm leading-relaxed text-muted">По СП 6.13130 (приложение Б, п. Б.2) — 24 часа в дежурном режиме плюс 1 час в режиме «Пожар». В экспертном режиме можно задать другое время работы.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Что такое коэффициент Kн и откуда он берётся?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Kн = Cном/Cфакт(t) — отношение номинальной ёмкости к фактически отдаваемой за время t по разрядной таблице АКБ. По умолчанию при Kн &lt; 1 он принимается равным 1 (в запас). Kн считается автоматически по разрядным кривым каталога (Delta, «Болид», GSL, SKAT).</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">Kн режима «Пожар» получился 1,5, хотя ток нагрузки небольшой — почему?</summary><p class="mt-2 text-sm leading-relaxed text-muted">По умолчанию Kн выбирается по времени резерва: для «Пожара» берётся коэффициент часового режима разрядной таблицы — как если бы АКБ за этот час разряжалась полностью. Когда фактический ток заметно меньше табличного тока часового разряда, такой Kн даёт страховочный запас. В экспертном режиме есть точный метод: Kн выбирается по фактическому току из той же таблицы — без запаса и без округления Kн до 1.</p></details><details class="mt-3 rounded-xl border border-line bg-card p-4"><summary class="cursor-pointer text-sm font-medium">В печатном СП во втором слагаемом (Б.1.1) стоит ΣIд.р. — почему в расчёт подставляется ток режима «Пожар»?</summary><p class="mt-2 text-sm leading-relaxed text-muted">Это опечатка печатного текста: второе слагаемое описывает работу в режиме «Пожар» (в нём Kнр.п. и tр.п.), поэтому физически в него входит ток этого режима ΣIр.п. Подстановка ΣIд.р. занизила бы ёмкость при токе «Пожара» выше дежурного. Расчёт ведётся с ΣIр.п.; отклонение явно указано в описании методики.</p></details></section></div></main></div></div>
+  </body>
+</html>
