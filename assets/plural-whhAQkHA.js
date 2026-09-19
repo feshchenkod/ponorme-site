@@ -1,0 +1,1 @@
+function e(e,t,n,r){let i=Math.abs(e)%10,a=Math.abs(e)%100;return i===1&&a!==11?t:i>=2&&i<=4&&(a<12||a>14)?n:r}export{e as t};

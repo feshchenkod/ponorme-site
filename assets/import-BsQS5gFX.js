@@ -1,0 +1,7 @@
+var e=e=>e.replaceAll(`&`,`&amp;`).replaceAll(`<`,`&lt;`).replaceAll(`>`,`&gt;`).replaceAll(`"`,`&quot;`),t=e=>/^[=+\-@\t\r]/.test(e)&&!/^[-+]?\d/.test(e)?`'`+e:e;function n(n,r){let i=[`<html><head><meta charset="utf-8"><style>
+table{border-collapse:collapse;margin-bottom:16px}
+td,th{border:1px solid #999;padding:4px 8px;font:12px sans-serif;vertical-align:top;mso-number-format:"\\@"}
+th{background:#eee;font-weight:bold}
+h1{font:bold 16px sans-serif}h2{font:bold 13px sans-serif}
+</style></head><body>`,`<h1>${e(n)}</h1>`];for(let n of r){i.push(`<h2>${e(n.title)}</h2><table>`),n.header?.length&&i.push(`<tr>${n.header.map(t=>`<th>${e(t)}</th>`).join(``)}</tr>`);for(let r of n.rows)i.push(`<tr>${r.map(n=>`<td>${e(t(n))}</td>`).join(``)}</tr>`);i.push(`</table>`)}return i.push(`</body></html>`),i.join(`
+`)}function r(e,t,r){let i=new Blob([`﻿`+n(t,r)],{type:`application/vnd.ms-excel;charset=utf-8`}),a=document.createElement(`a`);a.href=URL.createObjectURL(i),a.download=e,a.click(),URL.revokeObjectURL(a.href)}var i=`engcalc-battery-import`;function a(e){try{return sessionStorage.setItem(i,JSON.stringify(e)),!0}catch{return!1}}function o(){try{let e=sessionStorage.getItem(i);if(!e)return null;sessionStorage.removeItem(i);let t=JSON.parse(e);return Array.isArray(t?.items)?t:null}catch{return null}}export{a as n,r,o as t};
