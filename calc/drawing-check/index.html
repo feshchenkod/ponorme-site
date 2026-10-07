@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Генератор AutoLISP-команды проверки чертежа СПЗ: двойные вставки блоков (копипаст на месте), блоки без адреса, незаполненные атрибуты, объекты на слое 0, слои вне белого списка. Находки обводятся кружками и листаются с зумом; повторный запуск обновляет маркеры." />
+    <title>Проверка чертежа СПЗ в AutoCAD — LSP-линтер: дубли блоков, датчики без адреса, слои</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#2563eb" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Проверка чертежа СПЗ в AutoCAD — LSP-линтер: дубли блоков, датчики без адреса, слои" />
+    <meta property="og:description" content="Генератор AutoLISP-команды проверки чертежа СПЗ: двойные вставки блоков (копипаст на месте), блоки без адреса, незаполненные атрибуты, объекты на слое 0, слои вне белого списка. Находки обводятся кружками и листаются с зумом; повторный запуск обновляет маркеры." />
+    <meta property="og:url" content="https://ponorme.ru/calc/drawing-check" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Проверка чертежа СПЗ в AutoCAD — LSP-линтер: дубли блоков, датчики без адреса, слои" />
+    <meta name="twitter:description" content="Генератор AutoLISP-команды проверки чертежа СПЗ: двойные вставки блоков (копипаст на месте), блоки без адреса, незаполненные атрибуты, объекты на слое 0, слои вне белого списка. Находки обводятся кружками и листаются с зумом; повторный запуск обновляет маркеры." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "alternateName": ["По норме", "Понорме", "ponorme", "ponorme.ru"],
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-BXYWYXJj.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-1jC4L8mB.js">
+    <link rel="modulepreload" crossorigin href="/assets/createLucideIcon-CnNSuD2k.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CO6bi5ni.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/drawing-check" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Что именно проверяется?","acceptedAnswer":{"@type":"Answer","text":"Пять правил, каждое отключаемо: двойные вставки одного блока в одной точке; блоки по маске без адреса (ни заполненного атрибута, ни подписи рядом); обязательные атрибуты существуют и непусты; объекты на слое 0; слои вне белого списка масок. Проверяется пространство модели."}},{"@type":"Question","name":"Почему двойные вставки — первая проверка?","acceptedAnswer":{"@type":"Answer","text":"Блок, случайно вставленный дважды в одну точку, на печати не виден вообще: чертёж выглядит правильно, а спецификация, ёмкость АКБ и адреса считаются с лишним устройством. Ошибка всплывает только при монтаже. Команда ловит такие пары по совпадению эффективного имени и точки вставки с допуском."}},{"@type":"Question","name":"Как команда понимает, что у блока есть адрес?","acceptedAnswer":{"@type":"Answer","text":"Адрес есть, если у блока заполнен атрибут с заданным тегом или в радиусе поиска найден однострочный текст формата «префикс + число + суффикс» — тот же формат, что в инструменте нумерации. Дубли и пропуски самих адресов ищет команда АДРЕС-ДУБЛИ из инструмента нумерации."}},{"@type":"Question","name":"Как разбирать находки?","acceptedAnswer":{"@type":"Answer","text":"Каждая находка печатается в командной строке и обводится кружком на слое проверки (до 200 кружков, дальше — только счёт). После отчёта Enter листает находки с зумом. Исправили — запустите команду снова: старые кружки смоются, отчёт пересчитается."}},{"@type":"Question","name":"Чего линтер не умеет?","acceptedAnswer":{"@type":"Answer","text":"Правил, требующих семантики проекта, в DWG не выводимой: «устройство не подключено к линии», «извещатель вне помещения», «кабельная линия не замкнута» — в чертеже линия связи и стена неотличимы от любых других отрезков. Такие проверки возможны только при жёстком стандарте слоёв и блоков."}},{"@type":"Question","name":"Работает ли в AutoCAD LT и nanoCAD?","acceptedAnswer":{"@type":"Answer","text":"Полный AutoCAD и nanoCAD — да. AutoCAD LT 2023 и старше — нет (там нет AutoLISP); в LT 2024+ AutoLISP появился и, по справке Autodesk, используемые vla-/vlax-функции поддерживаются (внешние COM-объекты — нет), однако на LT работа не проверялась. Внешних зависимостей нет — только штатные функции чертежа."}}]}</script>
+  </head>
+  <body>
+    <div id="app" data-prerender-path="/calc/drawing-check"><div class="flex min-h-screen flex-col"><a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-white focus:shadow-lg"> К основному содержимому </a><header class="sticky top-0 z-40 border-b border-line bg-card"><div class="relative mx-auto flex h-14 w-full max-w-5xl items-center gap-2 px-4 sm:px-6"><a href="/" class="flex min-h-11 shrink-0 items-center gap-2 text-lg font-semibold tracking-tight" aria-label="ПоНорме — на главную"><img src="data:image/svg+xml,%3csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%2032%2032&#39;%3e%3crect%20width=&#39;32&#39;%20height=&#39;32&#39;%20rx=&#39;7&#39;%20fill=&#39;%232563eb&#39;/%3e%3cpath%20d=&#39;M7%2025V8h18v17h-4V12H11v13Z&#39;%20fill=&#39;%23fff&#39;/%3e%3cpath%20d=&#39;M14%2023h4v2h-4Z&#39;%20fill=&#39;%23fff&#39;/%3e%3c/svg%3e" alt class="size-7" width="28" height="28"><span>ПоНорме</span></a><button type="button" class="button-quiet ml-auto lg:hidden" aria-expanded="false" aria-controls="v-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu size-5" aria-hidden="true"><path d="M4 12h16"></path><path d="M4 18h16"></path><path d="M4 6h16"></path></svg>Меню</button><nav id="v-0" aria-label="Разделы сайта" class="hidden absolute inset-x-0 top-14 gap-1 border-b border-line bg-card p-3 shadow-sm lg:static lg:ml-auto lg:flex lg:w-auto lg:border-0 lg:p-0 lg:shadow-none"><!--[--><a href="/" class="flex min-h-11 items-center rounded-lg px-3 text-sm transition-colors hover:bg-soft hover:text-ink text-muted">Главная</a><a href="/calculators" class="flex min-h-11 items-center rounded-lg px-3 text-sm transition-colors hover:bg-soft hover:text-ink text-muted">Каталог</a><a aria-current="page" href="/calculators/cad" class="flex min-h-11 items-center rounded-lg px-3 text-sm transition-colors hover:bg-soft hover:text-ink bg-soft font-medium text-ink">AutoCAD</a><a href="/sp" class="flex min-h-11 items-center rounded-lg px-3 text-sm transition-colors hover:bg-soft hover:text-ink text-muted">Нормы</a><a href="/practice" class="flex min-h-11 items-center rounded-lg px-3 text-sm transition-colors hover:bg-soft hover:text-ink text-muted">Практика</a><!--]--></nav><button type="button" class="flex size-11 shrink-0 items-center justify-center rounded-lg text-muted transition-colors hover:bg-soft hover:text-ink" title="Тёмная тема" aria-label="Включить тёмную тему"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon-icon lucide-moon size-5" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button></div></header><div class="no-print fixed inset-x-4 top-16 z-50 mx-auto max-w-lg" role="status" aria-live="polite" aria-atomic="true"><!----></div><!----><main id="main" tabindex="-1" class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-6 outline-none sm:px-6 sm:pt-8"><article class="calc-page py-2 sm:py-4"><div class="no-print mb-3 flex items-center justify-between gap-2"><a href="/calculators" class="inline-flex min-h-10 items-center gap-1 text-sm text-muted transition-colors hover:text-ink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left size-4" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg> К каталогу</a><div class="flex items-center gap-1"><button type="button" class="button-quiet" aria-pressed="false" title="В избранное"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star-icon lucide-star size-4" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg> В избранное</button></div></div><h1 class="no-print flex items-start gap-3 text-2xl font-semibold leading-tight tracking-tight sm:text-3xl"><span class="flex size-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-checks-icon lucide-list-checks size-6"><path d="m3 17 2 2 4-4"></path><path d="m3 7 2 2 4-4"></path><path d="M13 6h8"></path><path d="M13 12h8"></path><path d="M13 18h8"></path></svg></span> Проверка чертежа СПЗ</h1><p class="no-print mt-3 max-w-[72ch] text-[15px] leading-relaxed text-muted">Линтер чертежа одной командой: двойные вставки блоков, датчики без адреса, пустые атрибуты, объекты на слое 0 и слои вне стандарта — LSP-команда с маркерами находок и листанием с зумом.</p><div class="no-print mt-2 flex flex-wrap items-center gap-x-3 gap-y-1"><!--[--><!--]--><!----></div><!----><!----><div class="space-y-6 mt-5"><section class="rounded-xl border border-line bg-card p-4 sm:p-6"><h2 class="text-base font-semibold">1. Что проверяем</h2><div class="mt-3 space-y-4"><div class="rounded-lg border border-line/70 p-3"><label class="flex items-start gap-2 text-sm font-medium"><input checked type="checkbox" class="mt-0.5 size-4 accent-current"><span>Двойные вставки блоков</span></label><div class="mt-2 flex flex-wrap items-end gap-3 pl-6"><p class="w-full text-xs text-muted"> Блок с тем же именем ближе допуска — почти всегда случайный копипаст: на печати не видно, а спецификация и расчёты завышены. </p><label class="form-field min-w-0 text-sm"><span class="field-label">Допуск совпадения, ед. черт.</span><input value="1" type="number" min="0.1" step="0.5" class="field-input"></label></div></div><div class="rounded-lg border border-line/70 p-3"><label class="flex items-start gap-2 text-sm font-medium"><input checked type="checkbox" class="mt-0.5 size-4 accent-current"><span>Блоки без адреса</span></label><div class="form-grid mt-2 pl-6 sm:grid-cols-2 lg:grid-cols-3"><p class="form-note w-full text-xs text-muted"> У блока по маске нет ни заполненного атрибута адреса, ни текстовой подписи формата «префикс + число + суффикс» в радиусе поиска. </p><!--[--><label class="form-field min-w-0 text-sm"><span class="field-label">Префикс подписи</span><input value="" type="text" placeholder="например: 1." class="field-input font-mono"></label><label class="form-field min-w-0 text-sm"><span class="field-label">Суффикс</span><input value="" type="text" class="field-input font-mono"></label><label class="form-field min-w-0 text-sm"><span class="field-label">Тег атрибута (пусто — только подписи)</span><input value="АДРЕС" type="text" class="field-input font-mono"></label><label class="form-field min-w-0 text-sm"><span class="field-label">Радиус поиска подписи, ед. черт.</span><input value="10" type="number" min="1" step="1" class="field-input"></label><!--]--></div></div><div class="rounded-lg border border-line/70 p-3"><label class="flex items-start gap-2 text-sm font-medium"><input type="checkbox" class="mt-0.5 size-4 accent-current"><span>Обязательные атрибуты заполнены</span></label><div class="mt-2 flex flex-wrap items-end gap-3 pl-6"><p class="w-full text-xs text-muted"> Для организаций с атрибутным стандартом блоков: у каждого блока по маске перечисленные атрибуты существуют и непусты. Различаются «нет атрибута» и «пустой атрибут». </p><!----></div></div><div class="flex flex-wrap items-end gap-3"><label class="form-field min-w-0 text-sm"><span class="field-label">Маска блоков для адресных проверок (wcmatch, через запятую)</span><input value="ИП*,ДИП*,ИПР*" type="text" class="border-line field-input font-mono"></label><p class="pb-2 text-xs text-muted">Динамические блоки сверяются по исходному (эффективному) имени.</p></div><div class="rounded-lg border border-line/70 p-3"><label class="flex items-start gap-2 text-sm font-medium"><input checked type="checkbox" class="mt-0.5 size-4 accent-current"><span>Объекты на слое 0</span></label><p class="mt-2 pl-6 text-xs text-muted"> В выпускаемом чертеже объектам на слое 0 не место. Отключите, если проверяете файл с чужой подложкой, начерченной на слое 0, — иначе находок будут сотни. </p></div><div class="rounded-lg border border-line/70 p-3"><p class="text-sm font-medium">Слои вне стандарта</p><p class="mt-1 text-xs text-muted"> Маски допустимых слоёв через запятую или с новой строки; пусто — не проверять. Слои «0», Defpoints и слой маркеров допустимы всегда. Сообщаются только слои, на которых есть объекты в модели. </p><textarea aria-label="Маски допустимых слоёв" rows="2" placeholder="ПБ-*, СТЕНЫ*, ОСИ*" class="mt-2 w-full rounded-lg border border-line bg-transparent px-3 py-1.5 font-mono text-sm"></textarea></div></div><!----><!----><!----></section><section class="rounded-xl border border-line bg-card p-4 sm:p-6"><h2 class="text-base font-semibold">2. Маркеры находок</h2><div class="form-grid mt-3 sm:grid-cols-2 lg:grid-cols-3"><label class="form-field min-w-0 text-sm"><span class="field-label">Слой маркеров</span><input value="ПРОВЕРКА" type="text" class="border-line field-input font-mono"></label><label class="form-field min-w-0 text-sm"><span class="field-label">Цвет слоя</span><select class="field-input"><!--[--><option value="1" selected>красный</option><option value="2">жёлтый</option><option value="3">зелёный</option><option value="4">голубой</option><option value="5">синий</option><option value="6">сиреневый</option><option value="7">белый/чёрный</option><!--]--></select></label><label class="form-field min-w-0 text-sm"><span class="field-label">Радиус кружка, ед. черт.</span><input value="5" type="number" min="0.5" step="0.5" class="field-input"></label></div><label class="mt-3 flex items-start gap-2 text-sm"><input checked type="checkbox" class="mt-0.5 size-4 accent-current"><span>после отчёта листать находки с зумом: Enter — следующая, любой ввод — стоп</span></label><!----><p class="mt-2 text-xs text-muted"> Находки печатаются в командную строку и обводятся кружками (не больше 200 — дальше только счёт). Повторный запуск смывает старые маркеры и ставит новые; вся серия откатывается одним U. </p></section><section class="rounded-xl border border-line bg-card p-4 sm:p-6"><h2 class="text-base font-semibold">3. Скрипт</h2><div class="mt-3 flex flex-wrap items-end gap-3"><label class="form-field min-w-0 text-sm"><span class="field-label">Имя команды в AutoCAD</span><input value="ПРОВЕРКА" type="text" class="border-line field-input font-mono uppercase"></label></div><!----><!----><!--[--><div class="mt-4 flex flex-wrap items-center gap-2"><button type="button" class="button-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download-icon lucide-download size-4" aria-hidden="true"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg> скачать .lsp </button><button type="button" class="button-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy-icon lucide-copy size-4" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg> скопировать LSP</button></div><details class="mt-4"><summary class="cursor-pointer text-sm font-medium text-accent">Показать текст LSP</summary><pre class="mt-2 max-h-80 overflow-auto rounded-lg bg-soft p-3 font-mono text-xs leading-relaxed">;; ПоНорме (ponorme.ru) — проверка чертежа СПЗ одной командой.
+;; ПРОВЕРКА прогоняет включённые проверки по модели: двойные вставки блоков,
+;; блоки без адреса, атрибуты, слой 0, слои вне стандарта. Находки печатаются
+;; в командную строку и обводятся кружками на слое ПРОВЕРКА (повторный
+;; запуск обновляет маркеры). Загрузка: перетащить .lsp в чертёж или APPLOAD.
+(defun pnrm:chk-layer (nm col)
+  (if (not (tblsearch &quot;LAYER&quot; nm))
+    (entmake (list (cons 0 &quot;LAYER&quot;) (cons 100 &quot;AcDbSymbolTableRecord&quot;)
+                   (cons 100 &quot;AcDbLayerTableRecord&quot;) (cons 2 nm) (cons 70 0) (cons 62 col)))))
+
+;; кружок-маркер: счёт находок не ограничен, кружков — не больше лимита
+(defun pnrm:chk-mark (p)
+  (setq total (1+ total))
+  (if (&lt; (length marks) 200)
+    (progn
+      (entmake (list (cons 0 &quot;CIRCLE&quot;) (cons 8 &quot;ПРОВЕРКА&quot;) (cons 10 p) (cons 40 5.0)))
+      (setq marks (cons p marks)))))
+
+;; имя блока с учётом динамических (эффективное имя)
+(defun pnrm:chk-bname (e / obj)
+  (setq obj (vlax-ename-&gt;vla-object e))
+  (if (vlax-property-available-p obj &#39;EffectiveName)
+    (vla-get-EffectiveName obj) (vla-get-Name obj)))
+
+;; значение атрибута тега без крайних пробелов; nil — атрибута нет
+(defun pnrm:chk-attr (e tag / a ed r)
+  (setq a (entnext e))
+  (while (and a (= &quot;ATTRIB&quot; (cdr (assoc 0 (setq ed (entget a))))))
+    (if (= tag (strcase (cdr (assoc 2 ed))))
+      (setq r (vl-string-trim &quot; &quot; (cdr (assoc 1 ed)))))
+    (setq a (entnext a)))
+  r)
+
+;; разбор подписи «префикс + число + суффикс» в номер, иначе nil
+(defun pnrm:chk-parse (s / m i c ok)
+  (if (and (&gt; (strlen s) 0)
+           (= &quot;&quot; (substr s 1 0))
+           (= &quot;&quot; (substr s (- (strlen s) 0 -1))))
+    (progn
+      (setq m (substr s (1+ 0) (- (strlen s) 0)) i 1 ok T)
+      (while (and ok (&lt;= i (strlen m)))
+        (setq c (ascii (substr m i 1)))
+        (if (or (&lt; c 48) (&gt; c 57)) (setq ok nil))
+        (setq i (1+ i)))
+      (if ok (atoi m)))))
+
+(defun c:ПРОВЕРКА (/ *error* doc marks total ss i e ed nm p v g has tbl txts rest lay dcnt acnt ecnt cnt0 bad tg)
+  (vl-load-com)
+  (setq doc (vla-get-ActiveDocument (vlax-get-acad-object)))
+  (defun *error* (msg)
+    (vl-catch-all-apply &#39;vla-EndUndoMark (list doc))
+    (princ))
+  (setq marks nil total 0)
+  (vla-StartUndoMark doc)
+  ;; смыть маркеры прошлого запуска
+  (if (setq ss (ssget &quot;_X&quot; &#39;((0 . &quot;CIRCLE&quot;) (8 . &quot;ПРОВЕРКА&quot;))))
+    (progn (setq i 0)
+      (repeat (sslength ss) (entdel (ssname ss i)) (setq i (1+ i)))))
+  (pnrm:chk-layer &quot;ПРОВЕРКА&quot; 1)
+  (princ &quot;\nПроверка чертежа:&quot;)
+  ;; --- двойные вставки блоков: одно имя, точки ближе допуска ---
+  (setq dcnt 0 tbl nil)
+  (if (setq ss (ssget &quot;_X&quot; &#39;((0 . &quot;INSERT&quot;) (410 . &quot;Model&quot;))))
+    (progn (setq i 0)
+      (repeat (sslength ss)
+        (setq e (ssname ss i) i (1+ i)
+              nm (strcase (pnrm:chk-bname e))
+              p (trans (cdr (assoc 10 (entget e))) e 0)
+              g (assoc nm tbl))
+        (if (and g (vl-some &#39;(lambda (q) (&lt; (distance q p) 1.0)) (cdr g)))
+          (progn
+            (setq dcnt (1+ dcnt))
+            (pnrm:chk-mark p)
+            (princ (strcat &quot;\n  двойная вставка &quot; nm &quot; в &quot; (rtos (car p) 2 1) &quot;, &quot; (rtos (cadr p) 2 1))))
+          (if g (setq tbl (subst (cons nm (cons p (cdr g))) g tbl))
+            (setq tbl (cons (list nm p) tbl)))))))
+  (princ (strcat &quot;\nДвойные вставки: &quot; (itoa dcnt) &quot;.&quot;))
+  ;; --- блоки без адреса: ни заполненного атрибута, ни подписи рядом ---
+  (setq acnt 0 txts nil)
+  (if (setq ss (ssget &quot;_X&quot; &#39;((0 . &quot;TEXT&quot;) (410 . &quot;Model&quot;))))
+    (progn (setq i 0)
+      (repeat (sslength ss)
+        (setq e (ssname ss i) i (1+ i) ed (entget e))
+        (if (pnrm:chk-parse (cdr (assoc 1 ed)))
+          (setq txts (cons (trans (cdr (assoc 10 ed)) e 0) txts))))))
+  (if (setq ss (ssget &quot;_X&quot; &#39;((0 . &quot;INSERT&quot;) (410 . &quot;Model&quot;))))
+    (progn (setq i 0)
+      (repeat (sslength ss)
+        (setq e (ssname ss i) i (1+ i) nm (pnrm:chk-bname e))
+        (if (wcmatch (strcase nm) &quot;ИП*,ДИП*,ИПР*&quot;)
+          (progn
+            (setq p (trans (cdr (assoc 10 (entget e))) e 0))
+            (setq v (pnrm:chk-attr e &quot;АДРЕС&quot;))
+            (setq has (and v (&gt; (strlen v) 0)))
+            (if (not has)
+              (setq has (vl-some &#39;(lambda (q) (&lt; (distance q p) 10.0)) txts)))
+            (if (not has)
+              (progn
+                (setq acnt (1+ acnt))
+                (pnrm:chk-mark p)
+                (princ (strcat &quot;\n  без адреса: &quot; nm &quot; в &quot; (rtos (car p) 2 1) &quot;, &quot; (rtos (cadr p) 2 1))))))))))
+  (princ (strcat &quot;\nБез адреса: &quot; (itoa acnt) &quot;.&quot;))
+  ;; --- объекты на слое 0 (в своём чертеже им не место) ---
+  (setq cnt0 0)
+  (if (setq ss (ssget &quot;_X&quot; &#39;((8 . &quot;0&quot;) (410 . &quot;Model&quot;))))
+    (progn (setq cnt0 (sslength ss) i 0)
+      (repeat (sslength ss)
+        (setq e (ssname ss i) i (1+ i) p (cdr (assoc 10 (entget e))))
+        (if p (pnrm:chk-mark (trans p e 0))))))
+  (princ (strcat &quot;\nНа слое 0: &quot; (itoa cnt0) &quot; объектов.&quot;))
+  (vla-EndUndoMark doc)
+  (princ (strcat &quot;\nИтого находок: &quot; (itoa total)
+                 &quot;; маркеров на слое ПРОВЕРКА: &quot; (itoa (length marks))
+                 (if (&gt; total (length marks)) &quot; (лимит 200)&quot; &quot;&quot;) &quot;.&quot;))
+  (if marks
+    (progn
+      (setq rest (reverse marks))
+      (while (and rest
+                  (= &quot;&quot; (progn
+                          (command &quot;_.ZOOM&quot; &quot;_C&quot; (trans (car rest) 0 1) 300.0)
+                          (getstring &quot;\n&lt;Enter&gt; — следующая находка, любой ввод — стоп: &quot;))))
+        (setq rest (cdr rest)))))
+  (princ))
+
+(princ &quot;\nПоНорме: загружена команда ПРОВЕРКА.&quot;)
+(princ)
+</pre></details><details class="mt-3"><summary class="cursor-pointer text-sm font-medium text-accent">Как подключить и пользоваться</summary><ol class="mt-2 list-decimal space-y-1 pl-5 text-sm leading-relaxed text-muted"><li>Разово: перетащите скачанный .lsp в окно чертежа — или команда <span class="font-mono">ЗАГПРИЛ</span> (_APPLOAD) → выбрать файл → «Загрузить».</li><li>Навсегда: в том же окне APPLOAD добавьте файл в «Приложения, загружаемые с автозагрузкой» (Startup Suite).</li><li>Наберите <span class="font-mono">ПРОВЕРКА</span> — команда без вопросов прогонит все включённые проверки и напечатает отчёт; находки обведены кружками на слое ПРОВЕРКА.</li><li>Дальше Enter листает находки с зумом; любой другой ввод или Esc — стоп.</li><li>Исправили — запустите команду снова: старые кружки смываются, отчёт пересчитывается. Перед выпуском листа отключите или заморозьте слой маркеров.</li><li>Файл в кодировке ANSI (cp1251) — как принято для AutoLISP с русским текстом. nanoCAD загружает те же .lsp.</li></ol></details><!--]--></section></div><p class="no-print mb-1 mt-8 text-[11px] font-semibold uppercase tracking-wider text-muted">Справка</p><details class="no-print border-t border-line py-4"><summary class="cursor-pointer text-sm font-medium text-ink transition-colors hover:text-accent">Назначение и исходные условия</summary><div class="prose-copy mt-3 max-w-[72ch] text-[15px] leading-relaxed text-ink"><p class="mb-3 leading-relaxed">Линтер чертежа СПЗ: одна LSP-команда прогоняет включённые проверки по модели и печатает отчёт, а находки обводит кружками на отдельном слое — как проверка кода у программистов, только для плана сигнализации. Повторный запуск смывает старые маркеры и пересчитывает отчёт, после отчёта находки листаются с зумом по Enter.</p>
+<p class="mb-3 leading-relaxed">Правила настраиваются в форме и попадают в скрипт только включённые. Самое ценное — <strong>двойные вставки блоков</strong>: случайный копипаст датчика в ту же точку на печати не виден, но завышает спецификацию, ёмкость АКБ и число адресов; команда ловит такие пары по эффективному имени (динамические блоки не обманут) и совпадению точек с допуском. <strong>Блоки без адреса</strong> ищутся по маске имён: адресом считается заполненный атрибут с заданным тегом или подпись формата «префикс + число + суффикс» рядом — формат тот же, что в <a href="/calc/numbering" class="text-accent underline underline-offset-2">инструменте нумерации</a>. Для организаций с атрибутным стандартом есть проверка <strong>обязательных атрибутов</strong> (различает «атрибута нет» и «атрибут пуст»), для стандарта слоёв — <strong>белый список масок</strong>; объекты на <strong>слое 0</strong> отмечаются всегда, если правило включено.</p>
+<p class="mb-3 leading-relaxed">Проверяется только то, что честно выводится из геометрии DWG: правил вида «устройство не подключено» или «извещатель вне помещения» линтер не обещает — в чужом чертеже линия связи неотличима от прочих отрезков. Дубли и пропуски самих адресов проверяет парная команда АДРЕС-ДУБЛИ из инструмента нумерации.</p></div></details><!----><!----><details class="no-print border-t border-line py-4"><summary class="cursor-pointer text-sm font-medium text-ink transition-colors hover:text-accent">Частые вопросы</summary><div class="mt-4 space-y-4"><!--[--><div><h3 class="text-sm font-semibold text-ink">Что именно проверяется?</h3><p class="mt-1 text-sm leading-relaxed text-muted">Пять правил, каждое отключаемо: двойные вставки одного блока в одной точке; блоки по маске без адреса (ни заполненного атрибута, ни подписи рядом); обязательные атрибуты существуют и непусты; объекты на слое 0; слои вне белого списка масок. Проверяется пространство модели.</p></div><div><h3 class="text-sm font-semibold text-ink">Почему двойные вставки — первая проверка?</h3><p class="mt-1 text-sm leading-relaxed text-muted">Блок, случайно вставленный дважды в одну точку, на печати не виден вообще: чертёж выглядит правильно, а спецификация, ёмкость АКБ и адреса считаются с лишним устройством. Ошибка всплывает только при монтаже. Команда ловит такие пары по совпадению эффективного имени и точки вставки с допуском.</p></div><div><h3 class="text-sm font-semibold text-ink">Как команда понимает, что у блока есть адрес?</h3><p class="mt-1 text-sm leading-relaxed text-muted">Адрес есть, если у блока заполнен атрибут с заданным тегом или в радиусе поиска найден однострочный текст формата «префикс + число + суффикс» — тот же формат, что в инструменте нумерации. Дубли и пропуски самих адресов ищет команда АДРЕС-ДУБЛИ из инструмента нумерации.</p></div><div><h3 class="text-sm font-semibold text-ink">Как разбирать находки?</h3><p class="mt-1 text-sm leading-relaxed text-muted">Каждая находка печатается в командной строке и обводится кружком на слое проверки (до 200 кружков, дальше — только счёт). После отчёта Enter листает находки с зумом. Исправили — запустите команду снова: старые кружки смоются, отчёт пересчитается.</p></div><div><h3 class="text-sm font-semibold text-ink">Чего линтер не умеет?</h3><p class="mt-1 text-sm leading-relaxed text-muted">Правил, требующих семантики проекта, в DWG не выводимой: «устройство не подключено к линии», «извещатель вне помещения», «кабельная линия не замкнута» — в чертеже линия связи и стена неотличимы от любых других отрезков. Такие проверки возможны только при жёстком стандарте слоёв и блоков.</p></div><div><h3 class="text-sm font-semibold text-ink">Работает ли в AutoCAD LT и nanoCAD?</h3><p class="mt-1 text-sm leading-relaxed text-muted">Полный AutoCAD и nanoCAD — да. AutoCAD LT 2023 и старше — нет (там нет AutoLISP); в LT 2024+ AutoLISP появился и, по справке Autodesk, используемые vla-/vlax-функции поддерживаются (внешние COM-объекты — нет), однако на LT работа не проверялась. Внешних зависимостей нет — только штатные функции чертежа.</p></div><!--]--></div></details><section class="no-print border-t border-line py-4"><h2 class="text-sm font-medium text-ink">Связанные расчёты</h2><div class="mt-3 flex flex-wrap gap-1.5"><!--[--><a href="/calc/numbering" class="inline-flex items-center gap-1 rounded-md border border-line bg-card px-2.5 py-1 text-xs font-medium text-ink/80 transition-colors hover:border-accent hover:text-accent">Нумерация и адресация датчиков</a><a href="/calc/ugo" class="inline-flex items-center gap-1 rounded-md border border-line bg-card px-2.5 py-1 text-xs font-medium text-ink/80 transition-colors hover:border-accent hover:text-accent">УГО для планов ОПС — блоки DXF</a><a href="/calc/layer-rename" class="inline-flex items-center gap-1 rounded-md border border-line bg-card px-2.5 py-1 text-xs font-medium text-ink/80 transition-colors hover:border-accent hover:text-accent">Переименование слоёв — правила → LSP</a><!--]--></div></section><p class="no-print flex items-start gap-2 border-t border-line py-4 text-[13px] leading-relaxed text-muted"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-warning-icon lucide-message-square-warning mt-0.5 size-4 shrink-0 text-muted" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><path d="M12 7v2"></path><path d="M12 13h.01"></path></svg><span> Нашли неточность — в формуле, числе или ссылке на пункт нормы? <a href="mailto:ponormedev@outlook.com?subject=%D0%9F%D0%BE%D0%9D%D0%BE%D1%80%D0%BC%D0%B5%20%E2%80%94%20%D0%BD%D0%B5%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C%3A%20%D0%9F%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20%D1%87%D0%B5%D1%80%D1%82%D0%B5%D0%B6%D0%B0%20%D0%A1%D0%9F%D0%97&amp;body=%D0%A1%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0%3A%20%0A%0A%D0%A7%D1%82%D0%BE%20%D0%B2%D1%8B%D0%B3%D0%BB%D1%8F%D0%B4%D0%B8%D1%82%20%D0%BD%D0%B5%D1%82%D0%BE%D1%87%D0%BD%D1%8B%D0%BC%3A%0A%0A%D0%9A%D0%B0%D0%BA%20%D0%B4%D0%BE%D0%BB%D0%B6%D0%BD%D0%BE%20%D0%B1%D1%8B%D1%82%D1%8C%20(%D0%BF%D1%83%D0%BD%D0%BA%D1%82%20%D0%BD%D0%BE%D1%80%D0%BC%D1%8B%20%D0%B8%D0%BB%D0%B8%20%D0%A2%D0%94%2C%20%D0%B5%D1%81%D0%BB%D0%B8%20%D0%B7%D0%BD%D0%B0%D0%B5%D1%82%D0%B5)%3A%0A" class="font-medium text-accent underline underline-offset-2">Напишите нам</a> — проверим по первоисточнику и поправим. Замечания практиков уже не раз делали сервис точнее. </span></p><p class="no-print border-t border-line pt-4 text-xs leading-relaxed text-muted"><!----> Данный сервис является справочным инструментом — окончательное решение принимается проектировщиком. </p></article></main><footer class="border-t border-line py-8 text-sm text-muted"><div class="mx-auto w-full max-w-5xl px-4 sm:px-6"><nav class="flex flex-wrap justify-center gap-x-5 gap-y-1 font-medium [&amp;&gt;a]:inline-flex [&amp;&gt;a]:min-h-10 [&amp;&gt;a]:items-center" aria-label="Дополнительные ссылки"><a href="/verification" class="transition-colors hover:text-accent-deep"> Верификация расчётов </a><a href="/sp#base" class="transition-colors hover:text-accent-deep"> Нормы: база расчётов </a><a href="mailto:ponormedev@outlook.com?subject=ПоНорме — обратная связь" class="transition-colors hover:text-accent-deep"> Обратная связь и предложения </a><a href="/privacy" class="transition-colors hover:text-accent-deep"> Конфиденциальность </a><a href="/about" class="transition-colors hover:text-accent-deep"> О проекте </a></nav><div class="mt-5 flex items-start justify-center gap-2 border-t border-line pt-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-alert-icon lucide-circle-alert mt-1 size-4 shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><p class="max-w-2xl text-sm leading-relaxed"> Результаты расчётов носят справочный характер и не заменяют инженерную проверку. При разработке проектной документации необходимо руководствоваться действующими редакциями нормативных документов. </p></div><p class="mt-4 text-center text-xs">© ПоНорме · ponorme.ru, 2026</p></div></footer></div></div>
+    <div id="field-info-popovers"></div>
+  </body>
+</html>

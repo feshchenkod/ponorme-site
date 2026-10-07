@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Генератор AutoLISP-команд: НУМЕР — подпись с очередным адресом по щелчку; АДРЕС — автоадресация блоков вдоль линии ДПЛС с записью в атрибут или подписью и перенумерацией участка; АДРЕС-ДУБЛИ — поиск дублей и пропусков адресов. Контроль ёмкости ДПЛС (127 адресов С2000-КДЛ)." />
+    <title>Нумерация и адресация датчиков AutoCAD — LSP: адреса по щелчку и вдоль линии ДПЛС</title>
+
+    <!-- иконки -->
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#2563eb" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ПоНорме" />
+    <meta property="og:title" content="Нумерация и адресация датчиков AutoCAD — LSP: адреса по щелчку и вдоль линии ДПЛС" />
+    <meta property="og:description" content="Генератор AutoLISP-команд: НУМЕР — подпись с очередным адресом по щелчку; АДРЕС — автоадресация блоков вдоль линии ДПЛС с записью в атрибут или подписью и перенумерацией участка; АДРЕС-ДУБЛИ — поиск дублей и пропусков адресов. Контроль ёмкости ДПЛС (127 адресов С2000-КДЛ)." />
+    <meta property="og:url" content="https://ponorme.ru/calc/numbering" />
+    <meta property="og:image" content="https://ponorme.ru/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Нумерация и адресация датчиков AutoCAD — LSP: адреса по щелчку и вдоль линии ДПЛС" />
+    <meta name="twitter:description" content="Генератор AutoLISP-команд: НУМЕР — подпись с очередным адресом по щелчку; АДРЕС — автоадресация блоков вдоль линии ДПЛС с записью в атрибут или подписью и перенумерацией участка; АДРЕС-ДУБЛИ — поиск дублей и пропусков адресов. Контроль ёмкости ДПЛС (127 адресов С2000-КДЛ)." />
+    <meta name="twitter:image" content="https://ponorme.ru/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ПоНорме",
+        "alternateName": ["По норме", "Понорме", "ponorme", "ponorme.ru"],
+        "url": "https://ponorme.ru/",
+        "description": "Инженерные расчёты и калькуляторы по нормативным документам РФ для проектировщиков систем противопожарной защиты.",
+        "inLanguage": "ru-RU"
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-BXYWYXJj.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-1jC4L8mB.js">
+    <link rel="modulepreload" crossorigin href="/assets/createLucideIcon-CnNSuD2k.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CO6bi5ni.css">
+    <link rel="preload" href="/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/inter-latin-wght-normal-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="canonical" href="https://ponorme.ru/calc/numbering" />
+    <script id="ld-faq" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Как работает нумерация по щелчку?","acceptedAnswer":{"@type":"Answer","text":"Команда спрашивает начальный номер (по умолчанию — продолжение прошлой серии), дальше каждый щелчок ставит подпись и увеличивает номер на шаг. Enter или Esc завершает серию; итог и следующий номер печатаются в командной строке."}},{"@type":"Question","name":"Как работает автоадресация вдоль линии?","acceptedAnswer":{"@type":"Answer","text":"Команда АДРЕС спрашивает линию ДПЛС (полилинию, отрезок, дугу или сплайн), точку возле конца, с которого вести отсчёт, и блоки. Блоки сортируются по положению вдоль линии и получают номера по порядку — подписью или записью в атрибут. Замкнутая полилиния считается кольцом: отсчёт от указанной точки по направлению отрисовки."}},{"@type":"Question","name":"Как перенумеровать участок?","acceptedAnswer":{"@type":"Answer","text":"Запустите АДРЕС ещё раз: выберите линию и блоки участка, задайте новый начальный номер. В режиме атрибута значения перезаписываются; в режиме подписи старые подписи на слое подписей возле блоков заменяются новыми (это отключаемо в форме)."}},{"@type":"Question","name":"Что ищет команда поиска дублей?","acceptedAnswer":{"@type":"Answer","text":"АДРЕС-ДУБЛИ разбирает все подписи на слое подписей и атрибуты с заданным тегом по формату «префикс + число + суффикс»: дубли обводит кружками на слое ПРОВЕРКА-АДРЕСОВ, пропуски в последовательности перечисляет, старший адрес сверяет с лимитом. Повторный запуск обновляет маркеры."}},{"@type":"Question","name":"Подписи — это текст или атрибуты блоков?","acceptedAnswer":{"@type":"Answer","text":"Нумерация по щелчку ставит однострочный текст (TEXT) на отдельном слое — работает с любыми блоками и без блоков. Автоадресация умеет и в атрибут: укажите его тег (например, АДРЕС) — значение запишется в блок; о блоках без такого атрибута команда сообщит, а режим «в атрибут, иначе подписью» подпишет их текстом."}},{"@type":"Question","name":"Почему предупреждение после 127?","acceptedAnswer":{"@type":"Answer","text":"127 — ёмкость ДПЛС одного С2000-КДЛ. Команда предупреждает, но нумерацию не останавливает; лимит в форме можно изменить или отключить (0). Для второй линии обычно начинают новую серию с префиксом, например «2.»."}},{"@type":"Question","name":"Чем режим «к блоку» отличается от «в точку»?","acceptedAnswer":{"@type":"Answer","text":"«В точку» — подпись там, где щёлкнули. «К блоку» — щелчок по вставке блока, подпись встаёт у его точки вставки с заданным смещением: у всех датчиков одинаково, ровнее, чем на глаз. Автоадресация подписью использует то же смещение."}},{"@type":"Question","name":"Работает ли в AutoCAD LT и nanoCAD?","acceptedAnswer":{"@type":"Answer","text":"Полный AutoCAD и nanoCAD — да. AutoCAD LT 2023 и старше — нет (там нет AutoLISP); в LT 2024+ AutoLISP появился и, по справке Autodesk, используемые vla-/vlax-функции поддерживаются (внешние COM-объекты — нет), однако на LT работа не проверялась. SCR-варианта нет: команды интерактивные."}}]}</script>
+  </head>
+  <body>
+    <div id="app" data-prerender-path="/calc/numbering"><div class="flex min-h-screen flex-col"><a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-white focus:shadow-lg"> К основному содержимому </a><header class="sticky top-0 z-40 border-b border-line bg-card"><div class="relative mx-auto flex h-14 w-full max-w-5xl items-center gap-2 px-4 sm:px-6"><a href="/" class="flex min-h-11 shrink-0 items-center gap-2 text-lg font-semibold tracking-tight" aria-label="ПоНорме — на главную"><img src="data:image/svg+xml,%3csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%2032%2032&#39;%3e%3crect%20width=&#39;32&#39;%20height=&#39;32&#39;%20rx=&#39;7&#39;%20fill=&#39;%232563eb&#39;/%3e%3cpath%20d=&#39;M7%2025V8h18v17h-4V12H11v13Z&#39;%20fill=&#39;%23fff&#39;/%3e%3cpath%20d=&#39;M14%2023h4v2h-4Z&#39;%20fill=&#39;%23fff&#39;/%3e%3c/svg%3e" alt class="size-7" width="28" height="28"><span>ПоНорме</span></a><button type="button" class="button-quiet ml-auto lg:hidden" aria-expanded="false" aria-controls="v-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu size-5" aria-hidden="true"><path d="M4 12h16"></path><path d="M4 18h16"></path><path d="M4 6h16"></path></svg>Меню</button><nav id="v-0" aria-label="Разделы сайта" class="hidden absolute inset-x-0 top-14 gap-1 border-b border-line bg-card p-3 shadow-sm lg:static lg:ml-auto lg:flex lg:w-auto lg:border-0 lg:p-0 lg:shadow-none"><!--[--><a href="/" class="flex min-h-11 items-center rounded-lg px-3 text-sm transition-colors hover:bg-soft hover:text-ink text-muted">Главная</a><a href="/calculators" class="flex min-h-11 items-center rounded-lg px-3 text-sm transition-colors hover:bg-soft hover:text-ink text-muted">Каталог</a><a aria-current="page" href="/calculators/cad" class="flex min-h-11 items-center rounded-lg px-3 text-sm transition-colors hover:bg-soft hover:text-ink bg-soft font-medium text-ink">AutoCAD</a><a href="/sp" class="flex min-h-11 items-center rounded-lg px-3 text-sm transition-colors hover:bg-soft hover:text-ink text-muted">Нормы</a><a href="/practice" class="flex min-h-11 items-center rounded-lg px-3 text-sm transition-colors hover:bg-soft hover:text-ink text-muted">Практика</a><!--]--></nav><button type="button" class="flex size-11 shrink-0 items-center justify-center rounded-lg text-muted transition-colors hover:bg-soft hover:text-ink" title="Тёмная тема" aria-label="Включить тёмную тему"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon-icon lucide-moon size-5" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button></div></header><div class="no-print fixed inset-x-4 top-16 z-50 mx-auto max-w-lg" role="status" aria-live="polite" aria-atomic="true"><!----></div><!----><main id="main" tabindex="-1" class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-6 outline-none sm:px-6 sm:pt-8"><article class="calc-page py-2 sm:py-4"><div class="no-print mb-3 flex items-center justify-between gap-2"><a href="/calculators" class="inline-flex min-h-10 items-center gap-1 text-sm text-muted transition-colors hover:text-ink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left size-4" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg> К каталогу</a><div class="flex items-center gap-1"><button type="button" class="button-quiet" aria-pressed="false" title="В избранное"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star-icon lucide-star size-4" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg> В избранное</button></div></div><h1 class="no-print flex items-start gap-3 text-2xl font-semibold leading-tight tracking-tight sm:text-3xl"><span class="flex size-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-ordered-icon lucide-list-ordered size-6"><path d="M10 12h11"></path><path d="M10 18h11"></path><path d="M10 6h11"></path><path d="M4 10h2"></path><path d="M4 6h1v4"></path><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"></path></svg></span> Нумерация и адресация датчиков</h1><p class="no-print mt-3 max-w-[72ch] text-[15px] leading-relaxed text-muted">Адреса извещателей на плане: подписи по щелчку, автоадресация вдоль линии ДПЛС с записью в атрибуты и поиск дублей — интерактивные LSP-команды для AutoCAD/nanoCAD.</p><div class="no-print mt-2 flex flex-wrap items-center gap-x-3 gap-y-1"><!--[--><!--]--><!----></div><!----><!----><div class="space-y-6 mt-5"><section class="rounded-xl border border-line bg-card p-4 sm:p-6"><h2 class="text-base font-semibold">1. Подпись и нумерация</h2><div class="form-grid mt-3 sm:grid-cols-2 lg:grid-cols-3"><label class="form-field min-w-0 text-sm"><span class="field-label">Префикс</span><input value="" type="text" placeholder="например: 1." class="field-input font-mono"></label><label class="form-field min-w-0 text-sm"><span class="field-label">Дополнение нулями</span><select class="field-input"><!--[--><option value="0" selected>нет (1, 2, 3)</option><option value="2">два знака (01)</option><option value="3">три знака (001)</option><option value="4">четыре знака (0001)</option><!--]--></select></label><label class="form-field min-w-0 text-sm"><span class="field-label">Суффикс</span><input value="" type="text" class="field-input font-mono"></label><label class="form-field min-w-0 text-sm"><span class="field-label">Начальный номер</span><input value="1" type="number" min="0" step="1" class="field-input"></label><label class="form-field min-w-0 text-sm"><span class="field-label">Шаг</span><input value="1" type="number" min="1" step="1" class="field-input"></label></div><p class="mt-3 text-sm text-muted"> Подписи: <span class="font-mono text-ink">1, 2, 3, …</span></p><div class="mt-3 flex flex-wrap items-center gap-2"><label class="form-field min-w-0 text-sm"><span class="field-label">Предупреждать после номера (0 — не контролировать)</span><input value="127" type="number" min="0" step="1" class="field-input"></label><button type="button" class="button-secondary mt-4"> ДПЛС С2000-КДЛ (127) </button></div><p class="mt-2 text-xs text-muted"> Ёмкость ДПЛС одного С2000-КДЛ — 127 адресов. Предупреждение печатается в командной строке, нумерация не останавливается. </p></section><section class="rounded-xl border border-line bg-card p-4 sm:p-6"><h2 class="text-base font-semibold">2. Размещение подписи</h2><div class="form-grid mt-3 sm:grid-cols-2 lg:grid-cols-3"><label class="form-field min-w-0 text-sm"><span class="field-label">Куда ставить</span><select class="field-input"><option value="point" selected>в точку щелчка</option><option value="block">к точке вставки блока</option></select></label><!--[--><label class="form-field min-w-0 text-sm"><span class="field-label">Смещение X, ед. черт.</span><input value="3" type="number" step="0.5" class="field-input"></label><label class="form-field min-w-0 text-sm"><span class="field-label">Смещение Y, ед. черт.</span><input value="3" type="number" step="0.5" class="field-input"></label><!--]--><label class="form-field min-w-0 text-sm"><span class="field-label">Высота текста, ед. черт.</span><input value="2.5" type="number" min="0.1" step="0.5" class="field-input"></label><label class="form-field min-w-0 text-sm"><span class="field-label">Слой подписей (пусто — текущий)</span><input value="АДРЕСА" type="text" class="border-line field-input font-mono"></label><label class="form-field min-w-0 text-sm"><span class="field-label">Цвет слоя</span><select class="field-input"><!--[--><option value="1" selected>красный</option><option value="2">жёлтый</option><option value="3">зелёный</option><option value="4">голубой</option><option value="5">синий</option><option value="6">сиреневый</option><option value="7">белый/чёрный</option><!--]--></select></label></div><!----><p class="mt-2 text-xs text-muted"> Режим «к блоку»: щелчок по вставке блока — подпись у его точки вставки со смещением, одинаково у всех датчиков. Отдельный слой создаётся автоматически: подписи легко скрыть или отключить на печать. Подпись — TEXT текущим текстовым стилем, выравнивание по центру. Смещение X/Y используют и режим «к блоку», и автоадресация подписью. </p></section><section class="rounded-xl border border-line bg-card p-4 sm:p-6"><h2 class="text-base font-semibold">3. Автоадресация вдоль линии</h2><p class="mt-2 text-sm leading-relaxed text-muted"> Команда <span class="font-mono text-ink">АДРЕС</span>: выбираете линию ДПЛС (полилинию), щёлкаете возле конца, с которого вести отсчёт, и выбираете блоки рамкой — команда сортирует их вдоль линии и присваивает номера по порядку. Повторный запуск с нужного начального номера перенумеровывает участок. </p><div class="form-grid mt-3 sm:grid-cols-2 lg:grid-cols-3"><label class="form-field min-w-0 text-sm"><span class="field-label">Куда писать адрес</span><select class="field-input"><option value="text" selected>подписью TEXT у блока</option><option value="attr">в атрибут блока</option><option value="attr-text">в атрибут, иначе подписью</option></select></label><!----><label class="form-field min-w-0 text-sm"><span class="field-label">Маска имён блоков (* — любые)</span><input value="*" type="text" placeholder="ИП*,ДИП*" class="field-input font-mono"></label><label class="form-field min-w-0 text-sm"><span class="field-label">Не дальше от линии, ед. черт. (0 — все)</span><input value="0" type="number" min="0" step="1" class="field-input"></label></div><label class="mt-3 flex items-start gap-2 text-sm"><input checked type="checkbox" class="mt-0.5 size-4 accent-current"><span>заменять старые подписи на слое «АДРЕСА» возле блока — перенумерация не плодит дубли</span></label><!----><p class="mt-2 text-xs text-muted"> Замкнутая полилиния считается кольцевой линией: отсчёт идёт от указанной точки по направлению отрисовки. Блоки без атрибута с заданным тегом считаются отдельно и о них сообщается. Проверка после адресации — команда <span class="font-mono">АДРЕС-ДУБЛИ</span>: разбирает подписи и атрибуты по заданному формату, дубли обводит кружками на слое ПРОВЕРКА-АДРЕСОВ, перечисляет пропуски номеров. Повторный запуск обновляет маркеры. </p></section><section class="rounded-xl border border-line bg-card p-4 sm:p-6"><h2 class="text-base font-semibold">4. Скрипт</h2><div class="form-grid mt-3 sm:grid-cols-2 lg:grid-cols-3"><label class="form-field min-w-0 text-sm"><span class="field-label">Команда нумерации по щелчку</span><input value="НУМЕР" type="text" class="border-line field-input font-mono uppercase"></label><label class="form-field min-w-0 text-sm"><span class="field-label">Команда автоадресации</span><input value="АДРЕС" type="text" class="border-line field-input font-mono uppercase"></label></div><p class="mt-2 text-xs text-muted"> Один файл — три команды: нумерация по щелчку, автоадресация вдоль линии и поиск дублей («имя автоадресации»-ДУБЛИ). </p><!----><!----><!--[--><div class="mt-4 flex flex-wrap items-center gap-2"><button type="button" class="button-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download-icon lucide-download size-4" aria-hidden="true"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg> скачать .lsp </button><button type="button" class="button-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy-icon lucide-copy size-4" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg> скопировать LSP</button></div><details class="mt-4"><summary class="cursor-pointer text-sm font-medium text-accent">Показать текст LSP</summary><pre class="mt-2 max-h-80 overflow-auto rounded-lg bg-soft p-3 font-mono text-xs leading-relaxed">;; ПоНорме (ponorme.ru) — нумерация и адресация датчиков.
+;; НУМЕР — подписи адресов по щелчку; серия продолжается между запусками.
+;; АДРЕС — автоадресация: выбранные блоки сортируются вдоль линии ДПЛС и
+;; получают номера по порядку; запуск с нужного номера перенумерует участок.
+;; АДРЕС-ДУБЛИ — поиск дублей и пропусков; находки обводятся на слое ПРОВЕРКА-АДРЕСОВ.
+;; Загрузка: перетащить .lsp в окно чертежа или APPLOAD.
+(defun pnrm:num-lbl (n) (itoa n))
+
+(defun pnrm:num-place (pt lbl)
+  (entmake (list (cons 0 &quot;TEXT&quot;) (cons 8 &quot;АДРЕСА&quot;) (cons 7 (getvar &quot;TEXTSTYLE&quot;))
+                 (cons 10 pt) (cons 11 pt)
+                 (cons 40 2.5) (cons 1 lbl) (cons 72 1) (cons 73 2))))
+
+(defun pnrm:num-layer (nm col)
+  (if (not (tblsearch &quot;LAYER&quot; nm))
+    (entmake (list (cons 0 &quot;LAYER&quot;) (cons 100 &quot;AcDbSymbolTableRecord&quot;)
+                   (cons 100 &quot;AcDbLayerTableRecord&quot;) (cons 2 nm) (cons 70 0) (cons 62 col)))))
+
+;; убрать старые подписи возле новой точки (список old собирает адресация)
+(defun pnrm:num-clear (p)
+  (foreach x old
+    (if (and (entget (car x)) (&lt; (distance (cdr x) p) 3.75))
+      (entdel (car x)))))
+
+(defun pnrm:num-put (e lbl / p)
+  (setq p (mapcar &#39;+ (trans (cdr (assoc 10 (entget e))) e 0) (list 3.0 3.0 0.0)))
+  (pnrm:num-clear p)
+  (pnrm:num-place p lbl))
+
+;; разбор подписи «префикс + число + суффикс» в номер, иначе nil
+(defun pnrm:num-parse (s / m i c ok)
+  (if (and (&gt; (strlen s) 0)
+           (= &quot;&quot; (substr s 1 0))
+           (= &quot;&quot; (substr s (- (strlen s) 0 -1))))
+    (progn
+      (setq m (substr s (1+ 0) (- (strlen s) 0)) i 1 ok T)
+      (while (and ok (&lt;= i (strlen m)))
+        (setq c (ascii (substr m i 1)))
+        (if (or (&lt; c 48) (&gt; c 57)) (setq ok nil))
+        (setq i (1+ i)))
+      (if ok (atoi m)))))
+
+(defun pnrm:num-mark (p)
+  (pnrm:num-layer &quot;ПРОВЕРКА-АДРЕСОВ&quot; 1)
+  (entmake (list (cons 0 &quot;CIRCLE&quot;) (cons 8 &quot;ПРОВЕРКА-АДРЕСОВ&quot;) (cons 10 p) (cons 40 5.0))))
+
+(defun c:НУМЕР (/ *error* doc def tmp pt es ent cnt n)
+  (vl-load-com)
+  (setq doc (vla-get-ActiveDocument (vlax-get-acad-object)))
+  (defun *error* (msg)
+    (if n (setq pnrm:num-НУМЕР n))
+    (vl-catch-all-apply &#39;vla-EndUndoMark (list doc))
+    (if (and cnt (&gt; cnt 0))
+      (princ (strcat &quot;\nПодписано: &quot; (itoa cnt) &quot;, следующий номер: &quot; (itoa n) &quot;.&quot;)))
+    (princ))
+  (setq def (if pnrm:num-НУМЕР pnrm:num-НУМЕР 1))
+  (initget 4)
+  (setq tmp (getint (strcat &quot;\nНачальный номер &lt;&quot; (itoa def) &quot;&gt;: &quot;)))
+  (setq n (if tmp tmp def) cnt 0)
+  (pnrm:num-layer &quot;АДРЕСА&quot; 1)
+  (vla-StartUndoMark doc)
+  (while (setq pt (getpoint (strcat &quot;\nТочка подписи «&quot; (pnrm:num-lbl n) &quot;» (Enter — завершить): &quot;)))
+    (if (&gt; n 127)
+      (princ (strcat &quot;\n** Номер &quot; (itoa n) &quot; больше лимита 127 — проверьте ёмкость линии.&quot;)))
+    (pnrm:num-place (trans pt 1 0) (pnrm:num-lbl n))
+    (setq cnt (1+ cnt) n (1+ n)))
+  (setq pnrm:num-НУМЕР n)
+  (vla-EndUndoMark doc)
+  (princ (strcat &quot;\nПодписано: &quot; (itoa cnt) &quot;, следующий номер: &quot; (itoa n) &quot;.&quot;))
+  (princ))
+
+(defun c:АДРЕС (/ *error* doc cs cur len closed p0 d0 rev ss ss2 i e e2 ed p q d lst old def tmp n cnt miss far lbl x)
+  (vl-load-com)
+  (setq doc (vla-get-ActiveDocument (vlax-get-acad-object)))
+  (defun *error* (msg)
+    (if n (setq pnrm:num-АДРЕС n))
+    (vl-catch-all-apply &#39;vla-EndUndoMark (list doc))
+    (princ))
+  (cond
+    ((not vlax-curve-getclosestpointto)
+     (princ &quot;\n** Функций vlax-curve в этой САПР нет — автоадресация недоступна.&quot;))
+    ((not (setq cs (entsel &quot;\nЛиния ДПЛС (полилиния, отрезок, дуга, сплайн): &quot;)))
+     (princ &quot;\nЛиния не выбрана.&quot;))
+    ((vl-catch-all-error-p (vl-catch-all-apply &#39;vlax-curve-getendparam (list (car cs))))
+     (princ &quot;\nЭтот объект линией не является — выберите полилинию, отрезок, дугу или сплайн.&quot;))
+    (T
+     (setq cur (car cs)
+           len (vlax-curve-getdistatparam cur (vlax-curve-getendparam cur))
+           closed (&lt; (distance (vlax-curve-getstartpoint cur) (vlax-curve-getendpoint cur)) 1.0e-6)
+           d0 0.0)
+     (setq p0 (getpoint &quot;\nКонец линии, с которого начать отсчёт &lt;начало линии&gt;: &quot;))
+     (if p0 (setq p0 (trans p0 1 0)))
+     (if closed
+       (if p0 (setq d0 (vlax-curve-getdistatpoint cur (vlax-curve-getclosestpointto cur p0))))
+       (setq rev (and p0 (&gt; (distance p0 (vlax-curve-getstartpoint cur))
+                            (distance p0 (vlax-curve-getendpoint cur))))))
+     (princ &quot;\nВыберите блоки датчиков: &quot;)
+     (if (not (setq ss (ssget &#39;((0 . &quot;INSERT&quot;)))))
+       (princ &quot;\nБлоки не выбраны.&quot;)
+       (progn
+         (setq lst nil far 0 i 0)
+         (repeat (sslength ss)
+           (setq e (ssname ss i) i (1+ i))
+           (setq p (trans (cdr (assoc 10 (entget e))) e 0)
+                 q (vlax-curve-getclosestpointto cur p))
+           (setq d (vlax-curve-getdistatpoint cur q)
+                 d (cond (closed (rem (+ (- d d0) len) len)) (rev (- len d)) (T d)))
+           (setq lst (cons (cons d e) lst))
+         )
+         (if (not lst)
+           (princ &quot;\nПосле отбора блоков не осталось.&quot;)
+           (progn
+             ;; &lt;= вместо &lt; обязателен: vl-sort с &lt; выбрасывает равные элементы
+             (setq lst (vl-sort lst &#39;(lambda (a b) (&lt;= (car a) (car b)))))
+             (setq def (if pnrm:num-АДРЕС pnrm:num-АДРЕС 1))
+             (initget 4)
+             (setq tmp (getint (strcat &quot;\nНачальный номер &lt;&quot; (itoa def) &quot;&gt;: &quot;)))
+             (setq n (if tmp tmp def) cnt 0 miss 0)
+             (pnrm:num-layer &quot;АДРЕСА&quot; 1)
+             (setq old nil)
+             (if (setq ss2 (ssget &quot;_X&quot; &#39;((0 . &quot;TEXT&quot;) (8 . &quot;АДРЕСА&quot;))))
+               (progn
+                 (setq i 0)
+                 (repeat (sslength ss2)
+                   (setq e2 (ssname ss2 i) i (1+ i))
+                   (setq old (cons (cons e2 (trans (cdr (assoc 10 (entget e2))) e2 0)) old)))))
+             (vla-StartUndoMark doc)
+             (foreach x lst
+               (setq e (cdr x) lbl (pnrm:num-lbl n))
+               (if (&gt; n 127)
+                 (princ (strcat &quot;\n** Номер &quot; (itoa n) &quot; больше лимита 127 — проверьте ёмкость линии.&quot;)))
+               (pnrm:num-put e lbl)
+               (setq cnt (1+ cnt) n (1+ n)))
+             (setq pnrm:num-АДРЕС n)
+             (vla-EndUndoMark doc)
+             (princ (strcat &quot;\nАдресовано: &quot; (itoa cnt) &quot;, следующий номер: &quot; (itoa n) &quot;.&quot;))
+         ))))))
+  (princ))
+
+(defun c:АДРЕС-ДУБЛИ (/ doc ss i e ed a v p lst dup g n cnt gaps more x)
+  (vl-load-com)
+  (setq doc (vla-get-ActiveDocument (vlax-get-acad-object)))
+  (vla-StartUndoMark doc)
+  ;; смыть маркеры прошлой проверки
+  (if (setq ss (ssget &quot;_X&quot; &#39;((0 . &quot;CIRCLE&quot;) (8 . &quot;ПРОВЕРКА-АДРЕСОВ&quot;))))
+    (progn (setq i 0)
+      (repeat (sslength ss) (entdel (ssname ss i)) (setq i (1+ i)))))
+  (setq lst nil)
+  (if (setq ss (ssget &quot;_X&quot; &#39;((0 . &quot;TEXT&quot;) (8 . &quot;АДРЕСА&quot;))))
+    (progn (setq i 0)
+      (repeat (sslength ss)
+        (setq e (ssname ss i) i (1+ i) ed (entget e))
+        (setq v (pnrm:num-parse (cdr (assoc 1 ed))))
+        (if v (setq lst (cons (cons v (trans (cdr (assoc 10 ed)) e 0)) lst))))))
+  (if (setq ss (ssget &quot;_X&quot; &#39;((0 . &quot;INSERT&quot;) (66 . 1))))
+    (progn (setq i 0)
+      (repeat (sslength ss)
+        (setq e (ssname ss i) i (1+ i) a (entnext e))
+        (setq p (trans (cdr (assoc 10 (entget e))) e 0))
+        (while (and a (= &quot;ATTRIB&quot; (cdr (assoc 0 (setq ed (entget a))))))
+          (if (= &quot;АДРЕС&quot; (strcase (cdr (assoc 2 ed))))
+            (progn (setq v (pnrm:num-parse (cdr (assoc 1 ed))))
+              (if v (setq lst (cons (cons v p) lst)))))
+          (setq a (entnext a))))))
+  (if (not lst)
+    (princ &quot;\nМеток заданного формата не найдено.&quot;)
+    (progn
+      ;; &lt;= вместо &lt; обязателен: vl-sort с &lt; выбрасывает равные элементы
+      (setq lst (vl-sort lst &#39;(lambda (a b) (&lt;= (car a) (car b)))))
+      (princ (strcat &quot;\nМеток: &quot; (itoa (length lst)) &quot;, диапазон &quot;
+                     (pnrm:num-lbl (car (car lst))) &quot; — &quot; (pnrm:num-lbl (car (last lst))) &quot;.&quot;))
+      (setq dup nil)
+      (foreach x lst
+        (setq g (assoc (car x) dup))
+        (if g (setq dup (subst (cons (car x) (cons (cdr x) (cdr g))) g dup))
+          (setq dup (cons (list (car x) (cdr x)) dup))))
+      (setq cnt 0)
+      (foreach g (reverse dup)
+        (if (&gt; (length (cdr g)) 1)
+          (progn
+            (setq cnt (1+ cnt))
+            (princ (strcat &quot;\n  дубль &quot; (pnrm:num-lbl (car g)) &quot; — &quot; (itoa (length (cdr g))) &quot; шт.&quot;))
+            (foreach p (cdr g) (pnrm:num-mark p)))))
+      (princ (if (= cnt 0) &quot;\nДублей нет.&quot;
+        (strcat &quot;\nДублей: &quot; (itoa cnt) &quot; — обведены кружками на слое ПРОВЕРКА-АДРЕСОВ.&quot;)))
+      (setq gaps nil n (car (car lst)))
+      (foreach x lst
+        (while (&lt; n (car x)) (setq gaps (cons n gaps) n (1+ n)))
+        (if (= n (car x)) (setq n (1+ n))))
+      (if gaps
+        (progn
+          (setq gaps (reverse gaps) more (- (length gaps) 30) i 0)
+          (princ &quot;\nПропущены: &quot;)
+          (foreach x gaps
+            (if (&lt; i 30) (princ (strcat (pnrm:num-lbl x) &quot; &quot;)))
+            (setq i (1+ i)))
+          (if (&gt; more 0) (princ (strcat &quot;и ещё &quot; (itoa more) &quot;.&quot;)))))
+      (if (&gt; (car (last lst)) 127)
+        (princ &quot;\n** Старший адрес больше лимита 127 — проверьте ёмкость линии.&quot;))
+  ))
+  (vla-EndUndoMark doc)
+  (princ))
+
+(princ &quot;\nПоНорме: команды НУМЕР, АДРЕС и АДРЕС-ДУБЛИ загружены.&quot;)
+(princ)
+</pre></details><details class="mt-3"><summary class="cursor-pointer text-sm font-medium text-accent">Как подключить и пользоваться</summary><ol class="mt-2 list-decimal space-y-1 pl-5 text-sm leading-relaxed text-muted"><li>Разово: перетащите скачанный .lsp в окно чертежа — или команда <span class="font-mono">ЗАГПРИЛ</span> (_APPLOAD) → выбрать файл → «Загрузить».</li><li>Навсегда: в том же окне APPLOAD добавьте файл в «Приложения, загружаемые с автозагрузкой» (Startup Suite) — команда будет в каждом чертеже.</li><li>Наберите <span class="font-mono">НУМЕР</span>, подтвердите начальный номер и щёлкайте по плану — каждый щелчок ставит подпись. Enter или Esc завершает серию; повторный запуск предложит продолжить со следующего номера.</li><li><span class="font-mono">АДРЕС</span>: укажите линию ДПЛС, щёлкните возле конца, с которого вести отсчёт (Enter — от начала линии), выберите блоки рамкой и подтвердите начальный номер — адреса встанут по порядку вдоль линии.</li><li><span class="font-mono">АДРЕС-ДУБЛИ</span>: без вопросов проверяет весь чертёж — дубли обводятся кружками на слое ПРОВЕРКА-АДРЕСОВ, пропуски перечисляются в командной строке.</li><li>Ошиблись — завершите серию, удалите неверные подписи и запустите команду с нужного номера; откат — <span class="font-mono">U</span> (при необходимости несколько раз).</li><li>Файл в кодировке ANSI (cp1251) — как принято для AutoLISP с русским текстом. nanoCAD загружает те же .lsp.</li></ol></details><!--]--></section></div><p class="no-print mb-1 mt-8 text-[11px] font-semibold uppercase tracking-wider text-muted">Справка</p><details class="no-print border-t border-line py-4"><summary class="cursor-pointer text-sm font-medium text-ink transition-colors hover:text-accent">Назначение и исходные условия</summary><div class="prose-copy mt-3 max-w-[72ch] text-[15px] leading-relaxed text-ink"><p class="mb-3 leading-relaxed">Интерактивные команды для AutoCAD/nanoCAD, один .lsp — три инструмента. <strong>Нумерация по щелчку</strong>: щелчок по плану — подпись с очередным адресом, номер растёт сам. Формат подписи (префикс «1.», дополнение нулями «001»), начальный номер, шаг, слой и высота текста задаются в форме — скрипт генерируется под стандарт организации и переиспользуется на любых чертежах.</p>
+<p class="mb-3 leading-relaxed"><strong>Автоадресация вдоль линии</strong>: команда сортирует выбранные блоки по положению вдоль полилинии ДПЛС и присваивает номера по порядку — подписью или записью в атрибут по заданному тегу. Конец отсчёта указывается щелчком, замкнутое кольцо нумеруется от указанной точки. То, что вручную занимает двадцать-сорок минут на линию, происходит за секунды; запуск с нужного начального номера перенумеровывает участок, старые подписи заменяются автоматически.</p>
+<p class="mb-3 leading-relaxed"><strong>Поиск дублей</strong>: третья команда разбирает подписи и атрибуты по заданному формату, обводит дубли адресов кружками на отдельном слое и перечисляет пропуски в последовательности — быстрая проверка линии перед выпуском листа. Для адресных систем на С2000-КДЛ включён контроль ёмкости ДПЛС: после 127-го адреса команды предупреждают, не останавливая нумерацию. Начальный номер спрашивается при каждом запуске, по умолчанию — продолжение прошлой серии; ошибочную серию откатывает штатная ОТМЕНИТЬ (U) — по справке Autodesk U после LISP-команды может откатывать по одному шагу, тогда нажмите его несколько раз.</p></div></details><!----><!----><details class="no-print border-t border-line py-4"><summary class="cursor-pointer text-sm font-medium text-ink transition-colors hover:text-accent">Частые вопросы</summary><div class="mt-4 space-y-4"><!--[--><div><h3 class="text-sm font-semibold text-ink">Как работает нумерация по щелчку?</h3><p class="mt-1 text-sm leading-relaxed text-muted">Команда спрашивает начальный номер (по умолчанию — продолжение прошлой серии), дальше каждый щелчок ставит подпись и увеличивает номер на шаг. Enter или Esc завершает серию; итог и следующий номер печатаются в командной строке.</p></div><div><h3 class="text-sm font-semibold text-ink">Как работает автоадресация вдоль линии?</h3><p class="mt-1 text-sm leading-relaxed text-muted">Команда АДРЕС спрашивает линию ДПЛС (полилинию, отрезок, дугу или сплайн), точку возле конца, с которого вести отсчёт, и блоки. Блоки сортируются по положению вдоль линии и получают номера по порядку — подписью или записью в атрибут. Замкнутая полилиния считается кольцом: отсчёт от указанной точки по направлению отрисовки.</p></div><div><h3 class="text-sm font-semibold text-ink">Как перенумеровать участок?</h3><p class="mt-1 text-sm leading-relaxed text-muted">Запустите АДРЕС ещё раз: выберите линию и блоки участка, задайте новый начальный номер. В режиме атрибута значения перезаписываются; в режиме подписи старые подписи на слое подписей возле блоков заменяются новыми (это отключаемо в форме).</p></div><div><h3 class="text-sm font-semibold text-ink">Что ищет команда поиска дублей?</h3><p class="mt-1 text-sm leading-relaxed text-muted">АДРЕС-ДУБЛИ разбирает все подписи на слое подписей и атрибуты с заданным тегом по формату «префикс + число + суффикс»: дубли обводит кружками на слое ПРОВЕРКА-АДРЕСОВ, пропуски в последовательности перечисляет, старший адрес сверяет с лимитом. Повторный запуск обновляет маркеры.</p></div><div><h3 class="text-sm font-semibold text-ink">Подписи — это текст или атрибуты блоков?</h3><p class="mt-1 text-sm leading-relaxed text-muted">Нумерация по щелчку ставит однострочный текст (TEXT) на отдельном слое — работает с любыми блоками и без блоков. Автоадресация умеет и в атрибут: укажите его тег (например, АДРЕС) — значение запишется в блок; о блоках без такого атрибута команда сообщит, а режим «в атрибут, иначе подписью» подпишет их текстом.</p></div><div><h3 class="text-sm font-semibold text-ink">Почему предупреждение после 127?</h3><p class="mt-1 text-sm leading-relaxed text-muted">127 — ёмкость ДПЛС одного С2000-КДЛ. Команда предупреждает, но нумерацию не останавливает; лимит в форме можно изменить или отключить (0). Для второй линии обычно начинают новую серию с префиксом, например «2.».</p></div><div><h3 class="text-sm font-semibold text-ink">Чем режим «к блоку» отличается от «в точку»?</h3><p class="mt-1 text-sm leading-relaxed text-muted">«В точку» — подпись там, где щёлкнули. «К блоку» — щелчок по вставке блока, подпись встаёт у его точки вставки с заданным смещением: у всех датчиков одинаково, ровнее, чем на глаз. Автоадресация подписью использует то же смещение.</p></div><div><h3 class="text-sm font-semibold text-ink">Работает ли в AutoCAD LT и nanoCAD?</h3><p class="mt-1 text-sm leading-relaxed text-muted">Полный AutoCAD и nanoCAD — да. AutoCAD LT 2023 и старше — нет (там нет AutoLISP); в LT 2024+ AutoLISP появился и, по справке Autodesk, используемые vla-/vlax-функции поддерживаются (внешние COM-объекты — нет), однако на LT работа не проверялась. SCR-варианта нет: команды интерактивные.</p></div><!--]--></div></details><section class="no-print border-t border-line py-4"><h2 class="text-sm font-medium text-ink">Связанные расчёты</h2><div class="mt-3 flex flex-wrap gap-1.5"><!--[--><a href="/calc/detector-placement" class="inline-flex items-center gap-1 rounded-md border border-line bg-card px-2.5 py-1 text-xs font-medium text-ink/80 transition-colors hover:border-accent hover:text-accent">Проверка размещения точечных извещателей</a><a href="/calc/block-count" class="inline-flex items-center gap-1 rounded-md border border-line bg-card px-2.5 py-1 text-xs font-medium text-ink/80 transition-colors hover:border-accent hover:text-accent">Спецификация с плана — подсчёт блоков</a><!--]--></div></section><p class="no-print flex items-start gap-2 border-t border-line py-4 text-[13px] leading-relaxed text-muted"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-warning-icon lucide-message-square-warning mt-0.5 size-4 shrink-0 text-muted" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><path d="M12 7v2"></path><path d="M12 13h.01"></path></svg><span> Нашли неточность — в формуле, числе или ссылке на пункт нормы? <a href="mailto:ponormedev@outlook.com?subject=%D0%9F%D0%BE%D0%9D%D0%BE%D1%80%D0%BC%D0%B5%20%E2%80%94%20%D0%BD%D0%B5%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C%3A%20%D0%9D%D1%83%D0%BC%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D0%B0%D0%B4%D1%80%D0%B5%D1%81%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B4%D0%B0%D1%82%D1%87%D0%B8%D0%BA%D0%BE%D0%B2&amp;body=%D0%A1%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0%3A%20%0A%0A%D0%A7%D1%82%D0%BE%20%D0%B2%D1%8B%D0%B3%D0%BB%D1%8F%D0%B4%D0%B8%D1%82%20%D0%BD%D0%B5%D1%82%D0%BE%D1%87%D0%BD%D1%8B%D0%BC%3A%0A%0A%D0%9A%D0%B0%D0%BA%20%D0%B4%D0%BE%D0%BB%D0%B6%D0%BD%D0%BE%20%D0%B1%D1%8B%D1%82%D1%8C%20(%D0%BF%D1%83%D0%BD%D0%BA%D1%82%20%D0%BD%D0%BE%D1%80%D0%BC%D1%8B%20%D0%B8%D0%BB%D0%B8%20%D0%A2%D0%94%2C%20%D0%B5%D1%81%D0%BB%D0%B8%20%D0%B7%D0%BD%D0%B0%D0%B5%D1%82%D0%B5)%3A%0A" class="font-medium text-accent underline underline-offset-2">Напишите нам</a> — проверим по первоисточнику и поправим. Замечания практиков уже не раз делали сервис точнее. </span></p><p class="no-print border-t border-line pt-4 text-xs leading-relaxed text-muted"><!----> Данный сервис является справочным инструментом — окончательное решение принимается проектировщиком. </p></article></main><footer class="border-t border-line py-8 text-sm text-muted"><div class="mx-auto w-full max-w-5xl px-4 sm:px-6"><nav class="flex flex-wrap justify-center gap-x-5 gap-y-1 font-medium [&amp;&gt;a]:inline-flex [&amp;&gt;a]:min-h-10 [&amp;&gt;a]:items-center" aria-label="Дополнительные ссылки"><a href="/verification" class="transition-colors hover:text-accent-deep"> Верификация расчётов </a><a href="/sp#base" class="transition-colors hover:text-accent-deep"> Нормы: база расчётов </a><a href="mailto:ponormedev@outlook.com?subject=ПоНорме — обратная связь" class="transition-colors hover:text-accent-deep"> Обратная связь и предложения </a><a href="/privacy" class="transition-colors hover:text-accent-deep"> Конфиденциальность </a><a href="/about" class="transition-colors hover:text-accent-deep"> О проекте </a></nav><div class="mt-5 flex items-start justify-center gap-2 border-t border-line pt-5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-alert-icon lucide-circle-alert mt-1 size-4 shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg><p class="max-w-2xl text-sm leading-relaxed"> Результаты расчётов носят справочный характер и не заменяют инженерную проверку. При разработке проектной документации необходимо руководствоваться действующими редакциями нормативных документов. </p></div><p class="mt-4 text-center text-xs">© ПоНорме · ponorme.ru, 2026</p></div></footer></div></div>
+    <div id="field-info-popovers"></div>
+  </body>
+</html>
