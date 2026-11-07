@@ -1,0 +1,90 @@
+{
+  "entryFileGzip": 32252,
+  "routes": [
+    {
+      "name": "entry",
+      "bytes": 211851,
+      "gzip": 73633,
+      "limit": 85000,
+      "files": [
+        "assets/createLucideIcon-DQwryfmw.js",
+        "assets/index-CaNZ3E5h.js",
+        "assets/vendor-3QNz-Mpq.js"
+      ]
+    },
+    {
+      "name": "home",
+      "bytes": 264114,
+      "gzip": 94015,
+      "limit": 110000,
+      "files": [
+        "assets/CalcCard-COZMlAzS.js",
+        "assets/HomePage-BgrBVtG6.js",
+        "assets/NormBadge-BEzhiXsJ.js",
+        "assets/ToolCatalog-DfdQX6aI.js",
+        "assets/_plugin-vue_export-helper-BDNMzG2s.js",
+        "assets/arrow-right-CMxhufJr.js",
+        "assets/book-open-Czb7FC3Q.js",
+        "assets/clock-CufdgwIa.js",
+        "assets/createLucideIcon-DQwryfmw.js",
+        "assets/external-link-BqXJj5K9.js",
+        "assets/file-text-CE3_g9Fd.js",
+        "assets/format-D1k5F0iu.js",
+        "assets/formula-C8vd45lc.js",
+        "assets/html-CKuHtFmo.js",
+        "assets/index-CaNZ3E5h.js",
+        "assets/norms-editions-EpEe8mkF.js",
+        "assets/plural-whhAQkHA.js",
+        "assets/share-DtI-0_Sm.js",
+        "assets/vendor-3QNz-Mpq.js"
+      ]
+    },
+    {
+      "name": "catalog",
+      "bytes": 237768,
+      "gzip": 84439,
+      "limit": 110000,
+      "files": [
+        "assets/CalcCard-COZMlAzS.js",
+        "assets/CalculatorsPage-B4Iu_O35.js",
+        "assets/NormBadge-BEzhiXsJ.js",
+        "assets/ToolCatalog-DfdQX6aI.js",
+        "assets/arrow-right-CMxhufJr.js",
+        "assets/book-open-Czb7FC3Q.js",
+        "assets/clock-CufdgwIa.js",
+        "assets/createLucideIcon-DQwryfmw.js",
+        "assets/external-link-BqXJj5K9.js",
+        "assets/index-CaNZ3E5h.js",
+        "assets/norms-editions-EpEe8mkF.js",
+        "assets/plural-whhAQkHA.js",
+        "assets/vendor-3QNz-Mpq.js"
+      ]
+    }
+  ],
+  "fonts": {
+    "bytes": 171068,
+    "limit": 180000,
+    "files": [
+      {
+        "fileName": "assets/inter-cyrillic-wght-normal-DqGufNeO.woff2",
+        "bytes": 18748,
+        "subset": "cyrillic"
+      },
+      {
+        "fileName": "assets/inter-greek-wght-normal-CkhJZR-_.woff2",
+        "bytes": 18996,
+        "subset": "greek"
+      },
+      {
+        "fileName": "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+        "bytes": 48256,
+        "subset": "latin"
+      },
+      {
+        "fileName": "assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+        "bytes": 85068,
+        "subset": "latin-ext"
+      }
+    ]
+  }
+}
